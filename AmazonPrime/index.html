@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PV Vision</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #0a0d14;
+  }
+
+  /* ─── Navigation Bar ─── */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background: rgba(10, 13, 20, 0.92);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    border-bottom: 1px solid rgba(212, 168, 67, 0.12);
+    padding: 0 24px;
+  }
+
+  .nav-tab {
+    position: relative;
+    padding: 8px 28px;
+    font-size: 13.5px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    color: #6b6d6a;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: color 0.25s ease, background 0.25s ease;
+    user-select: none;
+  }
+
+  .nav-tab:hover {
+    color: #a8a89c;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .nav-tab.active {
+    color: #f5f3ee;
+    background: rgba(212, 168, 67, 0.12);
+  }
+
+  .nav-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 2px;
+    background: #d4a843;
+    border-radius: 2px;
+  }
+
+  /* ─── Content Frame ─── */
+  .content-frame {
+    position: fixed;
+    top: 52px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .content-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: none;
+  }
+
+  .content-frame iframe.active {
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <button class="nav-tab active" data-tab="demo">Demo</button>
+  <button class="nav-tab" data-tab="memo">Memo</button>
+  <button class="nav-tab" data-tab="tech">Tech Companion</button>
+</nav>
+
+<div class="content-frame">
+  <iframe id="frame-demo" class="active" src="demo.html" loading="eager"></iframe>
+  <iframe id="frame-memo" src="memo.html" loading="lazy"></iframe>
+  <iframe id="frame-tech" src="tech.html" loading="lazy"></iframe>
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('.nav-tab');
+  const frames = {
+    demo: document.getElementById('frame-demo'),
+    memo: document.getElementById('frame-memo'),
+    tech: document.getElementById('frame-tech'),
+  };
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Update active tab
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      // Show corresponding iframe
+      const target = tab.dataset.tab;
+      Object.values(frames).forEach(f => f.classList.remove('active'));
+      frames[target].classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

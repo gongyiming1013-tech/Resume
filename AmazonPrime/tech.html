@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Video Search &amp; Assistant — Technical Companion · 6-page reference for Ming Ye</title>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500&display=swap');
+  @import url('https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap');
+
+  :root {
+    /* Academic paper palette — warm cream, scholarly, print-like */
+    --bg-deep: #faf7f0;
+    --bg-card: #f3eee2;
+    --bg-elevated: #ebe5d4;
+    --ink-primary: #1a1814;
+    --ink-secondary: #3e3a32;
+    --ink-tertiary: #6a6558;
+    --ink-faded: #9c9684;
+    --accent-amber: #8b6b1f;
+    --accent-amber-bright: #a07820;
+    --accent-amber-soft: rgba(139, 107, 31, 0.10);
+    --accent-amber-faint: rgba(139, 107, 31, 0.04);
+    --accent-blue: #2c5985;
+    --accent-coral: #a04e34;
+    --accent-jade: #4a7a52;
+    --accent-violet: #6e4a85;
+    --rule: #d8d2bf;
+    --rule-soft: #ece8db;
+    /* Page-frame ambient color */
+    --page-frame: #efe9d9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; background: var(--page-frame); }
+
+  body {
+    background: var(--page-frame);
+    color: var(--ink-primary);
+    font-family: 'General Sans', -apple-system, sans-serif;
+    font-weight: 400;
+    line-height: 1.55;
+    font-size: 14.5px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Paper grain — much subtler than memo's film grain, warm-tinted */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.42 0 0 0 0 0.12 0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)'/%3E%3C/svg%3E");
+    opacity: 0.06;
+    z-index: 100;
+    mix-blend-mode: multiply;
+  }
+
+  .display { font-family: 'Fraunces', Georgia, serif; }
+  .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.92em; }
+
+  em {
+    font-style: italic;
+    color: var(--accent-amber);
+    font-weight: 500;
+  }
+  strong { color: var(--ink-primary); font-weight: 600; }
+
+  /* ============================================== */
+  /* DOC LAYOUT — single-column A4 paper             */
+  /* ============================================== */
+  .doc {
+    max-width: 760px;
+    margin: 32px auto 60px;
+    padding: 64px 56px 80px;
+    background: var(--bg-deep);
+    box-shadow:
+      0 1px 2px rgba(60, 50, 25, 0.05),
+      0 8px 32px rgba(60, 50, 25, 0.08),
+      0 32px 80px rgba(60, 50, 25, 0.06);
+    position: relative;
+  }
+  /* Subtle inner page edge */
+  .doc::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border: 1px solid rgba(139, 107, 31, 0.08);
+  }
+
+  /* ============================================== */
+  /* MASTHEAD                                       */
+  /* ============================================== */
+  .masthead {
+    padding-bottom: 24px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .masthead-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-amber);
+    margin-bottom: 22px;
+    font-weight: 600;
+  }
+  .masthead-meta span:last-child { color: var(--ink-tertiary); }
+
+  .masthead h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1.1;
+    letter-spacing: -0.012em;
+    margin-bottom: 10px;
+    color: var(--ink-primary);
+  }
+  .masthead h1 em { color: var(--accent-amber); font-style: italic; font-weight: 500; }
+  .masthead .subtitle {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 14.5px;
+    color: var(--ink-secondary);
+    line-height: 1.4;
+    margin-bottom: 14px;
+  }
+  .masthead-byline {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--ink-secondary);
+  }
+  .masthead-byline::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--accent-amber);
+  }
+  .masthead-byline strong { color: var(--ink-primary); font-weight: 600; }
+
+  /* ============================================== */
+  /* EXECUTIVE NOTE / TL;DR                         */
+  /* ============================================== */
+  .exec-note {
+    background: var(--bg-card);
+    border-left: 3px solid var(--accent-amber);
+    border-radius: 0 4px 4px 0;
+    padding: 18px 22px;
+    margin-bottom: 26px;
+  }
+  .exec-note .label {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent-amber);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .exec-note p {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-secondary);
+    margin-bottom: 8px;
+  }
+  .exec-note p:last-child { margin-bottom: 0; }
+  .exec-note p strong { color: var(--ink-primary); }
+  .exec-note p em { color: var(--accent-amber); }
+
+  /* Reading guide */
+  .reading-guide {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin: 20px 0 22px;
+  }
+  .reading-guide .label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-tertiary);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .reading-guide table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .reading-guide td {
+    padding: 4px 8px 4px 0;
+    color: var(--ink-secondary);
+    vertical-align: top;
+  }
+  .reading-guide td:first-child {
+    width: 70px;
+    color: var(--accent-amber);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+  }
+  .reading-guide td:nth-child(2) {
+    color: var(--ink-primary);
+    font-weight: 500;
+    width: 165px;
+  }
+
+  /* ============================================== */
+  /* SECTIONS                                       */
+  /* ============================================== */
+  section {
+    margin-bottom: 26px;
+    page-break-inside: auto;
+  }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent-amber);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    width: 22px;
+    height: 1px;
+    background: var(--accent-amber);
+  }
+  .section-label .num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--accent-amber);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  h2.section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+  h2.section-title em { color: var(--accent-amber); font-style: italic; }
+  h3.subsection {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--ink-primary);
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+  h3.subsection em { color: var(--accent-amber); font-style: italic; font-weight: 500; }
+
+  p { margin-bottom: 9px; font-size: 13px; line-height: 1.55; color: var(--ink-secondary); }
+  p strong { color: var(--ink-primary); }
+  p em { color: var(--accent-amber); }
+
+  /* ============================================== */
+  /* COMPACT ARCHITECTURE FIGURE                    */
+  /* ============================================== */
+  .arch-mini {
+    margin: 12px 0 18px;
+    text-align: center;
+  }
+  .arch-mini svg {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+  }
+  .arch-mini-caption {
+    font-size: 11px;
+    color: var(--ink-tertiary);
+    font-style: italic;
+    margin-top: 8px;
+    line-height: 1.45;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .arch-mini-caption strong { color: var(--ink-secondary); font-style: normal; }
+
+  /* SVG color classes for dual-mode */
+  .svg-tier-label { font-size: 8.5px; fill: var(--ink-tertiary); font-weight: 700; letter-spacing: 0.15em; }
+  .svg-tier-amber { fill: var(--accent-amber); }
+  .svg-name-sm { font-size: 9px; fill: var(--ink-primary); font-weight: 500; }
+  .svg-meta-sm { font-size: 7.5px; fill: var(--ink-secondary); }
+  .svg-detail-sm { font-size: 8px; fill: var(--ink-secondary); }
+  .svg-surface-box { fill: var(--bg-elevated); stroke: var(--accent-blue); stroke-width: 1; }
+  .svg-l2-box { fill: var(--bg-elevated); stroke: var(--accent-blue); stroke-width: 1.2; }
+  .svg-l2-name { font-size: 10px; fill: var(--accent-blue); font-weight: 600; }
+  .svg-amber-stroke { stroke: var(--accent-amber); stroke-width: 1.5; }
+  .svg-coral-stroke { stroke: var(--accent-coral); stroke-width: 1.5; }
+  .svg-path-search { fill: var(--bg-elevated); stroke: var(--accent-blue); stroke-width: 1.2; }
+  .svg-path-asst { fill: var(--bg-elevated); stroke: var(--accent-coral); stroke-width: 1.2; }
+  .svg-path-title { font-size: 10px; font-weight: 600; }
+  .svg-blue { fill: var(--accent-blue); }
+  .svg-coral { fill: var(--accent-coral); }
+  .svg-asset-name-sm { font-size: 9.5px; fill: var(--accent-amber); font-weight: 600; }
+  .svg-asset-detail-sm { font-size: 8px; fill: var(--ink-secondary); }
+  .svg-asset-solves-sm { font-size: 7.5px; fill: var(--accent-jade); font-style: italic; }
+  .svg-consumer-box { fill: var(--bg-elevated); stroke: var(--accent-amber); stroke-width: 0.8; stroke-opacity: 0.5; }
+  .svg-foundation { fill: var(--bg-card); stroke: var(--rule); stroke-width: 1; stroke-dasharray: 4 3; }
+  .svg-foundation-name { font-size: 9.5px; fill: var(--ink-secondary); font-weight: 500; }
+  .svg-foundation-note { font-size: 8px; fill: var(--ink-tertiary); font-style: italic; }
+  .svg-eval-num { font-size: 10px; fill: var(--accent-coral); font-weight: 700; font-family: 'Fraunces', serif; font-style: italic; }
+  .svg-eval-label { font-size: 8px; fill: var(--accent-coral); font-weight: 700; letter-spacing: 0.05em; }
+  .svg-eval-divider { stroke: var(--accent-coral); stroke-width: 0.8; stroke-opacity: 0.4; }
+  .svg-eval-role { font-size: 7px; fill: var(--ink-tertiary); font-style: italic; }
+  .svg-eval-item { font-size: 7.5px; fill: var(--ink-primary); font-weight: 500; }
+  .svg-eval-sub { font-size: 6.5px; fill: var(--ink-tertiary); font-style: italic; }
+  .svg-connector { stroke: var(--ink-tertiary); stroke-width: 0.8; fill: none; }
+  .svg-arrow { fill: var(--ink-tertiary); }
+  .svg-layer-num { font-size: 8.5px; fill: var(--accent-amber); font-weight: 700; font-family: 'Fraunces', serif; font-style: italic; }
+  .svg-amber { fill: var(--accent-amber); }
+
+  /* ============================================== */
+  /* TABLES                                         */
+  /* ============================================== */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 11.5px;
+    line-height: 1.45;
+  }
+  .data-table th {
+    text-align: left;
+    padding: 8px 10px;
+    background: var(--bg-card);
+    border-bottom: 1.5px solid var(--accent-amber);
+    color: var(--accent-amber);
+    font-family: 'General Sans', sans-serif;
+    font-weight: 600;
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    vertical-align: bottom;
+  }
+  .data-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-secondary);
+    vertical-align: top;
+  }
+  .data-table td.lineage-name {
+    color: var(--accent-amber);
+    font-weight: 600;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+  }
+  .data-table td strong { color: var(--ink-primary); }
+  .data-table td em { color: var(--accent-amber); font-style: italic; }
+  .data-table td code { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--accent-amber-bright); }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table .star {
+    display: inline-block;
+    color: var(--accent-amber);
+    font-weight: 700;
+    margin-right: 4px;
+  }
+  /* Compact table variant — even tighter rows for dense reference content */
+  .data-table.compact-table td { padding: 5px 8px; }
+  .data-table.compact-table th { padding: 5px 8px; }
+
+  /* ============================================== */
+  /* SUBSYSTEM CARDS                                */
+  /* ============================================== */
+  .subsystem-card {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent-amber);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 18px;
+    margin: 10px 0;
+  }
+  .subsystem-card .header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  .subsystem-card .id {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--accent-amber);
+    flex-shrink: 0;
+  }
+  .subsystem-card .name {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    color: var(--ink-primary);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .subsystem-card .name em { color: var(--accent-amber); font-style: italic; }
+  .subsystem-card p { margin-bottom: 4px; font-size: 12.5px; color: var(--ink-secondary); }
+  .subsystem-card .pattern-tag {
+    display: inline-block;
+    background: var(--accent-amber-faint);
+    border: 1px solid var(--rule);
+    color: var(--accent-amber);
+    font-size: 9.5px;
+    padding: 1.5px 8px;
+    border-radius: 2px;
+    margin-bottom: 6px;
+    letter-spacing: 0.05em;
+  }
+  .subsystem-card .field-grid {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 4px 12px;
+    margin-top: 6px;
+    font-size: 11.5px;
+    line-height: 1.45;
+  }
+  .subsystem-card .field-grid .field-label {
+    color: var(--accent-amber);
+    font-style: italic;
+    font-family: 'Fraunces', serif;
+  }
+  .subsystem-card .field-grid .field-value {
+    color: var(--ink-secondary);
+  }
+  .subsystem-card .field-grid .field-value strong { color: var(--ink-primary); }
+  .subsystem-card .field-grid .field-value code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--accent-amber-bright);
+  }
+
+  /* ============================================== */
+  /* INTERFACE BLOCK                                */
+  /* ============================================== */
+  .interface-block {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 10px 0;
+  }
+  .interface-block .label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-tertiary);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .interface-row {
+    display: grid;
+    grid-template-columns: 195px 1fr 70px;
+    gap: 10px;
+    padding: 5px 0;
+    font-size: 11px;
+    border-bottom: 1px dashed var(--rule-soft);
+    line-height: 1.4;
+  }
+  .interface-row:last-child { border-bottom: none; }
+  .interface-row .endpoint {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent-amber);
+    font-size: 10.5px;
+  }
+  .interface-row .returns { color: var(--ink-secondary); }
+  .interface-row .latency {
+    color: var(--accent-jade);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-align: right;
+  }
+
+  /* ============================================== */
+  /* PIPELINE STAGES                                */
+  /* ============================================== */
+  .pipeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin: 14px 0 10px;
+  }
+  .pipeline-stage {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-top: 2px solid var(--accent-blue);
+    border-radius: 0 0 4px 4px;
+    padding: 10px 12px;
+    position: relative;
+  }
+  .pipeline-stage .stage-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--accent-blue);
+    margin-bottom: 4px;
+  }
+  .pipeline-stage h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 12.5px;
+    color: var(--ink-primary);
+    font-weight: 500;
+    margin-bottom: 5px;
+    line-height: 1.2;
+  }
+  .pipeline-stage p {
+    font-size: 10.5px;
+    line-height: 1.4;
+    color: var(--ink-secondary);
+    margin: 0;
+  }
+  .pipeline-stage p em { color: var(--accent-amber); font-style: italic; }
+
+  /* Sources strip (4-source hybrid retrieval) */
+  .sources-grid {
+    display: grid;
+    grid-template-columns: 110px 1fr 1fr 50px;
+    gap: 6px 12px;
+    font-size: 11px;
+    line-height: 1.4;
+    margin: 10px 0;
+  }
+  .sources-grid .header-row {
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-amber);
+    font-weight: 700;
+    border-bottom: 1px solid var(--accent-amber);
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+  }
+  .sources-grid .src-name {
+    color: var(--ink-primary);
+    font-weight: 500;
+    font-family: 'Fraunces', serif;
+  }
+  .sources-grid .src-tech { color: var(--ink-secondary); font-size: 10.5px; }
+  .sources-grid .src-when { color: var(--ink-secondary); font-style: italic; font-size: 10.5px; }
+  .sources-grid .src-tag {
+    color: var(--accent-amber);
+    font-size: 9px;
+    text-align: right;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  /* ============================================== */
+  /* DECISION BOXES                                 */
+  /* ============================================== */
+  .decision-box {
+    background: linear-gradient(135deg, var(--accent-amber-faint), transparent 70%);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent-amber);
+    border-radius: 0 4px 4px 0;
+    padding: 12px 16px;
+    margin: 12px 0;
+  }
+  .decision-box .label {
+    font-size: 9.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-amber);
+    margin-bottom: 5px;
+    font-weight: 700;
+  }
+  .decision-box h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 14px;
+    color: var(--ink-primary);
+    margin-bottom: 6px;
+    font-style: italic;
+    font-weight: 500;
+  }
+  .decision-box p {
+    font-size: 12px;
+    color: var(--ink-secondary);
+    margin-bottom: 4px;
+    line-height: 1.5;
+  }
+  .decision-box p:last-child { margin-bottom: 0; }
+  .decision-box p strong { color: var(--ink-primary); }
+  .decision-box p em { color: var(--accent-amber); }
+
+  /* ============================================== */
+  /* INNOVATIONS GRID (3 callouts)                  */
+  /* ============================================== */
+  .innovations {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 12px 0;
+  }
+  .innovation-card {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-top: 2px solid var(--accent-jade);
+    padding: 10px 12px;
+    border-radius: 0 0 4px 4px;
+  }
+  .innovation-card .num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--accent-jade);
+  }
+  .innovation-card h5 {
+    font-family: 'Fraunces', serif;
+    font-size: 12px;
+    color: var(--ink-primary);
+    font-weight: 500;
+    margin: 2px 0 5px;
+    line-height: 1.2;
+  }
+  .innovation-card p {
+    font-size: 10.5px;
+    line-height: 1.4;
+    color: var(--ink-secondary);
+    margin-bottom: 4px;
+  }
+  .innovation-card p:last-child { margin-bottom: 0; }
+  .innovation-card .solves {
+    color: var(--accent-jade);
+    font-style: italic;
+    font-size: 10px;
+    border-top: 1px solid var(--rule);
+    padding-top: 4px;
+    margin-top: 4px;
+  }
+
+  /* ============================================== */
+  /* TOOL CATEGORIES                                */
+  /* ============================================== */
+  .tool-categories {
+    margin: 10px 0;
+  }
+  .tool-cat {
+    border: 1px solid var(--rule);
+    background: var(--bg-card);
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin-bottom: 6px;
+  }
+  .tool-cat .cat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+  }
+  .tool-cat .cat-name {
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    color: var(--accent-amber);
+    font-weight: 500;
+    font-style: italic;
+  }
+  .tool-cat .cat-share {
+    font-size: 10px;
+    color: var(--ink-tertiary);
+    letter-spacing: 0.05em;
+  }
+  .tool-cat ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  .tool-cat li {
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--ink-secondary);
+    padding: 2px 0;
+  }
+  .tool-cat li code {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent-amber-bright);
+    font-size: 10.5px;
+    margin-right: 6px;
+  }
+  .tool-cat li em { color: var(--accent-amber); font-style: italic; }
+
+  /* ============================================== */
+  /* REFERENCES                                     */
+  /* ============================================== */
+  .references {
+    margin-top: 22px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+  }
+  .references h3 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--accent-amber);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .references ol {
+    list-style: none;
+    counter-reset: ref;
+  }
+  .references li {
+    counter-increment: ref;
+    padding: 3px 0 3px 24px;
+    position: relative;
+    font-size: 10.5px;
+    line-height: 1.45;
+    color: var(--ink-tertiary);
+  }
+  .references li::before {
+    content: counter(ref);
+    position: absolute;
+    left: 0;
+    top: 3px;
+    color: var(--accent-amber);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 11px;
+    width: 18px;
+    text-align: right;
+  }
+  .references li strong { color: var(--ink-secondary); font-weight: 500; }
+  .references li em { color: var(--ink-secondary); font-style: italic; }
+  .cite { color: var(--accent-amber); text-decoration: none; font-size: 0.78em; vertical-align: super; }
+
+  /* ============================================== */
+  /* FOOTER                                         */
+  /* ============================================== */
+  footer {
+    margin-top: 26px;
+    padding-top: 12px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-size: 10px;
+    color: var(--ink-faded);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* ============================================== */
+  /* PRINT STYLES                                   */
+  /* ============================================== */
+  @media print {
+    @page { size: A4; margin: 13mm 13mm; }
+    :root {
+      /* Slightly whiter for actual ink-on-paper crispness, but still warm */
+      --bg-deep: #ffffff;
+      --bg-card: #f8f4ea;
+      --bg-elevated: #f0ead8;
+      --ink-primary: #14110d;
+      --ink-secondary: #36322a;
+      --ink-tertiary: #6a6558;
+      --ink-faded: #9c9684;
+      --accent-amber: #8b6b1f;
+      --accent-amber-bright: #a07820;
+      --accent-amber-soft: rgba(139, 107, 31, 0.10);
+      --accent-amber-faint: rgba(139, 107, 31, 0.04);
+      --accent-blue: #2c5985;
+      --accent-coral: #a04e34;
+      --accent-jade: #4a7a52;
+      --accent-violet: #6e4a85;
+      --rule: #d4cdba;
+      --rule-soft: #ece4cf;
+    }
+    html, body {
+      background: white !important;
+      color: var(--ink-primary);
+      font-size: 9.4pt;
+      line-height: 1.42;
+    }
+    body::before { display: none; }
+    .doc {
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      background: white !important;
+      box-shadow: none;
+    }
+    .doc::before { display: none; }
+    em { color: var(--accent-amber); }
+
+    .masthead { padding-bottom: 11pt; margin-bottom: 13pt; }
+    .masthead-meta { margin-bottom: 11pt; font-size: 7.5pt; }
+    .masthead h1 { font-size: 21pt; line-height: 1.04; margin-bottom: 5pt; }
+    .masthead .subtitle { font-size: 11pt; line-height: 1.3; }
+    .masthead-byline { margin-top: 7pt; font-size: 8.5pt; gap: 8pt; }
+    .masthead-byline::before { width: 18pt; }
+
+    .exec-note { padding: 10pt 13pt; margin-bottom: 13pt; }
+    .exec-note .label { font-size: 7pt; margin-bottom: 5pt; letter-spacing: 0.22em; }
+    .exec-note p { font-size: 9.2pt; line-height: 1.42; margin-bottom: 4pt; }
+
+    .reading-guide { padding: 9pt 12pt; margin: 10pt 0 14pt; }
+    .reading-guide .label { font-size: 7pt; margin-bottom: 5pt; letter-spacing: 0.18em; }
+    .reading-guide table { font-size: 8.6pt; }
+    .reading-guide td { padding: 1.6pt 6pt 1.6pt 0; }
+    .reading-guide td:first-child { width: 42pt; }
+    .reading-guide td:nth-child(2) { width: 116pt; }
+
+    section { margin-bottom: 11pt; }
+    .section-label { font-size: 7pt; margin-bottom: 4pt; gap: 8pt; letter-spacing: 0.22em; }
+    .section-label::before { width: 14pt; }
+    h2.section-title { font-size: 14pt; line-height: 1.08; margin-bottom: 6pt; }
+    h3.subsection { font-size: 10.2pt; margin-top: 7pt; margin-bottom: 3pt; }
+
+    p { margin-bottom: 4pt; font-size: 9.1pt; line-height: 1.4; }
+
+    .arch-mini { margin: 6pt 0 8pt; }
+    .arch-mini-caption { font-size: 7.4pt; line-height: 1.38; margin-top: 4pt; }
+
+    .data-table {
+      font-size: 8pt;
+      margin: 5pt 0;
+      page-break-inside: avoid;
+    }
+    .data-table th { padding: 4pt 5pt; font-size: 7.3pt; }
+    .data-table td { padding: 3.5pt 5pt; }
+
+    .subsystem-card {
+      padding: 6.5pt 10pt;
+      margin: 5pt 0;
+      page-break-inside: avoid;
+    }
+    .subsystem-card .id { font-size: 10.5pt; }
+    .subsystem-card .name { font-size: 10.5pt; }
+    .subsystem-card p { font-size: 8.3pt; line-height: 1.4; }
+    .subsystem-card .pattern-tag { font-size: 6.8pt; padding: 1pt 5pt; margin-bottom: 4pt; }
+    .subsystem-card .field-grid { font-size: 8pt; gap: 1.5pt 8pt; grid-template-columns: 60pt 1fr; margin-top: 4pt; }
+
+    .interface-block { padding: 6.5pt 10pt; margin: 5pt 0; page-break-inside: avoid; }
+    .interface-block .label { font-size: 6.8pt; margin-bottom: 5pt; letter-spacing: 0.2em; }
+    .interface-row { font-size: 7.6pt; padding: 2.5pt 0; grid-template-columns: 132pt 1fr 48pt; gap: 7pt; }
+    .interface-row .endpoint { font-size: 7.3pt; }
+    .interface-row .latency { font-size: 7pt; }
+
+    .pipeline { gap: 4pt; margin: 6pt 0; }
+    .pipeline-stage { padding: 5pt 7pt; }
+    .pipeline-stage h4 { font-size: 9.2pt; margin-bottom: 2.5pt; }
+    .pipeline-stage p { font-size: 7.4pt; line-height: 1.36; }
+    .pipeline-stage .stage-num { font-size: 7.2pt; margin-bottom: 1.5pt; }
+
+    .sources-grid {
+      grid-template-columns: 75pt 1fr 1fr 32pt;
+      font-size: 7.6pt;
+      gap: 3pt 7pt;
+      margin: 5pt 0;
+    }
+    .sources-grid .src-tech { font-size: 7.3pt; }
+    .sources-grid .src-when { font-size: 7.3pt; }
+    .sources-grid .src-tag { font-size: 6.3pt; }
+    .sources-grid .header-row { font-size: 6.6pt; padding-bottom: 2pt; margin-bottom: 2pt; }
+
+    .decision-box {
+      padding: 7pt 10pt;
+      margin: 6pt 0;
+      page-break-inside: avoid;
+    }
+    .decision-box .label { font-size: 6.8pt; margin-bottom: 2.5pt; }
+    .decision-box h4 { font-size: 9.5pt; margin-bottom: 3pt; }
+    .decision-box p { font-size: 8.3pt; margin-bottom: 2.5pt; line-height: 1.4; }
+
+    .innovations { gap: 5pt; margin: 6pt 0; }
+    .innovation-card { padding: 5pt 7pt; }
+    .innovation-card .num { font-size: 10pt; }
+    .innovation-card h5 { font-size: 8.6pt; margin: 1pt 0 2.5pt; }
+    .innovation-card p { font-size: 7.3pt; line-height: 1.36; margin-bottom: 2.5pt; }
+    .innovation-card .solves { font-size: 7pt; padding-top: 2.5pt; margin-top: 2.5pt; }
+
+    .tool-categories { margin: 5pt 0; }
+    .tool-cat { padding: 5pt 9pt; margin-bottom: 3pt; page-break-inside: avoid; }
+    .tool-cat .cat-name { font-size: 9.5pt; }
+    .tool-cat .cat-share { font-size: 7.2pt; }
+    .tool-cat li { font-size: 7.7pt; padding: 0.8pt 0; line-height: 1.4; }
+    .tool-cat li code { font-size: 7.3pt; }
+
+    .references { margin-top: 7pt; padding-top: 5pt; }
+    .references h3 { font-size: 9pt; margin-bottom: 3pt; }
+    .references ol li { padding: 1.2pt 0 1.2pt 16pt; font-size: 7.3pt; line-height: 1.3; }
+    .references li::before { font-size: 7.5pt; top: 1.2pt; }
+
+    footer { margin-top: 7pt; padding-top: 4pt; font-size: 6.3pt; }
+
+    /* Page-break tuning */
+    section { page-break-inside: auto; }
+    h2.section-title, h3.subsection { page-break-after: avoid; }
+    .arch-mini { page-break-inside: avoid; }
+  }
+
+  @media screen and (max-width: 720px) {
+    .doc { padding: 32px 20px; }
+    .masthead h1 { font-size: 28px; }
+    h2.section-title { font-size: 19px; }
+    .reading-guide td:first-child { width: 60px; }
+    .reading-guide td:nth-child(2) { width: auto; }
+    .pipeline { grid-template-columns: 1fr 1fr; }
+    .sources-grid { grid-template-columns: 1fr; gap: 2px; }
+    .sources-grid .header-row { display: none; }
+    .innovations { grid-template-columns: 1fr; }
+    .interface-row { grid-template-columns: 1fr; gap: 2px; }
+    .subsystem-card .field-grid { grid-template-columns: 1fr; gap: 2px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="doc">
+
+  <!-- ============================================== -->
+  <!-- MASTHEAD                                       -->
+  <!-- ============================================== -->
+  <header class="masthead">
+    <div class="masthead-meta">
+      <span>Technical Companion · Vision Memo</span>
+      <span>April 2026 · Companion to Prime_Video_Vision_2.2</span>
+    </div>
+
+    <h1>Search &amp; Assistant — <em>technical reference</em></h1>
+    <div class="subtitle">A six-page deeper read for the curious reviewer. The memo answers <em>"what would you do?"</em>; this answers <em>"how exactly would you do it?"</em></div>
+
+    <div class="masthead-byline">
+      <span><strong>Dr. Ming Gong</strong></span>
+      <span>·</span>
+      <span>Prepared for review by Ming Ye</span>
+    </div>
+  </header>
+
+  <!-- ============================================== -->
+  <!-- EXECUTIVE NOTE                                 -->
+  <!-- ============================================== -->
+  <div class="exec-note">
+    <div class="label">Executive Note</div>
+    <p>
+      This document is the technical companion to the five-page Vision Memo. The memo is the strategy; this is the
+      implementation footing. Every claim in the memo's <em>Two engines, one stack</em> section can be traced to a
+      specific subsystem, interface, or training signal here. <strong>Read this if</strong> you want to know exactly
+      what gets built, in what order, what it costs, where the latency comes from, and where the risk lives.
+    </p>
+    <p>
+      <strong>Two design choices anchor everything below.</strong>
+      <em>(1) Two technical lineages compose, not compete</em> — implicit multimodal embeddings (Lineage B, MOON3.0
+      pattern) for recall and cross-lingual fuzzy match, plus explicit knowledge graphs (Lineage A, AliCoCo /
+      AliCoCo2 / COSMO pattern) for precision, constraints, and explainability. Industrial e-commerce converged
+      on this pattern over five years<a href="#ref3" class="cite">[3]</a>; Prime Video should adopt it, not re-invent it.
+      <em>(2) Both engines run from Year 1</em> — building the foundation without a customer-facing consumer
+      means you cannot tell whether you built the right foundation. A real Y1 conversational MVP is the only
+      thing that can tell you what to optimize for in Y2's fully agentic phase.
+    </p>
+  </div>
+
+  <!-- Compact 7-layer architecture diagram -->
+  <div class="arch-mini">
+    <svg viewBox="0 0 720 460" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <linearGradient id="cilGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="var(--accent-amber)" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="var(--accent-amber)" stop-opacity="0.08"/>
+        </linearGradient>
+        <linearGradient id="evalGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="var(--accent-coral)" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="var(--accent-coral)" stop-opacity="0.10"/>
+        </linearGradient>
+        <marker id="arr2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L6,3 z" class="svg-arrow"/>
+        </marker>
+      </defs>
+
+      <!-- L1 -->
+      <g transform="translate(20, 14)">
+        <text x="0" y="0" class="svg-layer-num">L1</text>
+        <text x="20" y="0" class="svg-tier-label">USER ENTRY · 5 surfaces · TV / Mobile / Web / In-Player / Voice</text>
+        <rect x="0" y="6" width="580" height="22" rx="3" class="svg-surface-box"/>
+        <text x="290" y="20" text-anchor="middle" class="svg-detail-sm">Voice + remote · Touch + voice · Keyboard · Pause-and-ask · Ambient</text>
+      </g>
+      <line x1="310" y1="44" x2="310" y2="54" class="svg-connector" marker-end="url(#arr2)"/>
+
+      <!-- L2 -->
+      <g transform="translate(20, 58)">
+        <text x="0" y="0" class="svg-layer-num">L2</text>
+        <text x="20" y="0" class="svg-tier-label">QUERY UNDERSTANDING · intent routing</text>
+        <rect x="0" y="6" width="580" height="28" rx="3" class="svg-l2-box"/>
+        <text x="10" y="19" class="svg-l2-name">Intent Classifier + Query Encoder</text>
+        <text x="10" y="29" class="svg-detail-sm">FETCH → Search · FIND → Search · EXPLORE (multi-constraint) → Assistant</text>
+      </g>
+      <line x1="310" y1="96" x2="310" y2="106" class="svg-connector" marker-end="url(#arr2)"/>
+
+      <!-- L3 -->
+      <g transform="translate(20, 110)">
+        <text x="0" y="0" class="svg-layer-num">L3</text>
+        <text x="20" y="0" class="svg-tier-label">DUAL PATH · latency tiers</text>
+        <rect x="0" y="6" width="282" height="38" rx="3" class="svg-path-search"/>
+        <text x="10" y="20" class="svg-path-title svg-blue">Search Path · ~200ms</text>
+        <text x="10" y="32" class="svg-detail-sm">FETCH/FIND · 4-source hybrid · multi-objective rank</text>
+
+        <rect x="298" y="6" width="282" height="38" rx="3" class="svg-path-asst"/>
+        <text x="308" y="20" class="svg-path-title svg-coral">Assistant Path · 3-10s</text>
+        <text x="308" y="32" class="svg-detail-sm">EXPLORE · ReAct · 14 tools · grounded by CIL</text>
+      </g>
+      <line x1="310" y1="160" x2="310" y2="170" class="svg-connector" marker-end="url(#arr2)"/>
+
+      <!-- L4 -->
+      <g transform="translate(20, 174)">
+        <text x="0" y="0" class="svg-layer-num svg-amber">L4</text>
+        <text x="20" y="0" class="svg-tier-label svg-tier-amber">★ CATALOG INTELLIGENCE LAYER · the V2.0 architectural centerpiece</text>
+        <rect x="0" y="6" width="580" height="48" rx="3" fill="url(#cilGrad2)" class="svg-amber-stroke"/>
+        <g transform="translate(10, 19)">
+          <text x="0" y="0" class="svg-asset-name-sm">Reasoning Attributes</text>
+          <text x="0" y="10" class="svg-asset-detail-sm">256-dim embedding</text>
+          <text x="0" y="20" class="svg-asset-solves-sm">→ MOON3.0 pattern</text>
+
+          <text x="195" y="0" class="svg-asset-name-sm">Scenario Concepts</text>
+          <text x="195" y="10" class="svg-asset-detail-sm">~50K viewing scenarios</text>
+          <text x="195" y="20" class="svg-asset-solves-sm">→ AliCoCo pattern</text>
+
+          <text x="390" y="0" class="svg-asset-name-sm">Constraint Edges ⟨s,p,o,c⟩</text>
+          <text x="390" y="10" class="svg-asset-detail-sm">~10M with constraint c</text>
+          <text x="390" y="20" class="svg-asset-solves-sm">→ AliCoCo2 + COSMO</text>
+        </g>
+      </g>
+      <line x1="310" y1="234" x2="310" y2="244" class="svg-connector" marker-end="url(#arr2)"/>
+
+      <!-- L5 -->
+      <g transform="translate(20, 248)">
+        <text x="0" y="0" class="svg-layer-num">L5</text>
+        <text x="20" y="0" class="svg-tier-label">DOWNSTREAM CONSUMERS · 6 surfaces share one CIL substrate</text>
+        <g transform="translate(0, 6)">
+          <rect x="0" y="0" width="93" height="24" rx="3" class="svg-consumer-box"/>
+          <text x="46" y="11" text-anchor="middle" class="svg-name-sm">Search</text>
+          <text x="46" y="19" text-anchor="middle" class="svg-meta-sm">FETCH/FIND</text>
+          <rect x="98" y="0" width="93" height="24" rx="3" class="svg-consumer-box"/>
+          <text x="144" y="11" text-anchor="middle" class="svg-name-sm">Ask Prime</text>
+          <text x="144" y="19" text-anchor="middle" class="svg-meta-sm">EXPLORE</text>
+          <rect x="196" y="0" width="93" height="24" rx="3" class="svg-consumer-box"/>
+          <text x="242" y="11" text-anchor="middle" class="svg-name-sm">Recsys</text>
+          <text x="242" y="19" text-anchor="middle" class="svg-meta-sm">Home rows</text>
+          <rect x="294" y="0" width="93" height="24" rx="3" class="svg-consumer-box"/>
+          <text x="340" y="11" text-anchor="middle" class="svg-name-sm">X-Ray</text>
+          <text x="340" y="19" text-anchor="middle" class="svg-meta-sm">In-scene info</text>
+          <rect x="392" y="0" width="93" height="24" rx="3" class="svg-consumer-box"/>
+          <text x="438" y="11" text-anchor="middle" class="svg-name-sm">Sports</text>
+          <text x="438" y="19" text-anchor="middle" class="svg-meta-sm">Key moments</text>
+          <rect x="490" y="0" width="90" height="24" rx="3" class="svg-consumer-box"/>
+          <text x="535" y="11" text-anchor="middle" class="svg-name-sm">Originals</text>
+          <text x="535" y="19" text-anchor="middle" class="svg-meta-sm">Discovery</text>
+        </g>
+      </g>
+      <line x1="310" y1="284" x2="310" y2="294" class="svg-connector" marker-end="url(#arr2)"/>
+
+      <!-- L6 -->
+      <g transform="translate(20, 298)">
+        <text x="0" y="0" class="svg-layer-num">L6</text>
+        <text x="20" y="0" class="svg-tier-label">INFERENCE INFRASTRUCTURE · inherited from Rufus</text>
+        <rect x="0" y="6" width="580" height="30" rx="3" class="svg-foundation"/>
+        <text x="290" y="20" text-anchor="middle" class="svg-foundation-name">Bedrock (multi-LLM router) + Trainium (training) + Inferentia2 (serving) + SageMaker</text>
+        <text x="290" y="30" text-anchor="middle" class="svg-foundation-note">We do not re-litigate inference economics.</text>
+      </g>
+
+      <!-- L7 EVAL MOAT (right vertical bar) -->
+      <g transform="translate(610, 14)">
+        <rect x="0" y="0" width="92" height="320" rx="3" fill="url(#evalGrad2)" class="svg-coral-stroke"/>
+        <text x="46" y="16" text-anchor="middle" class="svg-eval-num">L7</text>
+        <text x="46" y="29" text-anchor="middle" class="svg-eval-label">★ EVALUATION</text>
+        <text x="46" y="40" text-anchor="middle" class="svg-eval-label">MOAT</text>
+        <line x1="10" y1="48" x2="82" y2="48" class="svg-eval-divider"/>
+        <text x="46" y="62" text-anchor="middle" class="svg-eval-role">cross-cutting</text>
+        <text x="46" y="72" text-anchor="middle" class="svg-eval-role">gates all layers</text>
+
+        <text x="6" y="92" class="svg-eval-item">▸ RAG Triad</text>
+        <text x="6" y="102" class="svg-eval-sub">grounded · relevant · faithful</text>
+
+        <text x="6" y="120" class="svg-eval-item">▸ Asymmetric Loss</text>
+        <text x="6" y="130" class="svg-eval-sub">spoiler / age / safety</text>
+
+        <text x="6" y="148" class="svg-eval-item">▸ Constraint-</text>
+        <text x="6" y="158" class="svg-eval-item">  Conditional Eval</text>
+        <text x="6" y="168" class="svg-eval-sub">⟨q,c,gold⟩ four-tuples</text>
+
+        <text x="6" y="186" class="svg-eval-item">▸ Behavior</text>
+        <text x="6" y="196" class="svg-eval-item">  Simulator</text>
+        <text x="6" y="206" class="svg-eval-sub">60-90d holdout</text>
+
+        <line x1="10" y1="220" x2="82" y2="220" class="svg-eval-divider"/>
+        <text x="46" y="234" text-anchor="middle" class="svg-eval-item">~30% of</text>
+        <text x="46" y="244" text-anchor="middle" class="svg-eval-item">headcount</text>
+      </g>
+
+      <!-- Caption legend strip -->
+      <g transform="translate(0, 380)">
+        <text x="20" y="14" class="svg-tier-label">SECTIONS BELOW MAP TO LAYERS:</text>
+        <text x="20" y="32" class="svg-detail-sm">§1 Two Lineages explains L4's substrate · §2 details L4 internals · §3 details Search half of L3 · §4 details Assistant half of L3 · §5 covers L6 distillation · §6 covers L7 in depth.</text>
+      </g>
+    </svg>
+    <div class="arch-mini-caption">
+      <strong>Figure 1.</strong> Seven-layer architecture, compressed. Vertical flow L1→L6 is the data path; L7 is the
+      cross-cutting evaluation moat. Sections below detail each layer in sequence.
+    </div>
+  </div>
+
+  <!-- Reading guide -->
+  <div class="reading-guide">
+    <div class="label">How to read this — section to question mapping</div>
+    <table>
+      <tr><td>§1, p. 2</td><td>Two Lineages</td><td>"Why both KG <em>and</em> embeddings? Why not just one?" — industrial e-commerce evidence.</td></tr>
+      <tr><td>§2, p. 3</td><td>CIL Internals</td><td>"What does the Catalog Intelligence Layer actually contain?" — 3 subsystems + 3 interfaces.</td></tr>
+      <tr><td>§3, p. 4</td><td>Search Path</td><td>"How does sub-200ms hybrid retrieval work?" — 4-stage pipeline + 4 retrievers + 6 ranking objectives.</td></tr>
+      <tr><td>§4, p. 5</td><td>Assistant Path</td><td>"Why ReAct, not multi-agent? What tools does the agent have?" — orchestrator design + 14-tool catalog.</td></tr>
+      <tr><td>§5, p. 6</td><td>COSMO-LM</td><td>"Why distill? Why not just call Claude?" — cost / latency / sovereignty.</td></tr>
+      <tr><td>§6, p. 6</td><td>Evaluation</td><td>"How do you prevent the next Fallout S2?" — RAG Triad + asymmetric loss + constraint-conditional + behavior simulator.</td></tr>
+    </table>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- §1 TWO LINEAGES                                -->
+  <!-- ============================================== -->
+  <section>
+    <div class="section-label"><span class="num">§1</span> Two Technical Lineages — implicit embedding + explicit KG</div>
+    <h2 class="section-title">Both lineages compose; <em>neither replaces the other</em>.</h2>
+
+    <p>
+      Industrial e-commerce AI has, over the past five years, converged on a layered architecture in which two
+      formerly-rival research traditions are used <em>together</em>, not in competition. The first — implicit
+      multimodal embeddings — provides recall, cross-lingual fuzzy match, and graceful semantic degradation
+      under typos and paraphrase. The second — explicit constraint-aware knowledge graphs — provides precision,
+      explainability, and the architectural location for safety constraints. The Prime Video Search &amp; Assistant
+      architecture takes both.
+    </p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:25%">Lineage</th>
+          <th style="width:42%">E-commerce evolution path</th>
+          <th>Direct Prime Video translation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="lineage-name">Lineage A · explicit KG of user intent
+            <div style="font-size:9.5pt; color:var(--ink-tertiary); font-style:italic; font-weight:400; margin-top:4px;">symbolic, interpretable, low-latency lookup</div>
+          </td>
+          <td>
+            <strong>AliCoCo · 2020</strong>
+            — 4-layer ontology (User Needs → Primitive Concepts → Taxonomy → Items); 5.26M user-need nodes<a href="#ref3" class="cite">[3]</a>.<br>
+            <strong>AliCoCo2 · 2021</strong> — quadruples ⟨s,p,o,c⟩: relations are conditioned on context (category, season, audience) — constraint <em>c</em> as a first-class citizen.<br>
+            <strong>COSMO · 2024</strong> — replace human curation with LLM distillation; 6.3M nodes, 29M edges; search-buy beats co-buy as training signal; production deployment via async cache + Feature Store.
+          </td>
+          <td>
+            <strong>Viewing Intent Knowledge Graph (Bet 02)</strong>. Scenario nodes ("Saturday morning with preschooler", "post-breakup comfort"); constraint-aware edges ("thriller → exciting <em>only when</em> viewer is adult"). Distilled from Bedrock Claude into a 7B serving model. <strong>Search-watch</strong> is the streaming-domain equivalent of search-buy — a strictly higher-quality training signal than co-watch, just as in retail.
+          </td>
+        </tr>
+        <tr>
+          <td class="lineage-name">Lineage B · implicit multimodal embedding with reasoning
+            <div style="font-size:9.5pt; color:var(--ink-tertiary); font-style:italic; font-weight:400; margin-top:4px;">continuous, dense, high-recall semantic match</div>
+          </td>
+          <td>
+            <strong>MOON3.0 · 2025</strong> — MLLM-as-reasoner-then-embedder<a href="#ref3" class="cite">[3]</a>. Before producing the embedding, the model first generates structured product attributes (a "thinking step"). 256-dim representation outperforms 4096-dim baseline. GRPO reward shaping + FIRE-style residuals to preserve fine-grained signal.
+          </td>
+          <td>
+            <strong>Reasoning-aware multimodal title encoder (Bet 01)</strong>. Same paradigm: before producing the embedding, generate structured Reasoning Attributes — Genre / Mood / Visual style / Pace / Audience age / Sensitive content. 256 dimensions per title. <em>Single investment</em> serves search retrieval, recsys candidates, and Assistant grounding — three downstream consumers from one offline pipeline.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="subsection">Why one lineage alone fails — three structural weaknesses</h3>
+    <p>
+      A V1 architecture that builds only the embedding side leaves three gaps unfilled. <strong>(1) No interpretable
+      <em>"why this"</em> answer.</strong> An embedding-based ranker can return Tumble Leaf for "blue fox cartoon" — but
+      it cannot say <em>why</em>. The KG can: <em>"a character named Fig is a blue fox; stop-motion; rated 3+."</em> This
+      is exactly what Ask Prime needs to render a grounded response. <strong>(2) No safety mechanism for context-dependent
+      recommendations.</strong> "Thriller → exciting" is true for adults and harmful for children. Pure embedding
+      similarity does not encode this; AliCoCo2's quadruple does — and constraint <em>c</em> is precisely the dimension
+      Bet 05's evaluation framework weights asymmetrically. <strong>(3) No long-tail / cold-start path.</strong> When
+      a new MGM original launches, behavioral signal is zero. Behavior-trained embeddings degrade. A KG with
+      attribute and constraint edges (genre, themes, cast, comparable shows) lets Ask Prime tell the truth from minute one.
+    </p>
+
+    <div class="decision-box">
+      <div class="label">The 2.0 thesis</div>
+      <h4>Search and Assistant are the two product surfaces. Embeddings (B) and the Viewing Intent KG (A) are the two technical foundations. Both surfaces consume both foundations. The Catalog Intelligence Layer is where they meet.</h4>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- §2 CIL INTERNALS                               -->
+  <!-- ============================================== -->
+  <section>
+    <div class="section-label"><span class="num">§2</span> Catalog Intelligence Layer — internals</div>
+    <h2 class="section-title">Three subsystems, <em>three interfaces</em>, one substrate.</h2>
+
+    <p>
+      The CIL is a piece of <em>infrastructure</em>, not a product feature. Every active Prime Video surface — Search,
+      Ask Prime, Recsys, X-Ray, Sports, Originals discovery — reads from the same three derived assets, produced
+      offline and exposed through three surface-agnostic interfaces. This is the architectural step that turns
+      Bets 01 and 02 from one-off projects into a platform.
+    </p>
+
+    <div class="subsystem-card">
+      <div class="header">
+        <span class="id">A.</span>
+        <span class="name">Reasoning-aware multimodal title encoder</span>
+      </div>
+      <span class="pattern-tag">PATTERN: MOON3.0</span>
+      <div class="field-grid">
+        <span class="field-label">input fusion</span>
+        <span class="field-value">key-frame samples (ViT or V-JEPA), full subtitles (Bedrock Claude embedding), audio fingerprint, X-Ray entity graph</span>
+        <span class="field-label">reasoning step</span>
+        <span class="field-value">encoder emits structured Reasoning Attributes JSON — the same generative move as MOON3.0's <code>&lt;think&gt;...&lt;/think&gt;</code> block</span>
+        <span class="field-label">embedding step</span>
+        <span class="field-value">pooled representation over the reasoning trajectory + raw multimodal context → <strong>256-dim vector</strong></span>
+        <span class="field-label">training signal</span>
+        <span class="field-value">search-watch triplets (positive: query → played title; negative: query → impressed-but-not-played)</span>
+        <span class="field-label">retraining</span>
+        <span class="field-value">weekly full retrain on Trainium; daily incremental on new search-watch logs</span>
+      </div>
+    </div>
+
+    <div class="subsystem-card">
+      <div class="header">
+        <span class="id">B.</span>
+        <span class="name">Viewing Scenario Concept ontology</span>
+      </div>
+      <span class="pattern-tag">PATTERN: AliCoCo (4-layer ontology, entertainment-instantiated)</span>
+      <div class="field-grid">
+        <span class="field-label">layer 1</span>
+        <span class="field-value"><strong>Viewing Scenarios</strong> (~50K) — user mental model: "Saturday morning with preschooler", "post-workout comfort half-hour", "long commute episode", "after kids go to bed thriller"</span>
+        <span class="field-label">layer 2</span>
+        <span class="field-value"><strong>Primitive Concepts</strong> — atomic attributes: [Audience], [Mood], [Episode length], [Pace], [Time of day], [Co-viewing], [Emotional weight], [Sensitive content]</span>
+        <span class="field-label">layer 3</span>
+        <span class="field-value"><strong>Taxonomy</strong> — ~20 first-level domains: Genre, Mood, Pace, Audience, Length, Co-viewing context, Sensitive content, Cultural origin, Era, Format, etc.</span>
+        <span class="field-label">layer 4</span>
+        <span class="field-value"><strong>Items</strong> — ~100M titles in the catalog (incl. ad-supported / FAST)</span>
+        <span class="field-label">key insight</span>
+        <span class="field-value"><em>"Suitable for Saturday morning with a preschooler"</em> is more than the sum of its primitive attributes — AliCoCo calls this <em>semantic drift</em>; a learned matching model bridges Layer 4 ↔ Layer 1.</span>
+      </div>
+    </div>
+
+    <div class="subsystem-card">
+      <div class="header">
+        <span class="id">C.</span>
+        <span class="name">Constraint-aware commonsense edges</span>
+      </div>
+      <span class="pattern-tag">PATTERN: AliCoCo2 ⟨s,p,o,c⟩ + COSMO distillation</span>
+      <div class="field-grid">
+        <span class="field-label">edge form</span>
+        <span class="field-value"><code>⟨subject, predicate, object, constraint⟩</code> — same predicate may hold or fail depending on context <em>c</em></span>
+        <span class="field-label">examples</span>
+        <span class="field-value"><code>⟨Adult viewer, exciting_for, The Boys, NOT in family-mode⟩</code> · <code>⟨Long commute, fits, The Office, episode 22-min, headphones⟩</code></span>
+        <span class="field-label">edge generation</span>
+        <span class="field-value">5-step COSMO pipeline: sample search-watch pairs → frontier-model generation (Bedrock Claude) → 3-stage filter (rule, similarity, ~30K human-verified) → distill to 7B → daily retrain</span>
+        <span class="field-label">target scale</span>
+        <span class="field-value">Year 2 end: ~2M nodes, ~10M edges, 18 catalog domains, ~30 distinct constraint types (family-mode alone produces many)</span>
+      </div>
+    </div>
+
+    <div class="interface-block">
+      <div class="label">Three interfaces — surface-agnostic, all consumed by every PV surface</div>
+      <div class="interface-row">
+        <span class="endpoint">/cil/embedding/{title_id}</span>
+        <span class="returns">256-dim vector + Reasoning Attributes JSON</span>
+        <span class="latency">&lt;5ms</span>
+      </div>
+      <div class="interface-row">
+        <span class="endpoint">/cil/scenario/{scenario_id}</span>
+        <span class="returns">top-N titles with constraint annotations</span>
+        <span class="latency">&lt;30ms</span>
+      </div>
+      <div class="interface-row">
+        <span class="endpoint">/cil/explain/{title, scenario}</span>
+        <span class="returns">⟨s,p,o,c⟩ chain + citations (renders "why this?")</span>
+        <span class="latency">&lt;50ms</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- §3 SEARCH PATH                                 -->
+  <!-- ============================================== -->
+  <section>
+    <div class="section-label"><span class="num">§3</span> Search Path — sub-200ms hybrid retrieval</div>
+    <h2 class="section-title">Four stages, four retrievers, <em>never returns zero</em>.</h2>
+
+    <p>
+      The Search Path serves the FETCH and simple FIND traffic — roughly 90% of search volume. End-to-end latency
+      target is ~200ms p95, which forces every component into a tight budget. The path is structured as four
+      sequential stages with parallelism inside Stage 2.
+    </p>
+
+    <div class="pipeline">
+      <div class="pipeline-stage">
+        <div class="stage-num">Stage 1</div>
+        <h4>Query Encoding + Rewriting</h4>
+        <p>Cross-lingual encoder (256-dim, shared with catalog) + KG-aware query rewriting (e.g. "blue fox cartoon" → {Tumble Leaf, stop-motion preschool, Fig the fox, kids 3-6}) + spell correction.</p>
+      </div>
+      <div class="pipeline-stage">
+        <div class="stage-num">Stage 2</div>
+        <h4>Hybrid Retrieval (parallel)</h4>
+        <p>4 retrievers run concurrently — each returns top-50 — fused by Reciprocal Rank Fusion (RRF). RRF is score-agnostic; appropriate for heterogeneous sources.</p>
+      </div>
+      <div class="pipeline-stage">
+        <div class="stage-num">Stage 3</div>
+        <h4>Multi-objective Ranking</h4>
+        <p>From ~100 candidates → final 10. Weighted value model: relevance · engagement · diversity · novelty · business · safety. Safety is a hard constraint, not a weight.</p>
+      </div>
+      <div class="pipeline-stage">
+        <div class="stage-num">Stage 4</div>
+        <h4>OOC Detection + Fallback</h4>
+        <p><em>Never return zero.</em> Below confidence threshold θ_OOC (per-intent learned), fall back to nearest-neighbor + KG scenario expansion: "we don't have X, but try Y, Z, W."</p>
+      </div>
+    </div>
+
+    <h3 class="subsection">Stage 2 detail — <em>four-source</em> hybrid (most peers run two)</h3>
+
+    <div class="sources-grid">
+      <span class="header-row">Source</span>
+      <span class="header-row">Tech</span>
+      <span class="header-row">Catches</span>
+      <span class="header-row">Status</span>
+
+      <span class="src-name">Lexical (BM25)</span>
+      <span class="src-tech">inverted index over title / cast / director, edge-n-grams for type-ahead</span>
+      <span class="src-when">FETCH (~50% of traffic, e.g. "The Boys")</span>
+      <span class="src-tag">V1 ✓</span>
+
+      <span class="src-name">Dense ANN</span>
+      <span class="src-tech">CIL 256-dim embedding · HNSW / FAISS / OpenSearch ANN index</span>
+      <span class="src-when">FIND — semantic match, "blue fox cartoon" → Tumble Leaf</span>
+      <span class="src-tag">★ V2.0</span>
+
+      <span class="src-name">KG-faceted</span>
+      <span class="src-tech">graph query over CIL Asset 2 (scenario tags) + Asset 3 (constraint edges)</span>
+      <span class="src-when">scenario queries: "Saturday morning kids", "comfort movie"</span>
+      <span class="src-tag">★ V2.0</span>
+
+      <span class="src-name">External Web</span>
+      <span class="src-tech">via Bedrock or Brave Search MCP, triggered only when internal recall confidence is low</span>
+      <span class="src-when">user can't recall title; out-of-catalog query — direct Tumble Leaf fix</span>
+      <span class="src-tag">★ V2.2</span>
+    </div>
+
+    <h3 class="subsection">Six ranking objectives — Stage 3 detail</h3>
+    <table class="data-table">
+      <thead><tr><th>#</th><th>Objective</th><th>Definition</th><th>Weight</th></tr></thead>
+      <tbody>
+        <tr><td>①</td><td><strong>Relevance</strong></td><td>cross-encoder reranker: (query, title) match · features: BM25 + dense sim + KG path features</td><td>w₁ ≈ 0.35</td></tr>
+        <tr><td>②</td><td><strong>Engagement (predicted)</strong></td><td>predicted watch-completion · features: user × title × scenario triple-interaction</td><td>w₂ ≈ 0.30</td></tr>
+        <tr><td>③</td><td><strong>Diversity (intra-list)</strong></td><td>MMR re-ranking α-balance · pairwise embedding similarity penalty</td><td>w₃ ≈ 0.15</td></tr>
+        <tr><td>④</td><td><strong>Novelty / Serendipity</strong></td><td>boost titles unseen by user and not globally over-popular · filter-bubble mitigation</td><td>w₄ ≈ 0.10</td></tr>
+        <tr><td>⑤</td><td><strong>Business (PV-controlled)</strong></td><td>MGM originals priority (contractual), FAST-channel balance · soft constraint</td><td>w₅ ≈ 0.05</td></tr>
+        <tr><td><span class="star">★</span></td><td><strong>Safety (hard)</strong></td><td>family-mode no R-rated; spoiler-aware (vs current playback). <em>Not a weight, a hard constraint c.</em></td><td>non-negotiable</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      Combination: <code>final_score = ∑ wᵢ × normᵢ(scoreᵢ), subject to constraint c</code>. MMR is then applied
+      on the top-k to enforce diversity. Weights are learned per-locale and per-intent through long-window
+      A/B (60-90 day cohorts) — short-window A/B is misleading because novelty effects inflate w₂ artificially
+      (a lesson from Bing Generative SERP V1: +6% at 14 days collapsed to under +1% at 45 days).
+    </p>
+
+    <div class="innovations">
+      <div class="innovation-card">
+        <span class="num">①</span>
+        <h5>4-source Hybrid</h5>
+        <p>BM25 + Dense + KG + Web with RRF. Most peers run 2-source; we recall ~2× more.</p>
+        <p class="solves"><em>Solves:</em> FETCH and FIND simultaneously plus the OOC ~13% tail.</p>
+      </div>
+      <div class="innovation-card">
+        <span class="num">②</span>
+        <h5>Constraint-aware Ranking</h5>
+        <p>Safety enters as hard constraint <em>c</em>, not soft weight. AliCoCo2 quadruples consumed directly.</p>
+        <p class="solves"><em>Solves:</em> family-mode safety, spoiler avoidance, parental control reliability.</p>
+      </div>
+      <div class="innovation-card">
+        <span class="num">③</span>
+        <h5>Calibrated OOC + Fallback</h5>
+        <p>Never returns zero. Calibrated confidence (not raw score) gates fallback into NN + KG expansion.</p>
+        <p class="solves"><em>Solves:</em> the 13% null-result rate documented in <em>SIGIR 2019</em>.<a href="#ref1" class="cite">[1]</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- §4 ASSISTANT PATH                              -->
+  <!-- ============================================== -->
+  <section>
+    <div class="section-label"><span class="num">§4</span> Assistant Path — agentic orchestrator</div>
+    <h2 class="section-title">A single ReAct loop with a <em>good tool catalog</em>.</h2>
+
+    <p>
+      Through 2025-2026 the agent-orchestrator design space crystallised into roughly four families: multi-agent fan-out
+      (CrewAI, AutoGen, LangGraph multi-agent), explicit DAG (LangGraph graph mode), single ReAct loop (Claude Agent
+      SDK pattern), and tree search (LATS). For Prime Video, the choice is <em>single ReAct loop</em>. Anthropic's own
+      2025 research on effective agents found that for most use cases a single reactive loop with a rich tool catalog
+      outperforms multi-agent on latency, cost, and debuggability<a href="#ref4" class="cite">[4]</a>. Our orchestrator is
+      not the innovation; the tool catalog is.
+    </p>
+
+    <h3 class="subsection">Why <em>not</em> the alternatives — paradigm comparison</h3>
+    <table class="data-table">
+      <thead><tr><th style="width:24%">Paradigm</th><th style="width:38%">Core idea</th><th>Fit for PV Assistant</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Multi-agent fan-out</strong></td><td>Decompose to specialist agents in parallel; orchestrator merges</td><td><strong>Bad fit.</strong> Coordination cost (token / latency / debug) exceeds benefit for EXPLORE queries; one tool-using agent suffices.</td></tr>
+        <tr><td><strong>Explicit DAG</strong></td><td>State machine + typed edges defines control flow</td><td><strong>Partial fit.</strong> Good for stable transactional flows (subscribe-flow); too rigid for open dialogue.</td></tr>
+        <tr><td class="lineage-name"><strong>★ Single ReAct loop</strong></td><td>One model + while-loop: reason → tool_use → tool_result → repeat</td><td><strong>Our choice.</strong> Simple control flow + rich tool catalog. The Anthropic-validated default for production agents in 2025-2026.</td></tr>
+        <tr><td><strong>Tree search (LATS)</strong></td><td>Explore multiple trajectories, pick best</td><td><strong>Bad fit.</strong> ~10× latency penalty; PV queries rarely need search-style planning.</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subsection">Tool catalog — 14 tools across 4 categories</h3>
+    <div class="tool-categories">
+      <div class="tool-cat">
+        <div class="cat-header"><span class="cat-name">A. Catalog &amp; Knowledge</span><span class="cat-share">~70% of tool calls</span></div>
+        <ul>
+          <li><code>search_titles(q, filters)</code> reuses the entire Search Path · ~50ms</li>
+          <li><code>scenario_lookup(scenario, c)</code> direct CIL Asset 2+3 query · ~30ms · <em>★ V2.0</em></li>
+          <li><code>explain_match(title, scenario)</code> renders ⟨s,p,o,c⟩ chain in natural language · ~50ms</li>
+          <li><code>xray_lookup(title, query)</code> in-player "who is this?" — already-shipped X-Ray service · ~30ms</li>
+        </ul>
+      </div>
+      <div class="tool-cat">
+        <div class="cat-header"><span class="cat-name">B. External</span><span class="cat-share">~10% of calls · <em>★ V2.2 expansion</em></span></div>
+        <ul>
+          <li><code>web_search(query)</code> the Tumble Leaf failure fix — fall back when internal recall fails · ~800ms</li>
+          <li><code>cross_amazon_lookup(query)</code> Kindle / Audible / Music — consent-gated, off by default · ~100ms</li>
+          <li><code>imdb_freshness(title)</code> latest reviews, trends, momentum · ~80ms</li>
+          <li><code>live_sports_state(team)</code> calls existing NBA Key Moments agent · ~150ms</li>
+        </ul>
+      </div>
+      <div class="tool-cat">
+        <div class="cat-header"><span class="cat-name">C. Action (side-effects · strict permission gate)</span><span class="cat-share">~10% of calls</span></div>
+        <ul>
+          <li><code>play(title, episode?)</code> requires explicit user confirm + parental-control PreToolUse check</li>
+          <li><code>add_to_watchlist(title)</code> reversible, light confirm · &lt;30ms</li>
+          <li><code>subscribe(channel)</code> third-party purchase: explicit confirm + price display, irreversible</li>
+          <li><code>set_parental_mode(level)</code> requires password / biometric · user-initiated only</li>
+        </ul>
+      </div>
+      <div class="tool-cat">
+        <div class="cat-header"><span class="cat-name">D. Memory &amp; State (3-tier)</span><span class="cat-share">~10% of calls</span></div>
+        <ul>
+          <li><code>recall_session(turns?)</code> short-term in-context · free</li>
+          <li><code>recall_preferences()</code> mid-term stated prefs in DynamoDB · user-editable</li>
+          <li><code>recall_trajectory()</code> long-term viewing history · RUEL sequence model (existing)</li>
+          <li><code>save_preference(pref)</code> writes only after explicit user approval</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="decision-box">
+      <div class="label">Key engineering decision</div>
+      <h4>Tool Search, not Pre-loaded Tool Schemas</h4>
+      <p>
+        Inlining all 14 tool schemas into every prompt costs ~3,000 tokens per turn and — worse — distracts the
+        model: it must re-scan all 14 every decision. Claude Code validated a better pattern: load only tool
+        <em>names</em> (~200 tokens) into context; let the model call <code>search_tool(intent)</code> when it
+        needs a specific schema. We adopt this pattern verbatim, including for our own tools, since it is
+        especially well-suited to MCP-style server contexts.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- §5 COSMO-LM                                    -->
+  <!-- ============================================== -->
+  <section>
+    <div class="section-label"><span class="num">§5</span> COSMO-LM — distilling a 7B serving model</div>
+    <h2 class="section-title">Why distill — <em>three independent binding reasons</em>.</h2>
+
+    <p>
+      The COSMO-LM is not a chatbot. It is a domain-specific judge-and-generator, called millions of times per day
+      from the offline KG-edge pipeline. It does two narrow tasks: <strong>(a) edge generation</strong> — given a
+      (query, watched_title) pair, emit candidate ⟨s,p,o,c⟩ quadruples; <strong>(b) edge scoring</strong> — given a
+      candidate quadruple, emit five 0-1 scores (completeness, relevance, informativeness, plausibility,
+      typicality). The task is narrow but the call volume is enormous, which forces the model to be small, cheap,
+      low-latency, and locally hosted. Three independent reasons make distillation a hard requirement, not a
+      preference.
+    </p>
+
+    <table class="data-table compact-table">
+      <thead><tr><th style="width:18%">Reason</th><th>Argument</th><th style="width:16%">Magnitude</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>① Cost</strong></td>
+          <td>~10M calls/day × ~1000 tok in/out at current Bedrock Claude prices ≈ $50K/day = ~$18M/year. Distilled 7B on Inferentia2: stable-state ~$1.5M/year. COSMO paper documents a ~20× inference-cost reduction post-distillation.</td>
+          <td><strong>~12× saving</strong></td>
+        </tr>
+        <tr>
+          <td><strong>② Latency</strong></td>
+          <td>Bedrock Claude API median ~600ms, p99 ~2s (network + queue + inference). Inferentia2-served 7B: p99 ~80ms. Online KG lookup SLA is sub-50ms — Bedrock cannot meet this, so distillation is a <em>hard requirement</em>.</td>
+          <td><strong>~25× p99</strong></td>
+        </tr>
+        <tr>
+          <td><strong>③ Sovereignty</strong></td>
+          <td>Search-watch behavior is Amazon first-party data. Sending it across the Bedrock boundary (even within AWS) requires substantially heavier compliance and governance. A locally-distilled 7B keeps the data inside Amazon's network boundary — a non-negotiable for legal and privacy review.</td>
+          <td><strong>compliance gate</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:6px">
+      <strong>Training pipeline · 4 stages.</strong>
+      <em>Stage 1</em> Bedrock Claude Sonnet (teacher) generates ~3M candidate quadruples from sampled
+      search-watch logs. <em>Stage 2</em> three-layer filter — rule (perplexity, dedup, blocklist), similarity
+      (no tautology), human verification (~30K samples, 18 catalog domains). <em>Stage 3</em> SFT on LLaMA-3.1
+      7B / Qwen 7B with the verified set + augmented synthetic instructions; 5-task multi-task training; 8× A100
+      or Trainium for ~3 days. <em>Stage 4 (optional)</em> DPO/GRPO over preference pairs for borderline
+      alignment. Production: Inferentia2 + vLLM, async cache, daily SageMaker retrain.
+    </p>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- §6 EVALUATION                                  -->
+  <!-- ============================================== -->
+  <section>
+    <div class="section-label"><span class="num">§6</span> Evaluation Framework — the cross-cutting moat</div>
+    <h2 class="section-title">Four evaluations that <em>gate every layer</em>.</h2>
+
+    <p>
+      Bet 05 (Evaluation Infrastructure) consumes ~30% of headcount. This is the bet that makes the other four
+      shippable safely — the one that prevents a Fallout S2 incident. Four cross-cutting evaluations, run
+      continuously, gate releases at every layer.
+    </p>
+
+    <table class="data-table compact-table">
+      <thead><tr><th style="width:22%">Evaluation</th><th>What it measures</th><th>Why it gates everything</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="lineage-name">RAG Triad</td>
+          <td>(1) groundedness · (2) context relevance · (3) answer relevance — the three RAG quality axes</td>
+          <td>Hallucinations are blocked at the response layer, not just retrieval.</td>
+        </tr>
+        <tr>
+          <td class="lineage-name">Asymmetric Loss</td>
+          <td>weighted error rates where spoiler / age-rating / safety violations cost asymmetrically more than missed recommendations</td>
+          <td>"First do no harm" made mathematical. A 0.95-NDCG model that ships one spoiler is rejected.</td>
+        </tr>
+        <tr>
+          <td class="lineage-name">Constraint-Conditional Eval</td>
+          <td>AliCoCo2-style ⟨query, c, expected_safe, gold⟩ four-tuples, per-locale judge panels with calibrated correlation</td>
+          <td>Safety tested as <em>conditions</em>, not averages. Family-mode failure ≠ aggregate pass.</td>
+        </tr>
+        <tr>
+          <td class="lineage-name">Behavior Simulator</td>
+          <td>60-90 day holdout cohort + counterfactual session simulator predicting LTV impact <em>before</em> rollout</td>
+          <td>Catches the Bing-generative-SERP failure mode (14d looks great, 45d truth is ~zero).</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      No model — embedding, ranking, KG generator, or full Assistant — ships without passing all four. This is
+      what "evaluation as moat" means in practice: a structural, organizational guarantee that quality is not
+      shipped by judgment alone.
+    </p>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- REFERENCES                                     -->
+  <!-- ============================================== -->
+  <div class="references">
+    <h3>References &amp; further reading</h3>
+    <ol>
+      <li id="ref1"><strong>Bennett, J., et al.</strong> "Search and recommendation in the streaming era." <em>SIGIR 2019 Industry Track</em>. Establishes the ~13% out-of-catalog query rate as a structural floor for streaming search and the consequence on session continuation.</li>
+      <li id="ref2"><strong>Amazon Science.</strong> "Rufus: an LLM-powered shopping assistant." Public technical disclosures on Bedrock-routed multi-LLM orchestration, account-level memory, and cross-product personalization at retail scale. Architectural precedent we inherit at the inference layer, not replicate at the product layer.</li>
+      <li id="ref3"><strong>Industrial e-commerce AI papers (dual-lineage evidence).</strong> Luo et al., "AliCoCo: Alibaba E-commerce Cognitive Concept Net" (KDD 2020); Yu et al., "AliCoCo2: Beyond Concept Net" (KDD 2021); Yu et al., "COSMO: A Large-Scale E-commerce Common Sense Knowledge Generation and Serving" (SIGIR 2024); Liu et al., "MOON3.0: Multimodal Reasoner-Embedder for E-commerce Search" (2025). Convergent evidence for the implicit-embedding + explicit-KG pattern adopted in this vision.</li>
+      <li id="ref4"><strong>Yao, S., et al.</strong> "ReAct: Synergizing Reasoning and Acting in Language Models." <em>ICLR 2023</em>. Architectural basis for the Agentic Orchestrator (Bet 03). See also Anthropic's <em>Building Effective Agents</em> (2025) on why a single reactive loop outperforms multi-agent fan-out for most production cases.</li>
+      <li id="ref5"><strong>Internal Prime Video disclosures (2024-2025).</strong> X-Ray Recaps GA (Nov 2024), AI Topics GA, NBA Key Moments, Video Recaps Fallout S1 incident (Nov 2025). Source for current AI-asset inventory and the eval-gap diagnosis motivating Bet 05.</li>
+      <li id="ref6"><strong>MITRE ATT&amp;CK and ATLAS frameworks.</strong> Used for the safety / constraint-conditional eval design in Bet 05, particularly the asymmetric-loss treatment of spoiler, parental-control, and age-rating violations.</li>
+    </ol>
+  </div>
+
+  <footer>
+    Dr. Ming Gong · April 2026 · Technical Companion to <span class="mono">Prime_Video_Vision_2.2</span> · Companion to <span class="mono">PV_Vision_Memo</span>
+  </footer>
+
+</div>
+
+</body>
+</html>

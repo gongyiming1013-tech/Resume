@@ -1,0 +1,2065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Video Search & Assistant — 2-Year Vision · A Review Memo for Ming Ye</title>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500&display=swap');
+  @import url('https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap');
+
+  :root {
+    /* SCREEN palette (dark editorial) */
+    --bg-deep: #0a0d14;
+    --bg-card: #131720;
+    --bg-elevated: #1a1f2e;
+    --ink-primary: #f5f3ee;
+    --ink-secondary: #a8a89c;
+    --ink-tertiary: #6b6d6a;
+    --ink-faded: #4a4c52;
+    --accent-amber: #d4a843;
+    --accent-amber-bright: #e8b95a;
+    --accent-amber-soft: rgba(212, 168, 67, 0.15);
+    --accent-amber-faint: rgba(212, 168, 67, 0.05);
+    --accent-blue: #6ba4d4;
+    --accent-coral: #e07856;
+    --accent-jade: #7ab891;
+    --rule: #2a2f3d;
+    --rule-soft: #1f2330;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-deep);
+    color: var(--ink-primary);
+    font-family: 'General Sans', -apple-system, sans-serif;
+    font-weight: 400;
+    line-height: 1.65;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Subtle film-grain overlay for screen */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    z-index: 100;
+    mix-blend-mode: overlay;
+  }
+
+  .display { font-family: 'Fraunces', Georgia, serif; font-variation-settings: "opsz" 144, "SOFT" 50; }
+  .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.92em; }
+
+  em {
+    font-style: italic;
+    color: var(--accent-amber);
+    font-weight: 500;
+  }
+
+  strong { color: var(--ink-primary); font-weight: 600; }
+
+  /* ============================================== */
+  /* DOCUMENT LAYOUT — single column, magazine     */
+  /* ============================================== */
+  .doc {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 56px 48px 80px;
+  }
+
+  /* ============================================== */
+  /* MASTHEAD                                       */
+  /* ============================================== */
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 32px;
+    margin-bottom: 48px;
+  }
+  .masthead-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 28px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-tertiary);
+  }
+  .masthead-meta .doc-type {
+    color: var(--accent-amber);
+    font-weight: 600;
+  }
+  .masthead h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 44px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+    color: var(--ink-primary);
+  }
+  .masthead h1 em {
+    font-style: italic;
+    color: var(--accent-amber);
+    font-weight: 400;
+  }
+  .masthead .subtitle {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.4;
+    color: var(--ink-secondary);
+    font-weight: 300;
+  }
+
+  .masthead-byline {
+    margin-top: 24px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    font-size: 12px;
+    color: var(--ink-tertiary);
+  }
+  .masthead-byline::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--accent-amber);
+  }
+  .masthead-byline strong { color: var(--ink-primary); font-weight: 500; }
+
+  /* ============================================== */
+  /* TL;DR BLOCK                                    */
+  /* ============================================== */
+  .tldr {
+    background: var(--accent-amber-faint);
+    border-left: 2px solid var(--accent-amber);
+    padding: 22px 26px;
+    margin-bottom: 48px;
+    border-radius: 0 3px 3px 0;
+  }
+  .tldr .label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent-amber);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .tldr p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-primary);
+    margin: 0;
+  }
+  .tldr p:not(:last-child) { margin-bottom: 8px; }
+
+  /* ============================================== */
+  /* SECTION LAYOUT                                 */
+  /* ============================================== */
+  section {
+    margin-bottom: 56px;
+    page-break-inside: avoid;
+  }
+  section.allow-break { page-break-inside: auto; }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent-amber);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .section-label::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--accent-amber);
+  }
+  .section-label .num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--accent-amber-bright);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  h2.section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1.1;
+    color: var(--ink-primary);
+    letter-spacing: -0.015em;
+    margin-bottom: 18px;
+  }
+  h2.section-title em {
+    font-style: italic;
+    color: var(--accent-amber);
+    font-weight: 400;
+  }
+
+  h3.subsection {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 1.3;
+    color: var(--ink-primary);
+    margin-top: 24px;
+    margin-bottom: 10px;
+  }
+  h3.subsection .marker {
+    color: var(--accent-amber);
+    font-style: italic;
+    margin-right: 8px;
+  }
+
+  /* Body paragraphs */
+  p {
+    margin-bottom: 14px;
+    color: var(--ink-secondary);
+  }
+  p strong { color: var(--ink-primary); }
+
+  /* Inline citation marker */
+  .cite {
+    display: inline-block;
+    font-size: 0.7em;
+    color: var(--accent-amber);
+    vertical-align: super;
+    margin: 0 1px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .cite:hover { color: var(--accent-amber-bright); text-decoration: underline; }
+
+  /* ============================================== */
+  /* USER-EXPERIENCE SCENES                         */
+  /* ============================================== */
+  .scene {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent-amber);
+    border-radius: 0 4px 4px 0;
+    padding: 18px 22px;
+    margin: 14px 0;
+    page-break-inside: avoid;
+  }
+  .scene-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .scene-meta {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-amber);
+    font-weight: 600;
+  }
+  .replay-btn {
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--ink-tertiary);
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 0.08em;
+    transition: all 200ms ease;
+  }
+  .replay-btn:hover {
+    border-color: var(--accent-amber);
+    color: var(--accent-amber);
+    background: var(--accent-amber-faint);
+  }
+  .scene .quote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.35;
+    color: var(--ink-primary);
+    margin-bottom: 14px;
+    font-weight: 400;
+  }
+  .scene .quote::before { content: '"'; color: var(--accent-amber); }
+  .scene .quote::after { content: '"'; color: var(--accent-amber); }
+  .scene .narration {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink-secondary);
+  }
+  .scene .narration strong { color: var(--ink-primary); }
+  .scene .narration em { color: var(--accent-amber); }
+  .screen-only-inline { color: var(--ink-tertiary); font-size: 0.92em; }
+
+  /* ============================================== */
+  /* INTERACTIVE DEMOS — animated mockups            */
+  /* ============================================== */
+  .scene-demo {
+    margin: 6px 0 14px;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(180deg, rgba(212, 168, 67, 0.04), transparent);
+    border-radius: 4px;
+    padding: 18px 0;
+  }
+
+  /* Reset shared animation when "playing" class set */
+  .scene-interactive.playing .scene-demo > * { animation-play-state: running; }
+
+  /* ----- LEAD 1: TV mockup ----- */
+  .tv-frame {
+    width: 100%;
+    max-width: 460px;
+    padding: 0 16px;
+  }
+  .tv-bezel {
+    background: #000;
+    border: 3px solid var(--bg-elevated);
+    border-radius: 6px;
+    padding: 4px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  }
+  .tv-screen {
+    background: linear-gradient(180deg, #0a1220 0%, #050811 100%);
+    border-radius: 3px;
+    aspect-ratio: 16/9;
+    padding: 14px 16px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .tv-listening {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    animation: tv-listening-fade 6s ease-in-out infinite;
+  }
+  .tv-listening .mic-pulse {
+    font-size: 28px;
+    animation: mic-pulse 1s ease-in-out infinite;
+  }
+  .tv-listening .listening-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  @keyframes mic-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.18); opacity: 1; }
+  }
+  @keyframes tv-listening-fade {
+    0%, 18% { opacity: 1; }
+    25%, 100% { opacity: 0; pointer-events: none; }
+  }
+  .tv-query {
+    font-size: 11px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 3px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    opacity: 0;
+    animation: tv-query-show 6s ease-in-out infinite;
+  }
+  @keyframes tv-query-show {
+    0%, 22% { opacity: 0; transform: translateY(-4px); }
+    28%, 100% { opacity: 1; transform: translateY(0); }
+  }
+  .tv-results {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .tv-tile {
+    background: linear-gradient(135deg, #1a3052, #0d1a2e);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 3px;
+    padding: 7px 8px 8px;
+    color: white;
+    font-size: 9px;
+    line-height: 1.3;
+    aspect-ratio: 16/12;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .tv-tile .title { font-weight: 600; font-size: 10.5px; margin-bottom: 1px; color: white; }
+  .tv-tile .meta { color: rgba(255,255,255,0.55); font-size: 8.5px; }
+  .tv-tile.tile-1 { animation: tile-fade-in 6s ease-out infinite; animation-delay: 0s; }
+  .tv-tile.tile-2 { animation: tile-fade-in 6s ease-out infinite; animation-delay: 0s; animation-name: tile-fade-in-2; }
+  .tv-tile.tile-3 { animation: tile-fade-in 6s ease-out infinite; animation-delay: 0s; animation-name: tile-fade-in-3; }
+  @keyframes tile-fade-in {
+    0%, 30% { opacity: 0; transform: translateY(8px); }
+    37%, 100% { opacity: 0.55; transform: translateY(0); }
+  }
+  @keyframes tile-fade-in-2 {
+    0%, 32% { opacity: 0; transform: translateY(8px); }
+    39%, 100% { opacity: 0.55; transform: translateY(0); }
+  }
+  @keyframes tile-fade-in-3 {
+    0%, 34% { opacity: 0; transform: translateY(8px); }
+    41%, 100% { opacity: 0.55; transform: translateY(0); }
+  }
+  .tv-tile.tile-featured {
+    grid-column: 1 / 4;
+    grid-row: 1;
+    background: linear-gradient(135deg, #5a8fb8, #2a4a72);
+    border: 2px solid var(--accent-amber);
+    aspect-ratio: auto;
+    padding: 9px 11px 11px;
+    position: relative;
+    margin-top: 0;
+    animation: featured-slide-in 6s ease-out infinite;
+    z-index: 2;
+  }
+  @keyframes featured-slide-in {
+    0%, 50% { opacity: 0; transform: scale(0.92) translateY(12px); }
+    60%, 100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .tv-tile.tile-featured .title { font-size: 13px; }
+  .tv-tile.tile-featured .meta { color: rgba(255,255,255,0.75); font-size: 9.5px; }
+  .tv-tile.tile-featured .badge {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    background: var(--accent-amber);
+    color: #000;
+    font-size: 7.5px;
+    padding: 1.5px 6px;
+    border-radius: 2px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .tv-tile.tile-featured .reason-chip {
+    margin-top: 4px;
+    color: var(--accent-amber-bright);
+    font-size: 9px;
+    font-style: italic;
+    opacity: 0;
+    animation: chip-fade-in 6s ease-out infinite;
+  }
+  @keyframes chip-fade-in {
+    0%, 70% { opacity: 0; }
+    78%, 100% { opacity: 1; }
+  }
+
+  /* ----- LEAD 2: Phone mockup with chat ----- */
+  .phone-frame {
+    width: 100%;
+    max-width: 280px;
+  }
+  .phone-bezel {
+    background: #000;
+    border: 3px solid var(--bg-elevated);
+    border-radius: 28px;
+    padding: 5px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  }
+  .phone-screen {
+    background: #0a0d14;
+    border-radius: 22px;
+    overflow: hidden;
+    color: white;
+    height: 420px;
+    display: flex;
+    flex-direction: column;
+  }
+  .phone-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 18px 10px;
+    font-size: 10px;
+    color: rgba(255,255,255,0.7);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .phone-header span:last-child {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--accent-amber);
+    font-size: 11px;
+  }
+  .phone-chat {
+    flex: 1;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow: hidden;
+  }
+  .bubble {
+    font-size: 10.5px;
+    line-height: 1.4;
+    padding: 6px 10px;
+    border-radius: 12px;
+    max-width: 85%;
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  .bubble.bubble-user {
+    background: rgba(212, 168, 67, 0.20);
+    border: 1px solid rgba(212, 168, 67, 0.4);
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 3px;
+  }
+  .bubble.bubble-tool {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    background: rgba(107, 164, 212, 0.10);
+    border: 1px dashed rgba(107, 164, 212, 0.3);
+    color: rgba(107, 164, 212, 0.95);
+    align-self: flex-start;
+    padding: 4px 8px;
+    border-radius: 3px;
+  }
+  .bubble.bubble-bot {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.92);
+    align-self: flex-start;
+    border-bottom-left-radius: 3px;
+    width: 95%;
+    max-width: none;
+  }
+  .bubble.bubble-bot strong { color: var(--accent-amber-bright); }
+  .pick {
+    font-size: 9.5px;
+    padding: 3px 7px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 3px;
+    margin-top: 3px;
+  }
+  .action-row {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin-top: 6px;
+  }
+  .action-btn {
+    font-size: 9px;
+    padding: 3px 8px;
+    background: var(--accent-amber);
+    color: #000;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+  .action-confirm {
+    font-size: 9px;
+    color: var(--accent-jade);
+    font-style: italic;
+    opacity: 0;
+    animation: confirm-pop 10s ease-out infinite;
+  }
+  @keyframes bubble-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  /* 10s loop, staggered bubbles */
+  .bubble.b1 { animation: bubble-show 10s ease-out infinite; animation-delay: 0s; }
+  .bubble.b2 { animation: bubble-show-2 10s ease-out infinite; }
+  .bubble.b3 { animation: bubble-show-3 10s ease-out infinite; }
+  .bubble.b4 { animation: bubble-show-4 10s ease-out infinite; }
+  .bubble.b5 { animation: bubble-show-5 10s ease-out infinite; }
+  @keyframes bubble-show   { 0%, 5%   { opacity: 0; transform: translateY(8px); } 12%, 100% { opacity: 1; transform: translateY(0); } }
+  @keyframes bubble-show-2 { 0%, 18%  { opacity: 0; transform: translateY(8px); } 25%, 100% { opacity: 1; transform: translateY(0); } }
+  @keyframes bubble-show-3 { 0%, 28%  { opacity: 0; transform: translateY(8px); } 35%, 100% { opacity: 1; transform: translateY(0); } }
+  @keyframes bubble-show-4 { 0%, 50%  { opacity: 0; transform: translateY(8px); } 57%, 100% { opacity: 1; transform: translateY(0); } }
+  @keyframes bubble-show-5 { 0%, 65%  { opacity: 0; transform: translateY(8px); } 72%, 100% { opacity: 1; transform: translateY(0); } }
+  @keyframes confirm-pop   { 0%, 88%  { opacity: 0; } 92%, 100% { opacity: 1; } }
+
+  /* ----- LEAD 3: In-Player ----- */
+  .player-frame {
+    width: 100%;
+    max-width: 460px;
+    padding: 0 16px;
+  }
+  .player-scene {
+    background: linear-gradient(135deg, #2a1810 0%, #4a2c1a 50%, #1a0e08 100%);
+    aspect-ratio: 16/10;
+    border-radius: 6px;
+    border: 3px solid var(--bg-elevated);
+    padding: 10px 12px;
+    position: relative;
+    color: white;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  }
+  .player-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 4px;
+  }
+  .player-meta .paused { color: var(--accent-amber); }
+  .voice-overlay {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    opacity: 0;
+    animation: voice-show 8s ease-in-out infinite;
+  }
+  @keyframes voice-show {
+    0%, 8% { opacity: 0; }
+    14%, 35% { opacity: 1; }
+    42%, 100% { opacity: 0; }
+  }
+  .voice-pulse {
+    display: block;
+    font-size: 24px;
+    animation: mic-pulse 1.2s ease-in-out infinite;
+    margin-bottom: 4px;
+  }
+  .voice-text {
+    font-size: 11px;
+    color: var(--accent-amber);
+    letter-spacing: 0.15em;
+    font-weight: 600;
+  }
+  .answer-card {
+    position: absolute;
+    bottom: 60px;
+    left: 12px;
+    right: 12px;
+    background: rgba(0,0,0,0.7);
+    border-left: 2px solid var(--accent-amber);
+    padding: 7px 10px;
+    border-radius: 0 3px 3px 0;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    animation: answer-show 8s ease-in-out infinite;
+  }
+  @keyframes answer-show {
+    0%, 38% { opacity: 0; transform: translateY(6px); }
+    44%, 100% { opacity: 1; transform: translateY(0); }
+  }
+  .answer-label {
+    font-size: 9px;
+    color: var(--accent-amber);
+    font-weight: 600;
+    margin-bottom: 2px;
+    letter-spacing: 0.06em;
+  }
+  .answer-text { font-size: 10px; line-height: 1.4; color: white; }
+  .answer-text strong { color: white; }
+  .answer-text .no-spoiler {
+    display: block;
+    margin-top: 3px;
+    color: var(--accent-amber);
+    font-style: italic;
+    font-size: 9px;
+  }
+  .kindle-context {
+    position: absolute;
+    bottom: 36px;
+    left: 12px;
+    right: 12px;
+    font-size: 8.5px;
+    color: var(--accent-jade);
+    font-style: italic;
+    background: rgba(122, 184, 145, 0.10);
+    border: 1px dashed rgba(122, 184, 145, 0.4);
+    padding: 3px 8px;
+    border-radius: 3px;
+    opacity: 0;
+    animation: kindle-show 8s ease-in-out infinite;
+  }
+  .kindle-context em { color: white; font-style: italic; }
+  @keyframes kindle-show {
+    0%, 60% { opacity: 0; }
+    66%, 100% { opacity: 1; }
+  }
+  .ambient-actions {
+    position: absolute;
+    bottom: 8px;
+    left: 12px;
+    right: 12px;
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+  }
+  .ambient-actions .action-confirm {
+    font-size: 8.5px;
+    color: var(--accent-jade);
+    background: rgba(122, 184, 145, 0.10);
+    border: 1px solid rgba(122, 184, 145, 0.4);
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-style: normal;
+    animation: action-show 8s ease-in-out infinite;
+  }
+  .ambient-actions .action-confirm:nth-child(1) { animation-delay: 0s; }
+  .ambient-actions .action-confirm:nth-child(2) { animation-delay: 0s; animation-name: action-show-2; }
+  @keyframes action-show {
+    0%, 75% { opacity: 0; transform: translateY(4px); }
+    82%, 100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes action-show-2 {
+    0%, 80% { opacity: 0; transform: translateY(4px); }
+    87%, 100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Pause-on-hover for accessibility */
+  .scene-demo:hover * { animation-play-state: paused !important; }
+
+  /* ============================================== */
+  /* ARCHITECTURE FIGURE                            */
+  /* ============================================== */
+  /* ============================================== */
+  .figure {
+    margin: 22px -24px;
+    text-align: center;
+    page-break-inside: avoid;
+  }
+  .figure img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 4px;
+  }
+  .figure .arch-svg {
+    width: 100%;
+    max-width: 720px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  /* SVG color classes — inherit from CSS variables for screen/print theming */
+  .svg-tier-label { font-size: 10px; fill: var(--ink-tertiary); font-weight: 600; letter-spacing: 0.18em; }
+  .svg-tier-amber { fill: var(--accent-amber); }
+  .svg-name { font-size: 11px; fill: var(--ink-primary); font-weight: 500; }
+  .svg-meta { font-size: 9px; fill: var(--ink-secondary); }
+  .svg-detail { font-size: 10px; fill: var(--ink-secondary); }
+  .svg-surface-box { fill: var(--bg-elevated); stroke: var(--accent-blue); stroke-width: 1.5; }
+  .svg-amber-stroke { stroke: var(--accent-amber); stroke-width: 2; }
+  .svg-amber-title {
+    font-size: 14px; fill: var(--accent-amber); font-weight: 600;
+    font-family: 'Fraunces', Georgia, serif; font-style: italic;
+  }
+  .svg-path-search { fill: var(--bg-elevated); stroke: var(--accent-blue); stroke-width: 2; }
+  .svg-path-asst { fill: var(--bg-elevated); stroke: var(--accent-coral); stroke-width: 2; }
+  .svg-path-title { font-size: 12px; font-weight: 600; }
+  .svg-blue { fill: var(--accent-blue); }
+  .svg-coral { fill: var(--accent-coral); }
+  .svg-asset-name { font-size: 11px; fill: var(--accent-amber); font-weight: 600; }
+  .svg-asset-detail { font-size: 9.5px; fill: var(--ink-secondary); }
+  .svg-asset-solves { font-size: 9px; fill: var(--accent-jade); font-style: italic; }
+  .svg-foundation { fill: var(--bg-card); stroke: var(--rule); stroke-width: 1; stroke-dasharray: 4 3; }
+  .svg-foundation-name { font-size: 11px; fill: var(--ink-secondary); font-weight: 500; }
+  .svg-foundation-note { font-size: 9px; fill: var(--ink-tertiary); font-style: italic; }
+  .svg-connector { stroke: var(--ink-tertiary); stroke-width: 1; fill: none; }
+  .svg-arrow { fill: var(--ink-tertiary); }
+
+  /* 7-layer architecture additions */
+  .svg-layer-num {
+    font-size: 9.5px;
+    fill: var(--accent-amber);
+    font-weight: 700;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    letter-spacing: 0;
+  }
+  .svg-amber { fill: var(--accent-amber); }
+  .svg-role-note {
+    font-size: 8.5px;
+    fill: var(--ink-tertiary);
+    font-style: italic;
+    letter-spacing: 0;
+  }
+  .svg-name-sm { font-size: 9.5px; fill: var(--ink-primary); font-weight: 500; }
+  .svg-meta-sm { font-size: 7.5px; fill: var(--ink-secondary); }
+  .svg-detail-sm { font-size: 8.5px; fill: var(--ink-secondary); }
+  .svg-l2-box { fill: var(--bg-elevated); stroke: var(--accent-blue); stroke-width: 1.5; }
+  .svg-l2-name { font-size: 11px; fill: var(--accent-blue); font-weight: 600; }
+  .svg-amber-stroke-2 { stroke: var(--accent-amber); stroke-width: 2; }
+  .svg-coral-stroke { stroke: var(--accent-coral); stroke-width: 2; }
+  .svg-asset-name-sm { font-size: 10px; fill: var(--accent-amber); font-weight: 600; }
+  .svg-asset-detail-sm { font-size: 8.5px; fill: var(--ink-secondary); }
+  .svg-asset-solves-sm { font-size: 8px; fill: var(--accent-jade); font-style: italic; }
+  .svg-consumer-box { fill: var(--bg-elevated); stroke: var(--accent-amber); stroke-width: 1; stroke-opacity: 0.5; }
+
+  /* Eval moat (Layer 7, vertical bar) */
+  .svg-eval-num {
+    font-size: 11px;
+    fill: var(--accent-coral);
+    font-weight: 700;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+  }
+  .svg-eval-label {
+    font-size: 9px;
+    fill: var(--accent-coral);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .svg-eval-divider { stroke: var(--accent-coral); stroke-width: 1; stroke-opacity: 0.4; }
+  .svg-eval-role {
+    font-size: 7.5px;
+    fill: var(--ink-tertiary);
+    font-style: italic;
+  }
+  .svg-eval-item { font-size: 8.5px; fill: var(--ink-primary); font-weight: 500; }
+  .svg-eval-sub { font-size: 7px; fill: var(--ink-tertiary); font-style: italic; }
+  .svg-eval-callout {
+    font-size: 9px;
+    fill: var(--accent-coral);
+    font-weight: 600;
+  }
+  .svg-eval-tag {
+    font-size: 7.5px;
+    fill: var(--ink-secondary);
+    font-style: italic;
+  }
+  .svg-gate-mark { fill: var(--accent-coral); opacity: 0.55; }
+
+  /* Legend at bottom */
+  .svg-legend { font-size: 9px; fill: var(--ink-secondary); font-weight: 500; }
+  .svg-legend-text { font-size: 8.5px; fill: var(--ink-tertiary); }
+  .svg-legend-swatch-amber { fill: var(--accent-amber); opacity: 0.5; }
+  .svg-legend-swatch-blue { fill: var(--accent-blue); opacity: 0.5; }
+  .figure-caption {
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--ink-tertiary);
+    letter-spacing: 0.05em;
+    font-style: italic;
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+  }
+  .figure-caption strong { color: var(--ink-secondary); font-style: normal; }
+
+  /* ============================================== */
+  /* BETS GRID                                      */
+  /* ============================================== */
+  .bets-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 18px 0;
+  }
+  .bet-row {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 16px;
+    padding: 14px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    page-break-inside: avoid;
+  }
+  .bet-row.foundation { border-left: 3px solid var(--accent-blue); }
+  .bet-row.consumer { border-left: 3px solid var(--accent-amber); }
+  .bet-row.orth { border-left: 3px solid #b585c4; }
+  .bet-row.safety { border-left: 3px solid var(--accent-jade); }
+  .bet-row .bet-id {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--accent-amber);
+    font-weight: 400;
+  }
+  .bet-row.foundation .bet-id { color: var(--accent-blue); }
+  .bet-row.orth .bet-id { color: #b585c4; }
+  .bet-row.safety .bet-id { color: var(--accent-jade); }
+  .bet-row .bet-body h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    color: var(--ink-primary);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .bet-row .bet-body p {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink-secondary);
+    margin: 0;
+  }
+  .bet-row .bet-body p em { color: var(--accent-amber); }
+
+  /* ============================================== */
+  /* DIAMOND CALLOUT (org bet)                      */
+  /* ============================================== */
+  .diamond-callout {
+    background: linear-gradient(135deg, var(--accent-amber-faint), transparent 70%);
+    border: 1px solid var(--rule);
+    border-left: 2px solid var(--accent-amber);
+    padding: 20px 24px;
+    margin: 18px 0;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+  }
+  .diamond-callout .equation {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-secondary);
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    line-height: 1.5;
+  }
+  .diamond-callout .equation .term {
+    background: var(--bg-elevated);
+    padding: 3px 8px;
+    border-radius: 2px;
+    border: 1px solid var(--rule);
+    color: var(--ink-primary);
+    white-space: nowrap;
+    display: inline-block;
+    margin: 2px 0;
+  }
+  .diamond-callout .equation .term.hl {
+    border-color: var(--accent-amber);
+    color: var(--accent-amber);
+  }
+  .diamond-callout .equation .op {
+    color: var(--accent-amber);
+    font-weight: 600;
+    margin: 0 4px;
+  }
+
+  /* Diamond block: visual + 6-card grid */
+  .diamond-block {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 24px;
+    margin: 16px 0 18px;
+    align-items: center;
+    page-break-inside: avoid;
+  }
+  .diamond-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .diamond-visual svg {
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+  }
+
+  .diamond-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px 12px;
+  }
+  .dim-card {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-left: 2px solid var(--accent-amber);
+    border-radius: 0 3px 3px 0;
+    padding: 10px 12px;
+    position: relative;
+  }
+  .dim-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 10px;
+    color: var(--accent-amber);
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+    opacity: 0.75;
+  }
+  .dim-name {
+    font-family: 'Fraunces', serif;
+    font-size: 14px;
+    color: var(--ink-primary);
+    font-weight: 500;
+    margin-bottom: 4px;
+    line-height: 1.15;
+  }
+  .dim-meaning {
+    font-size: 11px;
+    color: var(--ink-secondary);
+    line-height: 1.4;
+  }
+  .dim-meaning em { color: var(--accent-amber); font-style: italic; }
+
+  /* ============================================== */
+  /* MOAT / INDUSTRY SECTION                        */
+  /* ============================================== */
+  .moat-block {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    padding: 22px 26px;
+    margin: 16px 0;
+    border-radius: 4px;
+    page-break-inside: avoid;
+    position: relative;
+    overflow: hidden;
+  }
+  .moat-block::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, var(--accent-amber-soft), transparent 70%);
+    pointer-events: none;
+  }
+  .moat-claim {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.4;
+    color: var(--ink-primary);
+    font-weight: 400;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .moat-claim em {
+    color: var(--accent-amber);
+    font-weight: 500;
+  }
+  .moat-counters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 14px;
+    position: relative;
+    z-index: 1;
+  }
+  .moat-counter {
+    padding: 10px 14px;
+    border-left: 2px solid var(--accent-coral);
+    background: rgba(224, 120, 86, 0.06);
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink-secondary);
+  }
+  .moat-counter strong { color: var(--ink-primary); display: block; margin-bottom: 2px; }
+
+  /* Moat secondary list */
+  .moat-secondary {
+    list-style: none;
+    margin: 14px 0;
+  }
+  .moat-secondary li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--rule-soft);
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 16px;
+    font-size: 13px;
+  }
+  .moat-secondary li:last-child { border-bottom: none; }
+  .moat-secondary .moat-name {
+    color: var(--accent-amber);
+    font-weight: 500;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+  }
+  .moat-secondary .moat-desc {
+    color: var(--ink-secondary);
+    line-height: 1.5;
+  }
+  .moat-secondary .moat-desc strong { color: var(--ink-primary); }
+
+  /* ============================================== */
+  /* REFERENCES                                     */
+  /* ============================================== */
+  .references {
+    margin-top: 56px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+  }
+  .references h3 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--accent-amber);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .references ol {
+    list-style: none;
+    counter-reset: ref;
+  }
+  .references li {
+    counter-increment: ref;
+    padding: 6px 0 6px 32px;
+    position: relative;
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--ink-tertiary);
+  }
+  .references li::before {
+    content: counter(ref);
+    position: absolute;
+    left: 0;
+    top: 6px;
+    color: var(--accent-amber);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 12px;
+    width: 24px;
+    text-align: right;
+  }
+  .references li strong { color: var(--ink-secondary); font-weight: 500; }
+  .references li em { color: var(--ink-secondary); font-style: italic; }
+
+  /* ============================================== */
+  /* FOOTER                                         */
+  /* ============================================== */
+  footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-size: 11px;
+    color: var(--ink-faded);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* ============================================== */
+  /* PRINT STYLES — clean ink-friendly page         */
+  /* ============================================== */
+  @media print {
+    @page {
+      size: A4;
+      margin: 14mm 14mm;
+    }
+    :root {
+      --bg-deep: #ffffff;
+      --bg-card: #fafaf6;
+      --bg-elevated: #f3f1ea;
+      --ink-primary: #1a1a1a;
+      --ink-secondary: #3a3a3a;
+      --ink-tertiary: #6a6a6a;
+      --ink-faded: #9a9a9a;
+      --accent-amber: #a07820;
+      --accent-amber-bright: #8c6818;
+      --accent-amber-soft: rgba(160, 120, 32, 0.10);
+      --accent-amber-faint: rgba(160, 120, 32, 0.04);
+      --accent-blue: #336699;
+      --accent-coral: #b04a30;
+      --accent-jade: #4a8a5a;
+      --rule: #d8d4c8;
+      --rule-soft: #ece8dc;
+    }
+    body {
+      background: white;
+      color: var(--ink-primary);
+      font-size: 9.7pt;
+      line-height: 1.42;
+    }
+    body::before { display: none; }
+    .doc { max-width: 100%; margin: 0; padding: 0; }
+    em { color: var(--accent-amber); }
+
+    /* Hide screen-only interactive elements when printing */
+    .screen-only,
+    .screen-only-inline,
+    .replay-btn { display: none !important; }
+    .scene-header { margin-bottom: 4pt; }
+
+    /* Masthead — much tighter */
+    .masthead { padding-bottom: 14pt; margin-bottom: 16pt; }
+    .masthead-meta { margin-bottom: 12pt; font-size: 8pt; }
+    .masthead h1 { font-size: 22pt; line-height: 1.05; margin-bottom: 8pt; }
+    .masthead .subtitle { font-size: 11pt; line-height: 1.3; }
+    .masthead-byline { margin-top: 10pt; font-size: 9pt; gap: 10pt; }
+
+    /* TL;DR */
+    .tldr { padding: 12pt 14pt; margin-bottom: 18pt; }
+    .tldr .label { font-size: 7.5pt; margin-bottom: 6pt; letter-spacing: 0.25em; }
+    .tldr p { font-size: 9.5pt; line-height: 1.45; }
+    .tldr p:not(:last-child) { margin-bottom: 5pt; }
+
+    /* Sections */
+    section { margin-bottom: 12pt; }
+    .section-label { font-size: 7.5pt; margin-bottom: 6pt; gap: 10pt; letter-spacing: 0.25em; }
+    .section-label::before { width: 16pt; }
+    h2.section-title { font-size: 16pt; line-height: 1.08; margin-bottom: 7pt; }
+    h3.subsection { font-size: 10.5pt; margin-top: 9pt; margin-bottom: 4pt; }
+
+    p { margin-bottom: 5pt; }
+
+    /* Scenes */
+    .scene { padding: 10pt 12pt; margin: 8pt 0; }
+    .scene-meta { font-size: 7pt; margin-bottom: 4pt; letter-spacing: 0.2em; }
+    .scene .quote { font-size: 12pt; line-height: 1.25; margin-bottom: 6pt; }
+    .scene .narration { font-size: 9pt; line-height: 1.42; }
+
+    /* Figure */
+    .figure {
+      margin: 6pt 0;
+      page-break-inside: avoid;
+    }
+    .figure img { filter: brightness(0.92) saturate(1.1); max-height: 78mm; }
+    .figure-caption { font-size: 7.5pt; margin-top: 4pt; line-height: 1.36; }
+
+    /* Bets */
+    .bets-list { gap: 6pt; margin: 10pt 0; }
+    .bet-row { padding: 8pt 10pt; grid-template-columns: 38pt 1fr; gap: 10pt; }
+    .bet-row .bet-id { font-size: 17pt; }
+    .bet-row .bet-body h4 { font-size: 11pt; margin-bottom: 2pt; }
+    .bet-row .bet-body p { font-size: 8.8pt; line-height: 1.42; }
+
+    /* Diamond */
+    .diamond-block {
+      grid-template-columns: 100pt 1fr;
+      gap: 12pt;
+      margin: 8pt 0 10pt;
+    }
+    .diamond-visual svg { max-width: 100pt; }
+    .diamond-grid { gap: 5pt 6pt; }
+    .dim-card { padding: 5pt 7pt; }
+    .dim-num { font-size: 7.5pt; margin-bottom: 1pt; }
+    .dim-name { font-size: 9.5pt; margin-bottom: 2pt; }
+    .dim-meaning { font-size: 7.8pt; line-height: 1.32; }
+
+    .diamond-callout { padding: 10pt 12pt; margin: 8pt 0; }
+    .diamond-callout p { font-size: 10.5pt !important; line-height: 1.32 !important; }
+    .diamond-callout .equation { font-size: 8.5pt; padding-top: 7pt; margin-top: 7pt; }
+    .diamond-callout .equation .term { padding: 2pt 6pt; }
+
+    /* Moat */
+    .moat-block { padding: 10pt 12pt; margin: 7pt 0; }
+    .moat-claim { font-size: 12pt; line-height: 1.28; margin-bottom: 7pt; }
+    .moat-counters { gap: 5pt; margin-top: 5pt; }
+    .moat-counter { padding: 4.5pt 7pt; font-size: 8.4pt; line-height: 1.36; }
+    .moat-secondary li { padding: 3pt 0; gap: 11pt; font-size: 8.6pt; grid-template-columns: 102pt 1fr; line-height: 1.36; }
+    .moat-secondary .moat-name { font-size: 9pt; }
+
+    /* References */
+    .references { margin-top: 9pt; padding-top: 7pt; }
+    .references h3 { font-size: 10pt; margin-bottom: 4pt; }
+    .references ol li {
+      padding: 1.5pt 0 1.5pt 20pt;
+      font-size: 7.9pt;
+      line-height: 1.32;
+    }
+    .references li::before { font-size: 8.2pt; top: 1.5pt; }
+
+    /* Footer */
+    footer { margin-top: 7pt; padding-top: 5pt; font-size: 6.8pt; }
+
+    /* Cite */
+    .cite { color: var(--accent-amber); }
+
+    /* Page-break tuning */
+    section { page-break-inside: auto; }
+    .bet-row, .scene, .moat-block, .diamond-callout { page-break-inside: avoid; }
+    h2.section-title, h3.subsection { page-break-after: avoid; }
+    .figure { page-break-inside: avoid; }
+  }
+
+  /* Mobile responsive */
+  @media screen and (max-width: 720px) {
+    .doc { padding: 32px 22px; }
+    .masthead h1 { font-size: 32px; }
+    h2.section-title { font-size: 24px; }
+    .moat-counters { grid-template-columns: 1fr; }
+    .diamond-block { grid-template-columns: 1fr; gap: 16px; }
+    .diamond-grid { grid-template-columns: 1fr 1fr; }
+    .moat-secondary li { grid-template-columns: 1fr; gap: 4px; }
+    .figure { margin-left: -12px; margin-right: -12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="doc">
+
+  <!-- ============================================== -->
+  <!-- MASTHEAD                                       -->
+  <!-- ============================================== -->
+  <header class="masthead">
+    <div class="masthead-meta">
+      <span class="doc-type">Vision Memo · For Director Review</span>
+      <span>April 2026</span>
+    </div>
+
+    <h1>Prime Video that <em>thinks with you</em>,<br>not just searches for you.</h1>
+    <div class="subtitle">A 2-year vision for Search &amp; Assistant</div>
+
+    <div class="masthead-byline">
+      <span><strong>Dr. Ming Gong</strong></span>
+      <span>·</span>
+      <span>Prepared for review by Ming Ye</span>
+    </div>
+  </header>
+
+  <!-- ============================================== -->
+  <!-- TL;DR                                          -->
+  <!-- ============================================== -->
+  <div class="tldr">
+    <div class="label">TL;DR</div>
+    <p>
+      Three years from now, Prime Video is <strong>a product that thinks with you</strong> — not a search box, not a feed.
+      The customer experiences a true entertainment concierge who understands what they mean,
+      remembers what they like, and acts on their behalf across Amazon's ecosystem.
+    </p>
+    <p>
+      Behind it: an <em>agentic orchestrator</em> as the customer-facing surface, and a <em>Catalog Intelligence Layer</em>
+      as the substrate every Prime Video surface inherits. <strong>Both are built in parallel from Year 1, not sequentially.</strong>
+      Evaluation infrastructure is the moat that makes both shippable safely.
+    </p>
+    <p>
+      The team I want to build is small, opinionated, eval-driven, and over-indexed on full-stack ownership — what I call
+      <em>diamond excellence</em>. The long-term industry bet is a structural moat no streaming competitor can build:
+      <strong>Prime Video becomes the only entertainment platform in the world where reading a book on Kindle changes
+      what you're recommended to watch.</strong>
+    </p>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- 1 · PRODUCT POSITION                           -->
+  <!-- ============================================== -->
+  <section>
+    <div class="section-label"><span class="num">i.</span> Product Position</div>
+    <h2 class="section-title">Search and Assistant become <em>one experience</em>, not two products.</h2>
+
+    <p>
+      Today, Prime Video discovery has a known shape: <strong>browse drives ~70-75% of plays, search ~20%, recommendations
+      the rest</strong>. But search punches above its weight — it is the moment of <em>highest customer intent</em>, and roughly
+      <strong>13% of streaming searches return zero or wrong results</strong><a href="#ref1" class="cite">[1]</a>. Each one
+      is a churn signal at exactly the wrong moment.
+    </p>
+
+    <p>
+      The deeper problem is intent fragmentation. Customers arrive with three distinct intents — and today's surfaces
+      serve only one of them well:
+    </p>
+
+    <h3 class="subsection"><span class="marker">·</span>Three intent buckets, unevenly served</h3>
+
+    <p>
+      <strong>FETCH</strong> ("just play <em>The Boys</em>") works fine — title-string match is solved.
+      <strong>FIND</strong> ("the gentle blue fox cartoon for my daughter") is broken — string-match fails because the title
+      <em>Tumble Leaf</em> doesn't contain the phrase "blue fox." <strong>EXPLORE</strong> ("Saturday night, ninety minutes,
+      no tears, something we'll both agree on") is unserved entirely — browse rows can't express constraints, and search has
+      no concept of multi-constraint conjunction.
+    </p>
+
+    <p>
+      The product position I'm proposing is straightforward: in three years, <strong>a customer should not have to know
+      the difference between search and assistant</strong>. They should say what they want — by voice, by typing, in any
+      language, with any number of constraints — and the system responds with a confident play in seconds, with the
+      surrounding context a real concierge would give. Search and Assistant collapse into <em>one experience</em>, not two
+      products. The customer-facing surface is conversational; the underlying machinery is <em>agentic</em>.
+    </p>
+
+    <p>
+      This is not "a chatbot bolted onto search." This is search and discovery <em>reimagined as a conversation that thinks
+      with you</em> — multi-turn, context-aware, action-capable, grounded in the catalog. Rufus has demonstrated the
+      architectural pattern at the retail node<a href="#ref2" class="cite">[2]</a>; <strong>Prime Video's job is to extend
+      it into the entertainment node — not replicate the commerce node, and not build in isolation.</strong>
+    </p>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- 2 · VISIONARY USER EXPERIENCES                 -->
+  <!-- ============================================== -->
+  <section class="allow-break">
+    <div class="section-label"><span class="num">ii.</span> Visionary User Experiences</div>
+    <h2 class="section-title">Three customer moments, one continuous intelligence.</h2>
+
+    <p>
+      Three concrete scenes across three surfaces. Each shows a different intent type. Each is impossible today —
+      and mechanically achievable within the proposed architecture.
+      <span class="screen-only-inline"><em>Click any scene to replay the interaction.</em></span>
+    </p>
+
+    <!-- LEAD 1: TV — Voice Search FIND -->
+    <div class="scene scene-interactive" data-scene="1">
+      <div class="scene-header">
+        <div class="scene-meta">Lead 1 · TV · FIND intent</div>
+        <button class="replay-btn" aria-label="Replay animation">▶ Replay</button>
+      </div>
+      <p class="quote">The blue fox cartoon.</p>
+
+      <!-- Animated TV demo (screen only) -->
+      <div class="scene-demo screen-only">
+        <div class="tv-frame">
+          <div class="tv-bezel">
+            <div class="tv-screen">
+              <div class="tv-listening">
+                <span class="mic-pulse">🎙</span>
+                <span class="listening-label">Listening…</span>
+              </div>
+              <div class="tv-query">"blue fox cartoon"</div>
+              <div class="tv-results">
+                <div class="tv-tile tile-1"><div class="title">Pocoyo</div><div class="meta">Animation · 3-6</div></div>
+                <div class="tv-tile tile-2"><div class="title">Sarah &amp; Duck</div><div class="meta">Animation · 3-6</div></div>
+                <div class="tv-tile tile-3"><div class="title">Trash Truck</div><div class="meta">Animation · 3-6</div></div>
+                <div class="tv-tile tile-featured">
+                  <div class="badge">TOP MATCH</div>
+                  <div class="title">Tumble Leaf</div>
+                  <div class="meta">Stop-motion · Preschool</div>
+                  <div class="reason-chip">★ blue fox · gentle · age 3-6</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Print-friendly narration -->
+      <p class="narration">
+        <strong>Today:</strong> voice search returns "<em>No results found</em>." Customer scrolls back to the generic feed.
+        Session ends without a play.<br>
+        <strong>Year 1:</strong> cross-lingual semantic match against <em>Reasoning Attributes</em> in the Catalog Intelligence
+        Layer. Returns <em>Tumble Leaf</em> in 1.5 seconds with a reason chip ("stop-motion · gentle · age 3-6"). One play,
+        one voice turn. <strong>The customer never thinks "search failed and assistant rescued me."</strong> It just works.
+      </p>
+    </div>
+
+    <!-- LEAD 2: Mobile — Multi-turn EXPLORE -->
+    <div class="scene scene-interactive" data-scene="2">
+      <div class="scene-header">
+        <div class="scene-meta">Lead 2 · Mobile · EXPLORE intent</div>
+        <button class="replay-btn" aria-label="Replay animation">▶ Replay</button>
+      </div>
+      <p class="quote">Saturday night, ninety minutes, no tears.</p>
+
+      <div class="scene-demo screen-only">
+        <div class="phone-frame">
+          <div class="phone-bezel">
+            <div class="phone-screen">
+              <div class="phone-header"><span class="time">9:42</span><span>Ask Prime</span></div>
+              <div class="phone-chat">
+                <div class="bubble bubble-user b1">Saturday night, 90 min, no tears</div>
+                <div class="bubble bubble-tool b2">→ scenario_lookup<br>&nbsp;&nbsp;mood: light, ≤90 min</div>
+                <div class="bubble bubble-bot b3">
+                  <strong>Three picks</strong> — light, ≤90 min:
+                  <div class="pick">Palm Springs · 90 min</div>
+                  <div class="pick">The Big Sick · 88 min</div>
+                  <div class="pick">About Time · 89 min</div>
+                </div>
+                <div class="bubble bubble-user b4">Anything similar but newer?</div>
+                <div class="bubble bubble-bot b5">
+                  <div class="pick">Fresh · 2022 · 90 min</div>
+                  <div class="pick">Vengeance · 2022 · 94 min</div>
+                  <div class="action-row">
+                    <span class="action-btn">+ Watchlist</span>
+                    <span class="action-confirm">✓ Added</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="narration">
+        <strong>Today:</strong> browse can't express constraints. Genre filters can't express "no tears." 15 minutes of
+        doom-scrolling. The EXPLORE intent is unserved.<br>
+        <strong>Year 1 (MVP):</strong> single-turn ranking against scenario concepts plus constraint edges — three picks,
+        each with a one-line reason.<br>
+        <strong>Year 2 (fully agentic):</strong> multi-turn refinement, drill-down, and <em>actions</em> (play, add to
+        watchlist, queue), with memory across sessions. The conversation feels like talking to a friend who knows
+        entertainment <em>and</em> knows you.
+      </p>
+    </div>
+
+    <!-- LEAD 3: In-Player — Cross-Surface Agentic -->
+    <div class="scene scene-interactive" data-scene="3">
+      <div class="scene-header">
+        <div class="scene-meta">Lead 3 · In-Player · Cross-surface agentic</div>
+        <button class="replay-btn" aria-label="Replay animation">▶ Replay</button>
+      </div>
+      <p class="quote">Who is this?</p>
+
+      <div class="scene-demo screen-only">
+        <div class="player-frame">
+          <div class="player-scene">
+            <div class="player-meta">
+              <span>Rings of Power · S2 E3</span>
+              <span class="paused">⏸ 24:18</span>
+            </div>
+            <div class="voice-overlay">
+              <span class="voice-pulse">🎙</span>
+              <span class="voice-text">"WHO IS THIS?"</span>
+            </div>
+            <div class="answer-card">
+              <div class="answer-label">⚡ Ask Prime</div>
+              <div class="answer-text">
+                <strong>Sauron</strong>, played by <strong>Charlie Vickers</strong>.
+                First appeared in S1 E5 as Halbrand.
+                <span class="no-spoiler">★ no spoilers past 24:18</span>
+              </div>
+            </div>
+            <div class="kindle-context">
+              📚 you finished <em>The Lord of the Rings</em> on Kindle last week
+            </div>
+            <div class="ambient-actions">
+              <span class="action-confirm">✓ Queued S2 E4</span>
+              <span class="action-confirm">✓ Sent to iPhone</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="narration">
+        <strong>Today:</strong> X-Ray panel is visual-only; voice is not integrated with the playing scene; cross-device
+        handoff is missing.<br>
+        <strong>Year 2:</strong> customer pauses <em>Rings of Power</em> mid-scene and asks by voice. Agent responds with
+        a grounded answer with an explicit no-spoiler constraint. Ambient actions follow ("queue next episode," "send to my phone").<br>
+        <strong>Year 3:</strong> the agent inherits Kindle / Audible / Music context with consent, off by default —
+        "<em>you finished LotR on Kindle last week</em>" silently shapes the answer. This is the compounding loop.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- 3 · TECHNICAL CHALLENGES + BIG BETS            -->
+  <!-- ============================================== -->
+  <section class="allow-break">
+    <div class="section-label"><span class="num">iii.</span> Technical Challenges &amp; Big Bets</div>
+    <h2 class="section-title">Two engines, <em>one stack</em>.</h2>
+
+    <p>
+      The architecture below is a <strong>seven-layer stack</strong> (data flows top-down) plus a cross-cutting Evaluation
+      Moat that gates every layer. Each layer's role and major innovation are annotated inline. Deeper detail at each
+      layer — subsystem internals, training cadence, latency budgets — lives in the technical companion document.
+      Two design choices matter most for this review:
+    </p>
+
+    <p>
+      <strong>First, two technical lineages compose, not compete.</strong> The system uses <em>implicit embeddings</em>
+      (Lineage B — recall, fuzzy match, cross-lingual) and <em>explicit knowledge graphs</em> (Lineage A — precision,
+      constraints, explainability) <em>together</em>. Industrial e-commerce has converged on this pattern over the
+      past five years (AliCoCo / AliCoCo2 / COSMO / MOON3.0)<a href="#ref3" class="cite">[3]</a>; Prime Video should not
+      re-invent it.
+    </p>
+
+    <p>
+      <strong>Second, both engines (Agentic + Catalog Intelligence Layer) are built in parallel from Year 1.</strong>
+      Foundation work without an agentic consumer can't tell you whether you built the right foundation. We need feedback
+      from a real Y1 conversational MVP to know what to optimize in Y2's fully agentic phase.
+    </p>
+
+    <figure class="figure">
+      <svg class="arch-svg" viewBox="0 0 880 510" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="cilGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="var(--accent-amber)" stop-opacity="0.18"/>
+            <stop offset="100%" stop-color="var(--accent-amber)" stop-opacity="0.08"/>
+          </linearGradient>
+          <linearGradient id="evalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="var(--accent-coral)" stop-opacity="0.18"/>
+            <stop offset="100%" stop-color="var(--accent-coral)" stop-opacity="0.10"/>
+          </linearGradient>
+          <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <path d="M0,0 L0,8 L8,4 z" class="svg-arrow"/>
+          </marker>
+        </defs>
+
+        <!-- ============ MAIN STACK (left 720) ============ -->
+
+        <!-- LAYER 1: User Entry / Surfaces -->
+        <g transform="translate(20, 16)">
+          <text x="0" y="0" class="svg-layer-num">L1</text>
+          <text x="22" y="0" class="svg-tier-label">USER ENTRY · 5 surfaces</text>
+          <text x="280" y="0" class="svg-role-note">role: capture intent · innovation: voice-first TV + In-Player pause-and-ask</text>
+          <g transform="translate(0, 10)">
+            <rect x="0" y="0" width="138" height="34" rx="3" class="svg-surface-box"/>
+            <text x="69" y="15" text-anchor="middle" class="svg-name-sm">TV (Fire TV)</text>
+            <text x="69" y="27" text-anchor="middle" class="svg-meta-sm">Voice + remote</text>
+
+            <rect x="146" y="0" width="138" height="34" rx="3" class="svg-surface-box"/>
+            <text x="215" y="15" text-anchor="middle" class="svg-name-sm">Mobile</text>
+            <text x="215" y="27" text-anchor="middle" class="svg-meta-sm">Touch + voice</text>
+
+            <rect x="292" y="0" width="138" height="34" rx="3" class="svg-surface-box"/>
+            <text x="361" y="15" text-anchor="middle" class="svg-name-sm">Web</text>
+            <text x="361" y="27" text-anchor="middle" class="svg-meta-sm">Keyboard</text>
+
+            <rect x="438" y="0" width="138" height="34" rx="3" class="svg-surface-box"/>
+            <text x="507" y="15" text-anchor="middle" class="svg-name-sm">In-Player</text>
+            <text x="507" y="27" text-anchor="middle" class="svg-meta-sm">Pause-and-ask</text>
+
+            <rect x="584" y="0" width="138" height="34" rx="3" class="svg-surface-box"/>
+            <text x="653" y="15" text-anchor="middle" class="svg-name-sm">Voice (Echo)</text>
+            <text x="653" y="27" text-anchor="middle" class="svg-meta-sm">Ambient</text>
+          </g>
+        </g>
+
+        <line x1="380" y1="56" x2="380" y2="68" class="svg-connector" marker-end="url(#arr)"/>
+
+        <!-- LAYER 2: Query Understanding -->
+        <g transform="translate(20, 72)">
+          <text x="0" y="0" class="svg-layer-num">L2</text>
+          <text x="22" y="0" class="svg-tier-label">QUERY UNDERSTANDING · intent routing</text>
+          <text x="280" y="0" class="svg-role-note">role: classify intent · innovation: cross-lingual + intent-aware routing</text>
+          <rect x="0" y="10" width="722" height="36" rx="4" class="svg-l2-box"/>
+          <text x="14" y="26" class="svg-l2-name">Intent Classifier + Query Encoder</text>
+          <text x="14" y="38" class="svg-detail-sm">FETCH (title-string) → Search · FIND (semantic) → Search · EXPLORE (multi-constraint) → Assistant</text>
+        </g>
+
+        <line x1="380" y1="124" x2="380" y2="136" class="svg-connector" marker-end="url(#arr)"/>
+
+        <!-- LAYER 3: Dual Path -->
+        <g transform="translate(20, 140)">
+          <text x="0" y="0" class="svg-layer-num">L3</text>
+          <text x="22" y="0" class="svg-tier-label">DUAL PATH · latency tiers</text>
+          <text x="280" y="0" class="svg-role-note">role: split traffic by complexity · innovation: 200ms + 3-10s side by side</text>
+          <g transform="translate(0, 10)">
+            <rect x="0" y="0" width="354" height="48" rx="4" class="svg-path-search"/>
+            <text x="14" y="18" class="svg-path-title svg-blue">Search Path · ~200ms</text>
+            <text x="14" y="32" class="svg-detail-sm">FETCH + simple FIND · 4-source hybrid retrieval</text>
+            <text x="14" y="44" class="svg-detail-sm">BM25 + dense + KG + web · multi-objective ranking</text>
+
+            <rect x="368" y="0" width="354" height="48" rx="4" class="svg-path-asst"/>
+            <text x="382" y="18" class="svg-path-title svg-coral">Assistant Path · 3-10s</text>
+            <text x="382" y="32" class="svg-detail-sm">Complex EXPLORE · multi-turn ReAct</text>
+            <text x="382" y="44" class="svg-detail-sm">14 tools · constraint-aware actions · grounded by CIL</text>
+          </g>
+        </g>
+
+        <line x1="380" y1="204" x2="380" y2="216" class="svg-connector" marker-end="url(#arr)"/>
+
+        <!-- LAYER 4: Catalog Intelligence Layer (CENTERPIECE) -->
+        <g transform="translate(20, 220)">
+          <text x="0" y="0" class="svg-layer-num svg-amber">L4</text>
+          <text x="22" y="0" class="svg-tier-label svg-tier-amber">★ CATALOG INTELLIGENCE LAYER · V2.0 centerpiece</text>
+          <text x="345" y="0" class="svg-role-note">role: derived assets every surface inherits · innovation: dual-lineage substrate</text>
+          <rect x="0" y="10" width="722" height="58" rx="4" fill="url(#cilGrad)" class="svg-amber-stroke-2"/>
+          <g transform="translate(14, 24)">
+            <text x="0" y="0" class="svg-asset-name-sm">Reasoning Attributes</text>
+            <text x="0" y="13" class="svg-asset-detail-sm">256-dim multimodal embedding</text>
+            <text x="0" y="26" class="svg-asset-solves-sm">→ semantic match · cold-start · MOON3.0</text>
+
+            <text x="244" y="0" class="svg-asset-name-sm">Scenario Concepts</text>
+            <text x="244" y="13" class="svg-asset-detail-sm">~50K viewing scenarios</text>
+            <text x="244" y="26" class="svg-asset-solves-sm">→ EXPLORE constraint conjunction · AliCoCo</text>
+
+            <text x="488" y="0" class="svg-asset-name-sm">Constraint Edges ⟨s,p,o,c⟩</text>
+            <text x="488" y="13" class="svg-asset-detail-sm">10M edges with constraint c</text>
+            <text x="488" y="26" class="svg-asset-solves-sm">→ safety guarantee · AliCoCo2 + COSMO</text>
+          </g>
+        </g>
+
+        <line x1="380" y1="288" x2="380" y2="300" class="svg-connector" marker-end="url(#arr)"/>
+
+        <!-- LAYER 5: Downstream Consumers -->
+        <g transform="translate(20, 304)">
+          <text x="0" y="0" class="svg-layer-num">L5</text>
+          <text x="22" y="0" class="svg-tier-label">DOWNSTREAM CONSUMERS · 6 surfaces share CIL</text>
+          <text x="380" y="0" class="svg-role-note">role: shared substrate · innovation: CIL as platform, not feature</text>
+          <g transform="translate(0, 10)">
+            <rect x="0" y="0" width="116" height="32" rx="3" class="svg-consumer-box"/>
+            <text x="58" y="14" text-anchor="middle" class="svg-name-sm">Search</text>
+            <text x="58" y="25" text-anchor="middle" class="svg-meta-sm">FETCH/FIND</text>
+
+            <rect x="122" y="0" width="116" height="32" rx="3" class="svg-consumer-box"/>
+            <text x="180" y="14" text-anchor="middle" class="svg-name-sm">Ask Prime</text>
+            <text x="180" y="25" text-anchor="middle" class="svg-meta-sm">EXPLORE</text>
+
+            <rect x="244" y="0" width="116" height="32" rx="3" class="svg-consumer-box"/>
+            <text x="302" y="14" text-anchor="middle" class="svg-name-sm">Recsys</text>
+            <text x="302" y="25" text-anchor="middle" class="svg-meta-sm">Home rows</text>
+
+            <rect x="366" y="0" width="116" height="32" rx="3" class="svg-consumer-box"/>
+            <text x="424" y="14" text-anchor="middle" class="svg-name-sm">X-Ray</text>
+            <text x="424" y="25" text-anchor="middle" class="svg-meta-sm">In-scene info</text>
+
+            <rect x="488" y="0" width="116" height="32" rx="3" class="svg-consumer-box"/>
+            <text x="546" y="14" text-anchor="middle" class="svg-name-sm">Sports</text>
+            <text x="546" y="25" text-anchor="middle" class="svg-meta-sm">Key moments</text>
+
+            <rect x="610" y="0" width="112" height="32" rx="3" class="svg-consumer-box"/>
+            <text x="666" y="14" text-anchor="middle" class="svg-name-sm">Originals</text>
+            <text x="666" y="25" text-anchor="middle" class="svg-meta-sm">Discovery</text>
+          </g>
+        </g>
+
+        <line x1="380" y1="350" x2="380" y2="362" class="svg-connector" marker-end="url(#arr)"/>
+
+        <!-- LAYER 6: Inference Infrastructure -->
+        <g transform="translate(20, 366)">
+          <text x="0" y="0" class="svg-layer-num">L6</text>
+          <text x="22" y="0" class="svg-tier-label">INFERENCE INFRASTRUCTURE · inherited from Rufus</text>
+          <text x="380" y="0" class="svg-role-note">role: shared compute · innovation: COSMO-LM 7B distilled to Inferentia2</text>
+          <rect x="0" y="10" width="722" height="40" rx="4" class="svg-foundation"/>
+          <text x="361" y="26" text-anchor="middle" class="svg-foundation-name">Bedrock (multi-LLM router) + Trainium (training) + Inferentia2 (serving) + SageMaker</text>
+          <text x="361" y="40" text-anchor="middle" class="svg-foundation-note">We do not re-litigate inference economics.</text>
+        </g>
+
+        <!-- ============ LAYER 7: EVALUATION MOAT (right side, vertical bar gating all layers) ============ -->
+        <g transform="translate(750, 16)">
+          <rect x="0" y="0" width="110" height="406" rx="4" fill="url(#evalGrad)" class="svg-coral-stroke"/>
+          <text x="55" y="20" text-anchor="middle" class="svg-eval-num">L7</text>
+          <text x="55" y="38" text-anchor="middle" class="svg-eval-label">★ EVALUATION</text>
+          <text x="55" y="50" text-anchor="middle" class="svg-eval-label">MOAT</text>
+          <line x1="14" y1="62" x2="96" y2="62" class="svg-eval-divider"/>
+          <text x="55" y="78" text-anchor="middle" class="svg-eval-role">cross-cutting</text>
+          <text x="55" y="90" text-anchor="middle" class="svg-eval-role">gates all layers</text>
+
+          <text x="8" y="118" class="svg-eval-item">▸ RAG Triad</text>
+          <text x="8" y="131" class="svg-eval-sub">grounded · relevant · faithful</text>
+
+          <text x="8" y="158" class="svg-eval-item">▸ Asymmetric Loss</text>
+          <text x="8" y="171" class="svg-eval-sub">spoiler / age / safety</text>
+
+          <text x="8" y="198" class="svg-eval-item">▸ Constraint-</text>
+          <text x="8" y="210" class="svg-eval-item">  Conditional Eval</text>
+          <text x="8" y="223" class="svg-eval-sub">⟨q, c, gold⟩ four-tuples</text>
+
+          <text x="8" y="250" class="svg-eval-item">▸ Behavior</text>
+          <text x="8" y="262" class="svg-eval-item">  Simulator</text>
+          <text x="8" y="275" class="svg-eval-sub">60-90d holdout cohort</text>
+
+          <line x1="14" y1="295" x2="96" y2="295" class="svg-eval-divider"/>
+          <text x="55" y="313" text-anchor="middle" class="svg-eval-callout">~30% of</text>
+          <text x="55" y="325" text-anchor="middle" class="svg-eval-callout">headcount</text>
+          <text x="55" y="345" text-anchor="middle" class="svg-eval-tag">★ the bet</text>
+          <text x="55" y="357" text-anchor="middle" class="svg-eval-tag">that prevents</text>
+          <text x="55" y="369" text-anchor="middle" class="svg-eval-tag">Fallout S2</text>
+        </g>
+
+        <!-- Eval gate marks (small triangle markers showing eval gates each main layer) -->
+        <g class="svg-gate-marks">
+          <path d="M 738,40 L 748,33 L 748,47 z" class="svg-gate-mark"/>
+          <path d="M 738,98 L 748,91 L 748,105 z" class="svg-gate-mark"/>
+          <path d="M 738,170 L 748,163 L 748,177 z" class="svg-gate-mark"/>
+          <path d="M 738,250 L 748,243 L 748,257 z" class="svg-gate-mark"/>
+          <path d="M 738,322 L 748,315 L 748,329 z" class="svg-gate-mark"/>
+          <path d="M 738,396 L 748,389 L 748,403 z" class="svg-gate-mark"/>
+        </g>
+
+        <!-- Caption strip -->
+        <g transform="translate(0, 440)">
+          <text x="20" y="14" class="svg-legend">Lineage A (KG):</text>
+          <rect x="120" y="4" width="14" height="14" rx="2" class="svg-legend-swatch-amber"/>
+          <text x="140" y="14" class="svg-legend-text">Scenario Concepts · Constraint Edges (AliCoCo / AliCoCo2 / COSMO)</text>
+
+          <text x="20" y="34" class="svg-legend">Lineage B (Embedding):</text>
+          <rect x="148" y="24" width="14" height="14" rx="2" class="svg-legend-swatch-blue"/>
+          <text x="168" y="34" class="svg-legend-text">Reasoning Attributes (MOON3.0 reasoner-then-embedder)</text>
+
+          <text x="20" y="54" class="svg-legend">★ marks V2.0 centerpiece additions:</text>
+          <text x="200" y="54" class="svg-legend-text">Layer 4 (CIL) and Layer 7 (Constraint-Conditional Eval).</text>
+        </g>
+      </svg>
+      <div class="figure-caption">
+        <strong>Figure 1.</strong> Seven-layer system architecture. Vertical flow: user enters at L1, query is understood at L2, routed
+        through dual-path L3, both paths consume L4 (CIL), L5 surfaces share the same substrate, all running on L6 inference infrastructure.
+        L7 (Evaluation Moat) is a cross-cutting horizontal layer that gates every other layer — the ★ marks V2.0 architectural centerpieces.
+      </div>
+    </figure>
+
+    <h3 class="subsection"><span class="marker">·</span>Five big bets — what we invest in</h3>
+
+    <p>
+      The five bets below are <em>not</em> five parallel projects. They are a system with explicit dependencies:
+      Bet 01 and Bet 02 are the two foundations (one per lineage); Bet 03 is the customer-facing consumer of both;
+      Bet 04 is orthogonal (cross-Amazon scope, not within-PV); Bet 05 is the cross-cutting safety net that gates everything.
+    </p>
+
+    <div class="bets-list">
+
+      <div class="bet-row foundation">
+        <div class="bet-id">01</div>
+        <div class="bet-body">
+          <h4>Multimodal Video Understanding</h4>
+          <p>Frames + subtitles + X-Ray fused into a 256-dim embedding per title. MOON3.0-style reasoner-then-embedder<a href="#ref3" class="cite">[3]</a>.
+            <em>Solves: semantic match, fuzzy queries, cold-start. The Lineage B foundation.</em></p>
+        </div>
+      </div>
+
+      <div class="bet-row foundation">
+        <div class="bet-id">02</div>
+        <div class="bet-body">
+          <h4>Viewing Intent Knowledge Graph</h4>
+          <p>~50K scenario nodes, ~10M ⟨scenario, predicate, title, constraint⟩ edges. COSMO-LM distilled to 7B for serving on Inferentia2.
+            <em>Solves: EXPLORE constraint-conjunction, family-mode safety as architectural guarantee. The Lineage A foundation.</em></p>
+        </div>
+      </div>
+
+      <div class="bet-row consumer">
+        <div class="bet-id">03</div>
+        <div class="bet-body">
+          <h4>Conversational + Agentic Assistant</h4>
+          <p>Y1: text-based MVP, single-turn ranking with constraints. Y2: full ReAct loop<a href="#ref4" class="cite">[4]</a>, 14 tools across 4 categories
+            (catalog · external · action · memory), constraint-aware actions, session memory.
+            <em>Solves: the customer-facing experience. What the customer sees.</em></p>
+        </div>
+      </div>
+
+      <div class="bet-row orth">
+        <div class="bet-id">04</div>
+        <div class="bet-body">
+          <h4>Cross-Amazon Entertainment Graph</h4>
+          <p>Federated graph across Kindle, Audible, Music, Twitch, MGM IP. Edges: same-author, same-IP, adapted-from,
+            shared-actor. Consent-gated, off by default. <em>Solves: the structural moat — 5–10× attribution lift per
+            cross-product action. Year 3 capability.</em></p>
+        </div>
+      </div>
+
+      <div class="bet-row safety">
+        <div class="bet-id">05</div>
+        <div class="bet-body">
+          <h4>Evaluation Infrastructure</h4>
+          <p>Constraint-conditional eval (AliCoCo2-style four-tuples)<a href="#ref3" class="cite">[3]</a>, per-locale judge panels with calibrated correlation,
+            60-90 day holdout cohort, behavior simulator. ~30% of headcount budget.
+            <em>Solves: making everything else shippable safely. The bet that prevents Fallout S2.</em></p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- 4 · ORG BET                                    -->
+  <!-- ============================================== -->
+  <section>
+    <div class="section-label"><span class="num">iv.</span> Beyond Product · Organization Bet</div>
+    <h2 class="section-title"><em>Diamond excellence</em>. Versatile multi-hyphenates.</h2>
+
+    <p>
+      The old org model — specialist hands off to specialist hands off to specialist — is dead in the AI-native era.
+      Every handoff is friction; friction kills velocity; velocity is the entire game now. The team I want to build is
+      <strong>small, opinionated, and full-stack from idea to ship</strong>. Each engineer sharpens six edges at once,
+      not one to perfection.
+    </p>
+
+    <div class="diamond-block">
+      <!-- Small diamond SVG visualization -->
+      <div class="diamond-visual">
+        <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="diamondTop" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--accent-amber)" stop-opacity="0.55"/>
+              <stop offset="100%" stop-color="var(--accent-amber)" stop-opacity="0.20"/>
+            </linearGradient>
+            <linearGradient id="diamondLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--accent-amber)" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="var(--accent-amber)" stop-opacity="0.10"/>
+            </linearGradient>
+            <linearGradient id="diamondRight" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--accent-amber)" stop-opacity="0.45"/>
+              <stop offset="100%" stop-color="var(--accent-amber)" stop-opacity="0.15"/>
+            </linearGradient>
+            <linearGradient id="diamondBottomLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--accent-amber)" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="var(--accent-amber)" stop-opacity="0.08"/>
+            </linearGradient>
+            <linearGradient id="diamondBottomRight" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--accent-amber)" stop-opacity="0.30"/>
+              <stop offset="100%" stop-color="var(--accent-amber)" stop-opacity="0.10"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Crown (top) — flat hexagonal table + 4 facets -->
+          <!-- Table (top flat surface) -->
+          <polygon points="60,40 140,40 130,60 70,60" fill="url(#diamondTop)" stroke="var(--accent-amber)" stroke-width="1.5" stroke-linejoin="round"/>
+          <!-- Upper-left crown facet -->
+          <polygon points="40,60 60,40 70,60" fill="url(#diamondLeft)" stroke="var(--accent-amber)" stroke-width="1.5" stroke-linejoin="round"/>
+          <!-- Upper-right crown facet -->
+          <polygon points="160,60 140,40 130,60" fill="url(#diamondRight)" stroke="var(--accent-amber)" stroke-width="1.5" stroke-linejoin="round"/>
+          <!-- Center crown facets -->
+          <polygon points="70,60 130,60 100,80" fill="url(#diamondTop)" stroke="var(--accent-amber)" stroke-width="1.5" stroke-linejoin="round" opacity="0.85"/>
+
+          <!-- Pavilion (bottom) — V-shape with facets -->
+          <!-- Left pavilion facet -->
+          <polygon points="40,60 70,60 100,80 100,180" fill="url(#diamondBottomLeft)" stroke="var(--accent-amber)" stroke-width="1.5" stroke-linejoin="round"/>
+          <!-- Right pavilion facet -->
+          <polygon points="160,60 130,60 100,80 100,180" fill="url(#diamondBottomRight)" stroke="var(--accent-amber)" stroke-width="1.5" stroke-linejoin="round"/>
+
+          <!-- Inner facet line (left pavilion) -->
+          <line x1="70" y1="60" x2="100" y2="180" stroke="var(--accent-amber)" stroke-width="0.8" opacity="0.5"/>
+          <!-- Inner facet line (right pavilion) -->
+          <line x1="130" y1="60" x2="100" y2="180" stroke="var(--accent-amber)" stroke-width="0.8" opacity="0.5"/>
+
+          <!-- 6 small markers indicating the 6 facets -->
+          <circle cx="100" cy="40" r="3" fill="var(--accent-amber)"/>
+          <circle cx="40" cy="60" r="3" fill="var(--accent-amber)"/>
+          <circle cx="160" cy="60" r="3" fill="var(--accent-amber)"/>
+          <circle cx="70" cy="60" r="3" fill="var(--accent-amber)"/>
+          <circle cx="130" cy="60" r="3" fill="var(--accent-amber)"/>
+          <circle cx="100" cy="180" r="3" fill="var(--accent-amber)"/>
+
+          <!-- Center label -->
+          <text x="100" y="108" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="14" fill="var(--accent-amber)" font-weight="500">Diamond</text>
+          <text x="100" y="124" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="11" fill="var(--ink-tertiary)">excellence</text>
+
+          <!-- Subtitle -->
+          <text x="100" y="208" text-anchor="middle" font-family="General Sans, sans-serif" font-size="9" fill="var(--ink-tertiary)" letter-spacing="0.15em">6 FACETS · 1 STONE</text>
+        </svg>
+      </div>
+
+      <!-- 6 dimensions in 3×2 grid -->
+      <div class="diamond-grid">
+        <div class="dim-card">
+          <div class="dim-num">01</div>
+          <div class="dim-name">Big Picture</div>
+          <div class="dim-meaning">Sees the system, not the ticket. Connects work to org-level outcomes.</div>
+        </div>
+        <div class="dim-card">
+          <div class="dim-num">02</div>
+          <div class="dim-name">UX Taste</div>
+          <div class="dim-meaning">Knows what good <em>feels</em> like — not just what tests well.</div>
+        </div>
+        <div class="dim-card">
+          <div class="dim-num">03</div>
+          <div class="dim-name">AI Craft</div>
+          <div class="dim-meaning">Embeddings, RAG, agents, eval. Reads papers <em>and</em> ships them.</div>
+        </div>
+        <div class="dim-card">
+          <div class="dim-num">04</div>
+          <div class="dim-name">Product Sense</div>
+          <div class="dim-meaning">Anchors every line of code in a customer outcome.</div>
+        </div>
+        <div class="dim-card">
+          <div class="dim-num">05</div>
+          <div class="dim-name">Extreme Ownership</div>
+          <div class="dim-meaning">Sees the unowned problem and takes it. Doesn't wait for permission.</div>
+        </div>
+        <div class="dim-card">
+          <div class="dim-num">06</div>
+          <div class="dim-name">Solid Code</div>
+          <div class="dim-meaning">Ships, doesn't just whiteboard. Uses the AI-native toolchain fluently.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="diamond-callout">
+      <p style="margin: 0; font-family: 'Fraunces', serif; font-size: 16px; line-height: 1.4; color: var(--ink-primary); font-style: italic;">
+        Specialists handing off to specialists is friction. Multi-hyphenates owning end-to-end is flow. <strong style="color: var(--accent-amber); font-style: italic;">Flow compounds.</strong>
+      </p>
+      <div class="equation">
+        <span class="term">Diamond Excellence</span><span class="op">×</span><span class="term">AI-Native Tooling</span><span class="op">=</span><span class="term hl">5–10× Velocity</span><span class="op">+</span><span class="term hl">E2E Innovation</span>
+      </div>
+    </div>
+
+    <p>
+      Three concrete commitments operationalize this. <strong>(i) Hire for the diamond, not the spike</strong> — every hire
+      screened on at least 4 of 6 edges; a 10/10 specialist with 2/10s elsewhere doesn't pass. <strong>(ii) Velocity
+      rituals over velocity rhetoric</strong> — weekly demo, biweekly ship, monthly retrospect; demo means working software,
+      ship means production traffic, retro means changed behavior. <strong>(iii) AI-native operating model</strong> — every
+      IC runs a full agentic toolchain (Claude Code, Cursor, custom harnesses, eval suites); ICs compound their own
+      capability quarterly. Prompt engineering is a craft, not a parlor trick.
+    </p>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- 5 · INDUSTRY BET / LONG-TERM MOAT              -->
+  <!-- ============================================== -->
+  <section>
+    <div class="section-label"><span class="num">v.</span> Long-Term Moat · Industry Bet</div>
+    <h2 class="section-title">A moat <em>no streaming competitor</em> can structurally build.</h2>
+
+    <p>
+      Prime Video already has multiple structural moats — Prime bundle economics, MGM IP, Live Sports rights, Fire TV
+      distribution, and the data depth across the Amazon account. Most of those are <em>givens</em> that Search &amp;
+      Assistant inherits, not builds. The moat that <em>this org can specifically build and own</em> is the cross-product
+      AI experience — and it is the one that, three years from now, will define competitive position.
+    </p>
+
+    <div class="moat-block">
+      <p class="moat-claim">
+        Three years from now, Prime Video is the <em>only entertainment platform in the world</em> where reading a
+        book on Kindle changes what you're recommended to watch — across fifty-plus markets, with consent.
+      </p>
+      <div class="moat-counters">
+        <div class="moat-counter"><strong>Netflix structurally cannot do this.</strong>No reading product. No listening product. One vertical, one signal.</div>
+        <div class="moat-counter"><strong>Disney+ structurally cannot do this.</strong>Has IP, doesn't have cross-product user behavior. The graph is missing.</div>
+      </div>
+      <p style="margin-top: 16px; font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: var(--ink-secondary); position: relative; z-index: 1;">
+        This isn't a feature parity race. <strong style="color: var(--accent-amber); font-style: italic;">This is the moat.</strong>
+      </p>
+    </div>
+
+    <h3 class="subsection"><span class="marker">·</span>Why this moat compounds — and the others Search &amp; Assistant inherits</h3>
+
+    <ul class="moat-secondary">
+      <li>
+        <span class="moat-name">Prime Bundle Economics</span>
+        <span class="moat-desc">PV's content costs amortize across retail GMV, AWS, ads. Netflix must amortize subscription-only. <strong>This lets us optimize for customer experience over short-term ARPU</strong> — a freedom competitors don't have.</span>
+      </li>
+      <li>
+        <span class="moat-name">Cross-Product Behavior</span>
+        <span class="moat-desc">Amazon has order-of-magnitude more user-behavior signals than Netflix (purchase + read + listen + watch). <strong>This becomes a recommendation moat the moment it becomes legible to the customer</strong> — which is exactly what Search &amp; Assistant ships.</span>
+      </li>
+      <li>
+        <span class="moat-name">Distribution (Fire TV / Echo)</span>
+        <span class="moat-desc">PV is first-class on Amazon hardware. Voice-first ambient discovery on Echo + Fire TV is uniquely accessible to us. <strong>Year 3 ambient discovery is the conversion of this distribution moat into an AI experience moat.</strong></span>
+      </li>
+      <li>
+        <span class="moat-name">Live Sports + MGM IP</span>
+        <span class="moat-desc">Long-tail content moats inherited from Prime Video's parent investments. Search &amp; Assistant doesn't build these — but it's the layer that makes them <em>discoverable</em> at scale across markets and locales.</span>
+      </li>
+    </ul>
+
+    <p>
+      None of the other moats become customer-legible without an intelligence layer that exposes them. Search &amp; Assistant
+      is that layer. Three years from now, the question isn't whether Prime Video <em>has</em> structural advantages — it
+      already does. The question is whether the customer can <em>feel</em> them. <strong>That is what this org is for.</strong>
+    </p>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- REFERENCES                                     -->
+  <!-- ============================================== -->
+  <section class="references">
+    <h3>References &amp; further reading</h3>
+    <ol>
+      <li id="ref1"><strong>Bennett, J., et al.</strong> "Search and recommendation in the streaming era." <em>SIGIR 2019 Industry Track</em>. Establishes the ~13% out-of-catalog query rate as a structural floor for streaming search and the consequence on session continuation.</li>
+      <li id="ref2"><strong>Amazon Science.</strong> "Rufus: an LLM-powered shopping assistant." Public technical disclosures on Bedrock-routed multi-LLM orchestration, account-level memory, and cross-product personalization at retail scale. Architectural precedent we inherit, not replicate.</li>
+      <li id="ref3"><strong>Industrial e-commerce AI papers.</strong> Luo et al., "AliCoCo: Alibaba E-commerce Cognitive Concept Net" (KDD 2020); "AliCoCo2: Beyond Concept Net" (KDD 2021); Yu et al., "COSMO: A Large-Scale E-commerce Common Sense Knowledge Generation and Serving" (SIGIR 2024); Liu et al., "MOON3.0: Multimodal Reasoner-Embedder for E-commerce Search" (2025). Convergent evidence for the dual-lineage (implicit embedding + explicit KG) pattern adopted in this vision.</li>
+      <li id="ref4"><strong>Yao, S., et al.</strong> "ReAct: Synergizing Reasoning and Acting in Language Models." <em>ICLR 2023</em>. Architectural basis for the Agentic Orchestrator design (Bet 02). See also Anthropic's <em>Building Effective Agents</em> (2025) on why reactive loops outperform multi-agent fan-out for most production cases.</li>
+      <li><strong>Internal Prime Video disclosures (2024-2025).</strong> X-Ray Recaps GA (Nov 2024); AI Topics GA; NBA Key Moments; Video Recaps Fallout S1 incident (Nov 2025). Source for current AI-asset inventory and the eval-gap diagnosis motivating Bet 04.</li>
+      <li><strong>MITRE ATT&amp;CK and ATLAS frameworks.</strong> Used for the safety / constraint-conditional eval design in Bet 04, particularly the asymmetric loss treatment of spoiler / parental-control / age-rating violations.</li>
+    </ol>
+  </section>
+
+  <footer>
+    Dr. Ming Gong · April 2026 · Vision Memo for review by Ming Ye · Companion to <span class="mono">Prime_Video_Vision_2.2</span>
+  </footer>
+
+</div>
+
+<script>
+  // Replay button — restart animations by toggling a class
+  document.querySelectorAll('.replay-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const scene = btn.closest('.scene-interactive');
+      const demo = scene.querySelector('.scene-demo');
+      if (!demo) return;
+      // Force re-trigger of CSS animations by removing/re-adding the demo node
+      const clone = demo.cloneNode(true);
+      demo.replaceWith(clone);
+    });
+  });
+</script>
+
+</body>
+</html>
