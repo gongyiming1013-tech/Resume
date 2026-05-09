@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Linjun Shou — CV</title>
+<style>
+  @page { size: Letter; margin: 0.55in 0.6in; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Calibri", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 10.3pt;
+    line-height: 1.32;
+    color: #111;
+  }
+  h1 { font-size: 22pt; margin: 0 0 4pt 0; text-align: center; letter-spacing: 0.3pt; }
+  .contact { text-align: center; font-size: 9.8pt; color: #333; margin-bottom: 8pt; }
+  .contact a { color: #1a4480; text-decoration: none; }
+  .contact span + span::before { content: " · "; color: #888; margin: 0 4pt; }
+  h2 {
+    font-size: 11.5pt; text-transform: uppercase; letter-spacing: 0.6pt;
+    border-bottom: 1px solid #333; padding-bottom: 2pt; margin: 10pt 0 5pt 0;
+  }
+  p { margin: 0 0 4pt 0; }
+  ul { margin: 2pt 0 4pt 0; padding-left: 16pt; }
+  li { margin: 0 0 2pt 0; }
+  .role-line {
+    display: flex; justify-content: space-between; align-items: baseline; margin-top: 4pt;
+  }
+  .role-line .left { font-weight: 600; }
+  .role-line .right { font-weight: 600; font-size: 9.7pt; }
+  .sub-line {
+    display: flex; justify-content: space-between; font-style: italic;
+    font-size: 9.8pt; color: #333; margin-bottom: 2pt;
+  }
+  .summary { text-align: justify; }
+  strong { color: #000; }
+  .pubs { font-size: 9.4pt; line-height: 1.28; }
+  .pubs li { margin-bottom: 1pt; }
+  .compact li { margin-bottom: 1pt; }
+</style>
+</head>
+<body>
+
+<h1>Linjun Shou</h1>
+<div class="contact">
+  <span>+1 425-324-5774</span>
+  <span><a href="mailto:ljshou@gmail.com">ljshou@gmail.com</a></span>
+  <span><a href="https://www.microsoft.com/en-us/research/people/lisho/">microsoft.com/en-us/research/people/lisho</a></span>
+</div>
+
+<h2>Summary</h2>
+<p class="summary">
+Partner Group Applied Scientist Manager currently leading the AI efforts of <strong>Edge browser</strong> and <strong>Office Agent (project codename "Societas")</strong>, a team of 30+ engineers and scientists. Extensive experience in search technologies — ranking, document understanding, query understanding (QU), and Q&amp;A systems. Published dozens of papers in top-tier research conferences and holds 20+ U.S. patents. <strong>Two-time recipient of the Distinguished Contribution Award</strong> from the CTO office at Microsoft MLADS (Spring and Fall 2021).
+</p>
+<p><strong>Expertise:</strong> Machine Learning, Copilot, Edge Intelligence, Document Understanding, Search, Question Answering, Recommendation, Natural Language Processing.</p>
+
+<h2>Education &amp; Employment</h2>
+<div class="role-line"><span class="left">Edge ML and Societas ML Team, Microsoft Redmond</span><span class="right">2025 – Present</span></div>
+<div class="sub-line"><span>Partner Group Applied Science Manager</span><span></span></div>
+
+<div class="role-line"><span class="left">Edge Machine Learning, Microsoft China</span><span class="right">2022 – 2025</span></div>
+<div class="sub-line"><span>Principal Group Applied Scientist Manager</span><span></span></div>
+
+<div class="role-line"><span class="left">Bing Search, Microsoft STCA</span><span class="right">2015 – 2022</span></div>
+<div class="sub-line"><span>Principal Applied Scientist Manager</span><span></span></div>
+
+<div class="role-line"><span class="left">Institute of Computing Technology, Chinese Academy of Sciences</span><span class="right">2012 – 2015</span></div>
+<div class="sub-line"><span>Master's degree, Computer Sciences (Honored Graduate)</span><span></span></div>
+
+<div class="role-line"><span class="left">Shanghai University</span><span class="right">2008 – 2012</span></div>
+<div class="sub-line"><span>Bachelor's degree, Mathematics (Top 1 / 297 in 4 consecutive years)</span><span></span></div>
+
+<h2>Work &amp; Projects</h2>
+
+<div class="role-line"><span class="left">Office Agent — Microsoft 365 Copilot (project codename "Societas")</span><span class="right">2025 – Present</span></div>
+<div class="sub-line"><span>Societas ML Team, Microsoft Redmond</span><span></span></div>
+<ul>
+  <li><strong>Motivation &amp; Goal:</strong> Build a <strong>multi-agent system</strong> for Microsoft 365 Copilot that delivers polished PowerPoint presentations, ready-to-use Word documents, and (soon) Excel spreadsheets — handling complex knowledge-work workflows end-to-end.</li>
+  <li><strong>Architecture:</strong> Multi-agent orchestration engine on an open-source agent stack with Anthropic's Claude — a <strong>central planner agent</strong> coordinates tasks and synthesizes results; <strong>specialized agents</strong> for code, finance, search, etc. work in parallel; a <strong>secure tool layer</strong> integrates utilities and sandboxed environments. Adopted a <strong>code-first approach</strong>, letting the model write and execute code (e.g., MP3 transcription, PDF text extraction) instead of relying on task-specific tools, for greater flexibility and generalization.</li>
+  <li><strong>Taste-Driven Development (TDD):</strong> pioneered a new generation paradigm — distilled <strong>"taste blueprints"</strong> from high-quality, in-house presentation/document samples; injected them into planning and execution to drive consistent design language. Built <strong>auto-theming</strong> (theme generated from content rather than picked from templates) and a <strong>content self-verification + iterative refinement</strong> loop. Output is HTML5-based slides with a converter to native PowerPoint.</li>
+  <li><strong>Benchmark — GAIA &amp; TDDEval (SOTA):</strong> achieved <strong>state-of-the-art</strong> on the public <strong>GAIA</strong> benchmark — <strong>L1 88.7 / L2 76.7 / L3 60.0</strong>, ahead of Genspark (87.8 / 72.7 / 58.8), Manus (86.5 / 70.1 / 57.7), and OpenAI Deep Research (74.3 / 69.1 / 42.3) per officially reported metrics. Also defined the in-house <strong>TDDEval</strong> benchmark for taste-driven generation across PowerPoint, Excel, and Word, scoring on <strong>Content Quality</strong> (grounding, relevance, completeness, structure, usability) and <strong>Taste Score</strong> (visual appeal, layout, typography, design consistency, asset curation).</li>
+  <li><strong>AI-native execution:</strong> built and shipped the system as a fully <strong>AI-native team of 7</strong>, going from zero to SOTA in just <strong>8 weeks</strong>, with <strong>95%+ of code generated and reviewed via AI coding</strong> tools.</li>
+  <li><strong>Deliveries:</strong> SOTA on GAIA across L1/L2/L3 difficulty tiers; Office Agent shipped as a multi-agent capability for Microsoft 365 Copilot. <a href="https://techcommunity.microsoft.com/blog/microsoft365copilotblog/office-agent-%E2%80%93-%E2%80%9Ctaste-driven%E2%80%9D-multi-agent-system-for-microsoft-365-copilot/4457397">Microsoft Tech Community blog</a>.</li>
+</ul>
+
+<div class="role-line"><span class="left">Copilot in Edge Browser</span><span class="right">2023/03 – 2024/05</span></div>
+<div class="sub-line"><span>Edge ML, Microsoft</span><span></span></div>
+<ul>
+  <li><strong>Motivation &amp; Goal:</strong> Lead the team to build the most intelligent browser with Edge Copilot.</li>
+  <li><strong>Accountability:</strong> Fully responsible for the Edge Copilot algorithm and feature development — (1) Contextual chat with any documents in browser; (2) Video Copilot — chat with any videos; (3) Edge Actions for end-to-end task completion; (4) Personal Copilot — ask anything about what you have browsed before.</li>
+  <li><strong>Deliveries:</strong> (1) Chat DAU reached <strong>3 million (10× increase)</strong>; (2) Contextual chat supports 1000+ pages long documents at <strong>95%+ accuracy</strong>; (3) Quoted by Microsoft CEO Satya Nadella: <em>"my most favorite agentic experience is Tab auto-grouping in Edge Copilot"</em>; (4) Strong positive user feedback (e.g., <em>"God bless those who invented Edge Copilot"</em> on Twitter).</li>
+</ul>
+
+<div class="role-line"><span class="left">Copilot in Windows</span><span class="right">2023/03 – 2024/05</span></div>
+<div class="sub-line"><span>Edge ML, Microsoft</span><span></span></div>
+<ul>
+  <li><strong>Motivation &amp; Goal:</strong> Ensure agile shipping of the first Windows Copilot release; Edge team joined forces with Windows team. Windows Copilot was built on top of the Edge Copilot codebase.</li>
+  <li><strong>Responsibility:</strong> My team owned the back-end and algorithm development to ship Copilot in the world's largest operating system.</li>
+  <li><strong>Deliveries:</strong> (1) Shipped the first Windows Copilot release with positive user feedback; (2) Shipped Windows Skills powered by the Edge Action framework I built; (3) Shipped contextual chat in Windows Copilot; (4) Shipped the screen understanding feature — see what you see on your screen via screenshot.</li>
+</ul>
+
+<div class="role-line"><span class="left">Edge Client Intelligence — Client DNN Models</span><span class="right">2022/06 – 2023/03</span></div>
+<div class="sub-line"><span>Edge ML, Microsoft</span><span></span></div>
+<ul>
+  <li>Developed extreme model compression technologies (distillation, quantization, etc.) to ship multiple client DNN models — <strong>DeepEE, DeepPU, DeepAutoFill, DeepUU</strong> — powering AI features in Edge with enhanced privacy and COGS savings.</li>
+  <li><strong>DeepEE:</strong> shipped the very first client universal transformer models in Edge with P/R over 95, to <strong>69 languages, 154+ regions worldwide</strong> for PH and PC, powering Shopping globalization. <strong>4M peak DAU</strong> in shipping season.</li>
+  <li><strong>DeepPU:</strong> shipped to 6+ scenarios — shoreline personalization, 1CNS personalized notifications, contextual prompt suggestions, shopping PDP triggering, tab group auto-naming and auto-grouping, etc.</li>
+  <li><strong>DeepAutoFill:</strong> autofilling scenarios in Edge.</li>
+  <li><strong>DeepUU:</strong> shipped V1 to build client user profile in global markets, powering Edge personalization with <strong>BSoM proxy gains +0.79% (abs) and +2% (rel)</strong>.</li>
+</ul>
+
+<div class="role-line"><span class="left">Document Understanding for 400B Web Index</span><span class="right">2019 – 2022</span></div>
+<div class="sub-line"><span>Document Understanding Team, WebXT, Microsoft</span><span></span></div>
+<ul>
+  <li>Led the STCA DU team (16 engineers/scientists) to develop the best document understanding DNN techniques and platform for search and recommendation scenarios.</li>
+  <li>Developed <strong>Universal Multi-modal Information Extraction</strong> (Semantic Document) powering 15+ production scenarios — Caption, QnA, Ads, Recommendation. Extended to fine-grained extraction (product name, price, manufacturer, image).</li>
+  <li>Developed <strong>Universal Topic Understanding</strong> models with 100k topics powering 15+ scenarios — Sage News, Windows Feeds (50+ regions), Underside, Enterprise News, Bing QnA, PAA.</li>
+  <li>Developed SOTA document full-body representation model (FBV) — shipped to Bing search for <strong>400 billion vector space ANN search</strong>.</li>
+  <li>Developed Long Document MRC: one of the longest DU models in 100+ languages, powering 8+ scenarios — Azure, QnA, PAA, MSN News, Knowledge Card.</li>
+  <li>Developed authority techniques (topical authority and host embedding) powering Bing QnA, PAA, core relevance, spam detection, personalized search.</li>
+  <li>Excellent team collaboration — received 16 positive partner feedbacks (VP, Partner, Principal level) in FY21 across multiple orgs.</li>
+</ul>
+
+<div class="role-line"><span class="left">Recommendation Algorithms for Feeds</span><span class="right">2020</span></div>
+<div class="sub-line"><span>ASK &amp; DU Team, Bing, Microsoft</span><span></span></div>
+<ul>
+  <li><strong>QnA Feeds:</strong> as tech lead, drove the recommendation streaming index gen and ranking system (3 layers of ranking and two-tower embedding model) from scratch.</li>
+  <li><strong>News Recommendation:</strong> developed and shipped topic/KPE-based personalized recall and topic-based diversity for the first Windows Feeds release in 50+ regions on Windows 10/11.</li>
+  <li><strong>Web Recommendation:</strong> as tech lead, drove FBV techniques for semantic recall path — <strong>+21 points recall@100</strong>.</li>
+  <li><strong>Movie Recommendation:</strong> developed knowledge-graph-enhanced collaborative filtering — <strong>+10 points</strong>.</li>
+</ul>
+
+<div class="role-line"><span class="left">Bing QnA Universalization in Global Regions</span><span class="right">2019 – 2020</span></div>
+<div class="sub-line"><span>ASK Team, Bing, Microsoft</span><span></span></div>
+<ul>
+  <li>As tech lead, scaled QnA from English-only to <strong>100+ languages and 200+ regions</strong> for the very first time.</li>
+  <li>Proposed a systematic <strong>language scaling methodology</strong> for low-resource languages — <strong>2× MLADS Distinguished Contribution Award (top 2 / 300, record-breaking)</strong>.</li>
+  <li>Designed and drove a brand-new universal streaming QnA pipeline from scratch — improved QnA refresh cycle from <strong>1 month to minutes/seconds</strong> and saved <strong>80% of GPU capacity</strong>.</li>
+</ul>
+
+<div class="role-line"><span class="left">Deep Learning Technologies for Bing QnA</span><span class="right">2017 – 2019</span></div>
+<div class="sub-line"><span>Quantus Team, Bing, Microsoft</span><span></span></div>
+<ul>
+  <li>Shipped 10+ DNN releases improving core QnA relevance — beat and replaced legacy GBDT ranker (400+ hand-crafted features) for the first time and won WPSBS vs. Google.</li>
+  <li>Designed and built DNN-powered full-stack list QnA ranking pipeline; shipped 10+ releases contributing to <strong>+20 precision points</strong> to beat Google.</li>
+  <li>Proposed novel model compression techniques for heavy pre-trained model online serving [Shou2020RSKD, 15], powering the <strong>first BERT model released in Bing</strong> (within 1 month of BERT open-source) — +3.0% coverage and +5.0% precision.</li>
+  <li>Open-sourced an NLP DNN toolkit, <strong>NeuronBlocks</strong>, on GitHub — <strong>1k+ stars in 2 months</strong>; reduced model dev time from weekly/daily to minutes.</li>
+</ul>
+
+<div class="role-line"><span class="left">Bing News and Tweet Core Ranking</span><span class="right">2015 – 2016</span></div>
+<div class="sub-line"><span>News Team, Bing, Microsoft</span><span></span></div>
+<ul>
+  <li>Shipped dozens of ranker releases in Bing News ranking and News homepage ranking.</li>
+  <li>Shipped ML-based Tweets ranker — improved Twitter answer defect rate from <strong>18% to 2%</strong>.</li>
+  <li>Designed breaking-news detection system — minute-level latency (from daily); filed a US patent.</li>
+  <li>Developed and shipped Rich Nav news feature on Bing from scratch — 2.73 strong surplus, 19.17 weak surplus.</li>
+</ul>
+
+<h2>Selected Publications <span style="font-weight:normal; font-size:10pt; text-transform:none; letter-spacing:0;">(50+ papers, 9,500+ citations on Google Scholar — full list on <a href="https://scholar.google.com/citations?user=YkF8e9wAAAAJ">scholar profile</a>)</span></h2>
+<ol class="pubs">
+  <li>Nuo Chen, <strong>Linjun Shou</strong>, Tengtao Song, Ming Gong, Jian Pei, Jianhui Chang, Daxin Jiang, Jia Li. "Structural Contrastive Pretraining for Cross-Lingual Comprehension." <em>ACL</em> 2023. (intern mentored)</li>
+  <li>Nuo Chen, <strong>Linjun Shou</strong>, Ming Gong, Jian Pei, Bowen Cao, Jianhui Chang, Daxin Jiang, Jia Li. "Alleviating Over-smoothing for Unsupervised Sentence Representation." <em>ACL</em> 2023. (intern mentored)</li>
+  <li>Shengyao Zhuang, <strong>Linjun Shou</strong>, Jian Pei, Ming Gong, Houxing Ren, G. Zuccon, Daxin Jiang. "Typos-aware Bottlenecked Pre-Training for Robust Dense Retrieval." <em>SIGIR</em> 2023. (intern mentored)</li>
+  <li>Nuo Chen, <strong>Linjun Shou</strong>, Ming Gong, Jian Pei, Daxin Jiang. "Bridging the Gap between Language Models and Cross-Lingual Sequence Labeling." <em>NAACL</em> 2022. (intern mentored)</li>
+  <li><strong>Linjun Shou</strong>, Ming Gong, Jian Pei, Xiubo Geng, Xingjie Zhou, Daxin Jiang. "Language Scaling: Applications, Challenges and Approaches." <em>KDD Tutorial</em> 2021.</li>
+  <li><strong>Linjun Shou</strong>, Ming Gong, J. Pei, Xiubo Geng, Xingjie Zhou, Daxin Jiang. "Scaling out NLP Applications to 100+ Languages." <em>WWW Tutorial</em> 2021.</li>
+  <li>S. Liang, M. Gong, J. Pei, <strong>Linjun Shou</strong>, D. Jiang. "Reinforced Iterative Knowledge Distillation for Cross-Lingual Named Entity Recognition." <em>KDD</em> 2021. (intern mentored)</li>
+  <li>Yingmei Guo, <strong>Linjun Shou</strong>, Jian Pei, Ming Gong, Mingxing Xu, Zhiyong Wu, Daxin Jiang. "Learning from Multiple Noisy Augmented Data Sets for Better Cross-Lingual Spoken Language Understanding." <em>EMNLP</em> 2021.</li>
+  <li>Junjie Huang, Duyu Tang, <strong>Linjun Shou</strong>, Ming Gong, Ke Xu, Daxin Jiang, Ming Zhou. "CoSQA: 20,000+ Web Queries for Code Search and Question Answering." <em>ACL</em> 2021.</li>
+  <li><strong>Linjun Shou</strong>, S. Bo, Fei-Xiang Cheng, Ming Gong, J. Pei, Daxin Jiang. "Mining Implicit Relevance Feedback from User Behavior for Web Question Answering." <em>KDD</em> 2020.</li>
+  <li>Shining Liang, <strong>Linjun Shou</strong>, Jian Pei, Ming Gong, Wanli Zuo, Daxin Jiang. "CalibreNet: Calibration Networks for Multilingual Sequence Labeling." <em>WSDM</em> 2021. (intern mentored)</li>
+  <li>Junwei Liao, Yu Shi, Ming Gong, <strong>Linjun Shou</strong>, Sefik Eskimez, L. Lu, H. Qu, Michael Zeng. "Generating Human Readable Transcript for Automatic Speech Recognition with Pre-trained Language Model." <em>ICASSP</em> 2021.</li>
+  <li>Junhao Liu*, <strong>Linjun Shou</strong>*, Jian Pei, Ming Gong, Min Yang, Daxin Jiang. "Cross-lingual Machine Reading Comprehension with Language Branch Knowledge Distillation." <em>COLING</em> 2020. (* equal contribution)</li>
+  <li>F. Yuan, <strong>Linjun Shou</strong>, X. Bai, M. Gong, Y. Liang, N. Duan, Y. Fu, Daxin Jiang. "Enhancing Answer Boundary Detection for Multilingual Machine Reading Comprehension." <em>ACL</em> 2020. (intern mentored)</li>
+  <li>Ze Yang*, <strong>Linjun Shou</strong>*, Ming Gong, Wutao Lin, Daxin Jiang. "Model Compression with Two-stage Multi-teacher Knowledge Distillation for Web Question Answering System." <em>WSDM</em> 2020. (* equal contribution)</li>
+  <li>H. Huang, Yaobo Liang, N. Duan, Ming Gong, <strong>Linjun Shou</strong>, D. Jiang, M. Zhou. "Unicoder: A Universal Language Encoder by Pre-training with Multiple Cross-lingual Tasks." <em>EMNLP/IJCNLP</em> 2019.</li>
+  <li>Ming Gong, <strong>Linjun Shou</strong>, Wutao Lin, Zhijie Sang, Quanjia Yan, Ze Yang, D. Jiang. "NeuronBlocks — Building Your NLP DNN Models Like Playing Lego." <em>EMNLP/IJCNLP</em> 2019.</li>
+  <li>Xuguang Wang, <strong>Linjun Shou</strong>, Ming Gong, Nan Duan, Daxin Jiang. "No Answer is Better Than Wrong Answer: A Reflection Model for Document Level Machine Reading Comprehension." <em>EMNLP</em> 2020.</li>
+</ol>
+
+<h2>Patents</h2>
+<ul class="compact pubs">
+  <li>Personalized Multilingual Content Recommendation based on Robust Feature Network. 2023. (MS#412659-CN-NP)</li>
+  <li>Split-Screen Viewing Based On Intelligent Triggering. 2023. (MS#413279-CN-NP)</li>
+  <li>Sequential Recommendation based on Cross-Domain Behavior Data. 2023. (MS#412874-CN-NP)</li>
+  <li>Universal Deep Entity Extraction (DeepEE) for Browser. 2023.</li>
+  <li>Providing An Activeness Indication Of A Tab. 2023. (MS#412658-CN-NP)</li>
+  <li>Establishing a Language Model Adapted to a Cross-Lingual Sequence Labeling Task. 2022. (MS#411268-CN-NP)</li>
+  <li>Temporal Co-Contrastive Learning-Based Node Representation Generation. 2022. (MS#411267-CN-NP)</li>
+  <li>Sequential Recommendation Based On Dual Contrastive Interest Learning. 2022. (MS#411269-CN-NP)</li>
+  <li>Sentence Representation Generation for Cross-lingual Retrieval. 2022. (MS#411088-CN-NP)</li>
+  <li>Content Recommendation Based On Graph Enhanced Collaborative Filtering. 2022. (MS#410901-CN-NP)</li>
+  <li>Controversial Poll Auto Generation by Generation Model and Crowdsourcing. 2021.</li>
+  <li>Knowledge-enhanced Content-Aware Collaborative Filtering for Recommendation. 2021.</li>
+  <li>From Good to Best: Two-Stage Training for Cross-lingual Machine Reading Comprehension. 2021.</li>
+  <li>Graph based Fact Clustering for Diversity and Freshness. 2021.</li>
+  <li>Representation Learning of Cross-Language Texts. 2021. (MS#409565-CN-NP)</li>
+  <li>Hierarchical Representation Learning of User Interest. 2021. (MS#410462-CN-NP)</li>
+  <li>Question Generation from Queries. 2021. (MS#410241-CN-NP)</li>
+  <li>Multi-Model Joint Denoising Training. 2021. (MS#409566-CN-NP)</li>
+  <li>Representation Learning of Semi-structured Data. 2020. (MS#408908-CN-NP)</li>
+  <li>Model Selection Learning for Knowledge Distillation. 2020. (MS#408426-CN-NP)</li>
+  <li>Providing QA Training Data and Training a QA Model based on Implicit Relevance Feedbacks. 2020. (MS#407927-CN-NP)</li>
+  <li>Contrastive Learning for Question Answering. 2020. (MS#407988-CN-NP)</li>
+  <li>Model Generation based Model Compression. 2019. (MS#406805-CN-NP)</li>
+  <li>Cross-Lingual Task Training. 2019. (MS#406497-CN-NP)</li>
+  <li>Assertion-based Question Answering with Question-Aware Open Information Extraction. 2019.</li>
+  <li>EventFactory: detect event's scale, sub-intent, category, timeline, social sentiment with AI for search and recommendation. 2016. (US WO2018098751A1)</li>
+</ul>
+
+<h2>Awards</h2>
+<ul class="compact">
+  <li>Microsoft 2024 Hackathon Greater China Region — <strong>Outstanding Project Award</strong>: Bootstrap Copilot Pages with Edge Browsing Task Center. (Won 4 awards in total — record-breaking.)</li>
+  <li>Microsoft 2024 Hackathon Beijing — Outstanding Project Award: Browse for Me.</li>
+  <li>Microsoft 2024 Hackathon Beijing — Outstanding Project Award: Microsoft Mindmap — Transform Anything into Mind Maps.</li>
+  <li>Microsoft 2024 Hackathon Suzhou — Outstanding Project Award: Tango — On-Device AI Service Stack for Windows M365 Apps.</li>
+  <li><strong>Microsoft 2021 MLADS Fall Distinguished Contribution Award</strong> (2 / 250+). First time in history to receive the Award twice in 2 consecutive conferences.</li>
+  <li><strong>Microsoft 2021 MLADS Spring Distinguished Contribution Award</strong> (2 / 300+).</li>
+  <li>Excellent Service as Teaching Assistant of AI School China — 2019, 2020, 2021 (won Excellent Project Award — 1st Prize twice).</li>
+  <li>Microsoft AI Core Q3 FY18 Greatness Award. 2018.</li>
+  <li>Excellent Student of CAS (Top 5%). 2013.</li>
+  <li>Honored Graduate of Shanghai (Top 1%). 2012.</li>
+  <li>National Scholarship (Top 1%). 2011.</li>
+  <li>First Prize Scholarship in SHU (Top 1%) — 4 consecutive times. 2008–2012.</li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+% !TEX program = pdflatex
+% Ming Gong — targeted resume for Amazon Director, Prime Video Search & Assistant
+\documentclass[10.5pt,letterpaper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{fontawesome5}
+\usepackage{array}
+
+\hypersetup{colorlinks=true, urlcolor=blue!60!black, linkcolor=black}
+\pagenumbering{gobble}
+\setlist[itemize]{leftmargin=1.1em, itemsep=1pt, topsep=2pt, parsep=0pt}
+
+\titleformat{\section}{\large\bfseries\color{black!85}}{}{0em}{}[\titlerule]
+\titlespacing*{\section}{0pt}{8pt}{4pt}
+
+\newcommand{\role}[4]{%
+  \noindent\textbf{#1} \hfill \textbf{#3}\\
+  \textit{#2} \hfill \textit{#4}\par\vspace{2pt}}
+
+\newcommand{\lp}[1]{\textcolor{blue!55!black}{\small\textit{[#1]}}}
+
+\begin{document}
+
+% ========== HEADER ==========
+\begin{center}
+  {\LARGE\bfseries Ming Gong, Ph.D.}\\[3pt]
+  \faMapMarker* \ {{City, State}} \quad \textbar \quad
+  \faPhone \ +1\,206\,833\,0010 \quad \textbar \quad
+  \faEnvelope \ {{name@gmail.com}} \quad \textbar \quad
+  \faLinkedin \ \href{https://linkedin.com/in/{{handle}}}{linkedin.com/in/{{handle}}} \quad \textbar \quad
+  \faGraduationCap \ \href{https://scholar.google.com/citations?user=c7JEFwsAAAAJ}{Google Scholar}
+\end{center}
+
+% ========== SUMMARY ==========
+\section*{Summary}
+Engineering leader with 12+ years building consumer-scale \textbf{search and AI assistant} products. Currently Head of ML Engineering at Atlassian, leading a 60+ globally distributed org across Jira Search, Knowledge Fundamentals, and Generative AI Search. Previously Principal Scientist Manager at Microsoft, where I built and led a 40+ team that took Bing Question-Answering, Knowledge, and Copilot Search from English-only to \textbf{100+ languages and 200+ markets}, and shipped \textbf{Copilot Search as a Bing AI vertical one month ahead of Google's AI Mode}. Track record across the full stack: query understanding, retrieval, ranking, generative answers, multi-turn assistant UX, and large-scale ML serving. \textbf{50+ peer-reviewed publications, 8K+ citations, 20+ granted patents.}
+
+% ========== HIGHLIGHTS ==========
+\section*{Selected Highlights}
+\begin{itemize}
+  \item \textbf{Consumer-scale impact:} Knowledge Card on Bing — 150M entities, 80\% query coverage, \textbf{32M DAU}, +0.5\% WPSBS; certified as a Bing ``WoW'' feature. Generative Answers — 8\% query coverage globally, +1.5M chat DAU.
+  \item \textbf{Generative AI assistant:} Drove Copilot Search (multi-turn AI search vertical on Bing), Generative SERP, and Generative Answers. Established LLM post-training and SLM fine-tuning framework; \textbf{<5\,s first-token latency} at production scale.
+  \item \textbf{Global \& multilingual:} Pioneered cross-lingual scaling methodology for QnA across 100+ languages, 200+ markets — \textbf{2$\times$ Microsoft MLADS Distinguished Contribution Awards}.
+  \item \textbf{Ship velocity:} Jira Search V1 shipped \textbf{2 months} after joining Atlassian (announced at Team\,'25); Enterprise AI Search POC built in \textbf{<1 month}, now progressing to launch.
+  \item \textbf{Talent development:} Founded and led \textbf{Microsoft AI School APRD} for 7 years — 10K+ participants, 1K+ honored graduates; the most influential AI training program in Microsoft Asia-Pacific R\&D.
+\end{itemize}
+
+% ========== EXPERIENCE ==========
+\section*{Experience}
+
+\role{Atlassian (US)}{Head of Machine Learning Engineering --- Knowledge AI}{Feb 2025 -- Present}{{{City}}}
+\begin{itemize}
+  \item Lead a full-stack, globally distributed org of \textbf{60+ SWEs and MLEs} across Jira Search, Knowledge Fundamentals, and Generative AI Search. \lp{Hire and Develop / Are Right, A Lot}
+  \item \textbf{Shipped Jira Search V1 within 2 months} of joining: rebuilt the ranking stack and search UX; quality and engagement gains announced at Team\,'25. \lp{Bias for Action / Deliver Results}
+  \item Drove enterprise \textbf{knowledge fundamentals} (knowledge management, serving, discovery) now adopted by multiple product teams for personalized features. \lp{Think Big / Ownership}
+  \item Initiated and led an \textbf{Enterprise AI Search} product from zero — POC in <1 month, now progressing to GA. \lp{Customer Obsession / Invent and Simplify}
+\end{itemize}
+
+\vspace{4pt}
+\role{Microsoft --- Search Technology Center Asia (Bing, Edge, Copilot)}{Principal Scientist Manager (2019--2024) $\cdot$ Senior Dev Manager (2018--2019) $\cdot$ Senior Tech Lead (2016--2018) $\cdot$ SWE II (2013--2015)}{Aug 2013 -- Dec 2024}{Beijing / Suzhou}
+\begin{itemize}
+  \item \textbf{Built and led an org of 40+ engineers and applied scientists} across two sites (Beijing and Suzhou), spanning Bing Search, Copilot, Cross-Lingual QA, Knowledge Graph, Recommendation, and Edge browser AI. \lp{Hire and Develop}
+  \item \textbf{Copilot Search (Bing AI vertical, 2024--2025):} delivered multi-turn AI search experience unifying GenQnA, GenSERP, and Magazine; built scalable LLM generation pipelines and task-specific SLMs (incl.\ R1-distilled). \textbf{Shipped April 2025 — one month before Google's AI Mode.} \lp{Bias for Action / Think Big}
+  \item \textbf{Generative SERP (2023--2024):} reinvented Bing SERP as ``AI Masterpieces'' — automated deep-intent understanding and multi-source synthesis with hallucination control. Shipped MVP at 1.0\% query coverage with +0.2 WPSBS; V2 SLM pipeline scaled to 5--10\%. \lp{Invent and Simplify}
+  \item \textbf{Generative Answers on Bing SERP (2023--present):} \textbf{8\% query coverage on Bing global markets, +0.1 WPSBS, +1.5M chat DAU} via streaming generative answers and click-through to Bing Chat. \lp{Customer Obsession / Deliver Results}
+  \item \textbf{Knowledge Card for 150M Entities (2021--2023):} multi-modal entity aggregation across web sources with template + MRC DL extraction and LLM generation. \textbf{80\% Bing query coverage, 32M DAU, +0.5 WPSBS}; certified as a ``WoW'' feature. \lp{Customer Obsession}
+  \item \textbf{Segment Entity Search \& Recommendation (2021--present):} shipped recipe, job, and movie answers — \textbf{beat Google on relevance and WPSBS} on recipe and job; closed WPSBS gap with Google on movie recommendation. \lp{Are Right, A Lot}
+  \item \textbf{Microsoft Copilot on Edge (2023):} long-document summarization and chat over PDFs and long-form web pages — 1000+ page docs at \textbf{95\%+ accuracy}; demoed at Microsoft Copilot 2023 announcement event; shipped to Edge and Windows Copilot. \lp{Deliver Results}
+  \item \textbf{NLU Platform ``Orca'' (2020--present):} unified query understanding pipeline (domain, intent, slots, topics) powering answer triggering. \textbf{95\%+ of Bing answers (coverage $\ge$ 0.05\%)} onboarded; 60\% of onboarding answers closed triggering gap with Google. \lp{Invent and Simplify}
+  \item \textbf{Globalization of Bing Q\&A (2016--2022):} led the team to scale QnA from English-only to \textbf{100+ languages and 200+ markets}; proposed systematic cross-lingual scaling methodology for low-resource languages — \textbf{2$\times$ MLADS Distinguished Contribution Award}. Shipped 10+ DNN releases that replaced legacy GBDT ranker (400+ hand-crafted features) and won WPSBS vs.\ Google. Authored novel model compression that powered the \textbf{first BERT model deployed in Bing} (within 1 month of BERT open-source) — +3.0\% coverage, +5.0\% precision. \lp{Think Big / Are Right, A Lot}
+\end{itemize}
+
+% ========== PEOPLE / ORG ==========
+\section*{People \& Org Development}
+\begin{itemize}
+  \item \textbf{Founder \& Head, Microsoft AI School --- Asia-Pacific R\&D Group} (2017--2024). Drove planning, curriculum, and execution of all AI learning events for the region. \textbf{10K+ participants, 1K+ honored graduates} (with strict graduation criteria); record-breaking participation 8 years running. Built and led the core committee. \lp{Hire and Develop}
+  \item \textbf{Invited instructor, LinkedIn Global Academy for Chinese Programmers} (2022--2023): 4-class series on ``Intelligent QA Systems for Search Engines'' — \textbf{50M impressions, 98\% satisfaction}.
+  \item \textbf{Invited speaker, InfoQ AICon Global AI Conference} (2021): represented Microsoft China on globalization of Bing QA.
+\end{itemize}
+
+% ========== EDUCATION ==========
+\section*{Education}
+\noindent\textbf{Ph.D., Graphics and Visual Computing} \hfill 2008 -- 2013\\
+Institute of Computing Technology, Chinese Academy of Sciences
+
+% ========== PUBLICATIONS / PATENTS ==========
+\section*{Publications, Patents \& Recognition}
+\begin{itemize}
+  \item \textbf{50+ peer-reviewed publications, 8{,}000+ citations} on Google Scholar (ACL, EMNLP, SIGIR, AAAI, CIKM, KDD, NAACL). Full list: \href{https://scholar.google.com/citations?user=c7JEFwsAAAAJ}{scholar profile}.
+  \item \textbf{20+ granted technology patents} worldwide in search, NLU, and generative AI.
+  \item \textbf{2$\times$ Microsoft MLADS Distinguished Contribution Award} for cross-lingual understanding.
+\end{itemize}
+
+\end{document}
