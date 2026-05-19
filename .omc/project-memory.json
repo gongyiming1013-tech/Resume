@@ -1,0 +1,131 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1779073706939,
+  "projectRoot": "C:\\Users\\lisho\\migon\\Resume",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "AmazonPrime": {
+      "path": "AmazonPrime",
+      "purpose": null,
+      "fileCount": 4,
+      "lastAccessed": 1779073706894,
+      "keyFiles": [
+        "demo.html",
+        "index.html",
+        "memo.html",
+        "tech.html"
+      ]
+    },
+    "LinjunShou": {
+      "path": "LinjunShou",
+      "purpose": null,
+      "fileCount": 7,
+      "lastAccessed": 1779073706895,
+      "keyFiles": [
+        "Linjun_Shou_CV.html",
+        "Linjun_Shou_CV.pdf",
+        "Linjun_Shou_CV_Director.html",
+        "Linjun_Shou_CV_Director.pdf",
+        "Linjun_Shou_GoogleDeepMind_Director_Create.html"
+      ]
+    },
+    "MingGong": {
+      "path": "MingGong",
+      "purpose": null,
+      "fileCount": 8,
+      "lastAccessed": 1779073706895,
+      "keyFiles": [
+        "MingGong_Resume_20260326.pdf",
+        "Ming_Gong_Amazon_PrimeVideo.html",
+        "Ming_Gong_Amazon_PrimeVideo.pdf",
+        "Ming_Gong_Amazon_PrimeVideo.tex",
+        "Ming_Gong_Amazon_PrimeVideo_CoverLetter.md"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "MingGong\\Ming_Gong_OpenAI_CoopSystems.html",
+      "accessCount": 11,
+      "lastAccessed": 1779164864767,
+      "type": "file"
+    },
+    {
+      "path": "MingGong\\Ming_Gong_OpenAI_CoopSystems.tex",
+      "accessCount": 9,
+      "lastAccessed": 1779162303616,
+      "type": "file"
+    },
+    {
+      "path": "MingGong\\Ming_Gong_OpenAI_CoopSystems.pdf",
+      "accessCount": 3,
+      "lastAccessed": 1779116263493,
+      "type": "file"
+    },
+    {
+      "path": "MingGong\\Ming_Gong_OpenAI_AnswerExperience.html",
+      "accessCount": 3,
+      "lastAccessed": 1779166689177,
+      "type": "file"
+    },
+    {
+      "path": "MingGong\\Ming_Gong_Amazon_PrimeVideo.html",
+      "accessCount": 2,
+      "lastAccessed": 1779082809715,
+      "type": "file"
+    },
+    {
+      "path": "MingGong\\Ming_Gong_Amazon_PrimeVideo.tex",
+      "accessCount": 2,
+      "lastAccessed": 1779118428339,
+      "type": "file"
+    },
+    {
+      "path": "MingGong\\Ming_Gong_OpenAI_AnswerExperience.tex",
+      "accessCount": 2,
+      "lastAccessed": 1779166542299,
+      "type": "file"
+    },
+    {
+      "path": "MingGong\\Ming_Gong_Amazon_PrimeVideo_CoverLetter.md",
+      "accessCount": 1,
+      "lastAccessed": 1779077070379,
+      "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 1,
+      "lastAccessed": 1779161895294,
+      "type": "directory"
+    }
+  ],
+  "userDirectives": []
+}
