@@ -13,9 +13,15 @@
 \usepackage{hyperref}
 \usepackage{fontawesome5}
 \usepackage{array}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
 
 \hypersetup{colorlinks=true, urlcolor=blue!60!black, linkcolor=black}
-\pagenumbering{gobble}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[C]{\footnotesize\textcolor{gray}{\thepage/\pageref{LastPage}}}
 \setlist[itemize]{leftmargin=1.1em, itemsep=0pt, topsep=1pt, parsep=0pt}
 
 \titleformat{\section}{\large\bfseries\color{blue!60!black}}{}{0em}{}[\titlerule]
@@ -41,7 +47,7 @@
 
 % ========== SUMMARY ==========
 \section*{Summary}
-Applied AI engineering leader with 20+ years across the full frontier-model production stack --- from pre-training-era cross-lingual encoders (Unicoder EMNLP 2019; CodeBERT 3,000+ citations) through BERT/DNN compression and distillation for production serving, to LLM post-training, SLM fine-tuning, generative answer systems, and agentic search experiences shipped to 100+ languages and 200M+ users.\\[4pt]
+Applied AI engineering leader with 13+ years across the full frontier-model production stack --- from pre-training-era cross-lingual encoders (Unicoder EMNLP 2019; CodeBERT 3,000+ citations) through BERT/DNN compression and distillation for production serving, to LLM post-training, SLM fine-tuning, generative answer systems, and agentic search experiences shipped to 100+ languages and 200M+ users.\\[4pt]
 Currently leading \textbf{Knowledge AI} at Atlassian: search, retrieval, knowledge graph, generative answers, and agentic search across the Atlassian Suite. Previously at Microsoft for 11 years, took Bing Question-Answering and Copilot Search from zero to global; shipped \textbf{Copilot Search one month before Google's AI Mode}. Two-time MLADS Distinguished Contribution Award recipient (first-ever back-to-back). Best Paper Award at IJCAI\,'24 AI4Research. 50+ publications, 10,000+ citations, 20+ patents.
 
 % ========== TECHNICAL HIGHLIGHTS ==========
@@ -126,8 +132,8 @@ Built and led a team of 40+ engineers and applied scientists from scratch across
 % ========== INDEPENDENT TECHNICAL WORK ==========
 \section*{Independent Technical Work}
 \begin{itemize}
-  \item \textbf{OpenClaw} (2025--): multi-agent workflow harness built on Claude Code + Telegram bot, integrating multiple model providers; explores long-running agentic workflows over tmux + E2B sandboxes and remote browser platforms. Hands-on experimentation with Claude Code hooks, harnesses, CLAUDE.md / TASKS.md patterns.
-  \item \textbf{VoicePilotIOS} (2025): iOS voice input app for hands-free LLM interaction.
+  \item \textbf{X-SuperAgent} (2025--): an Atlassian-compliant implementation of the OpenClaw multi-agent framework; integrates with first-party (1P) and third-party (3P) workplace apps to facilitate productivity improvements across day-to-day work scenarios.
+  \item \textbf{VoicePilot} (2025): a cross-platform voice-input application (iOS, Windows, macOS) that markedly improves the efficiency of interacting with AI tools --- rapidly distilling lengthy verbal input into clear, well-structured prompts.
 \end{itemize}
 
 % ========== EDUCATION ==========
@@ -161,11 +167,11 @@ Institute of Computing Technology, Chinese Academy of Sciences
   \item Gen Li, Nan Duan, Yuejian Fang, \textbf{Ming Gong}, Daxin Jiang. ``Unicoder-VL: A Universal Encoder for Vision and Language by Cross-modal Pre-training.'' \textit{AAAI} 2019.
   \item Nuo Chen, Ning Wu, Shining Liang, \textbf{Ming Gong}, et al. ``Is Bigger and Deeper Always Better? Probing LLaMA Across Scales and Layers.'' \textit{arXiv} 2023.
   \item Ning Wu, \textbf{Ming Gong}, Linjun Shou, et al. ``Large Language Models are Diverse Role-Players for Summarization Evaluation.'' \textit{NLPCC} 2023.
-  \item \textbf{Ming Gong}, Linjun Shou, Wutao Lin, et al. ``NeuronBlocks --- Building Your NLP DNN Models Like Playing Lego.'' \textit{EMNLP/IJCNLP} 2019.
 \end{itemize}
 
-\noindent\textcolor{blue!60!black}{\textbf{$\triangleright$ Model Compression \& Distillation}}
+\noindent\textcolor{blue!60!black}{\textbf{$\triangleright$ Model Training, Compression \& Distillation}}
 \begin{itemize}
+  \item \textbf{Ming Gong}, Linjun Shou, Wutao Lin, et al. ``NeuronBlocks --- Building Your NLP DNN Models Like Playing Lego.'' \textit{EMNLP/IJCNLP} 2019.
   \item Ze Yang, Linjun Shou, \textbf{Ming Gong}, Wutao Lin, Daxin Jiang. ``Model Compression with Two-stage Multi-teacher Knowledge Distillation for Web Question Answering System.'' \textit{WSDM} 2020.
   \item Fei Yuan, Linjun Shou, Jian Pei, Wutao Lin, \textbf{Ming Gong}, Daxin Jiang. ``Reinforced Multi-Teacher Selection for Knowledge Distillation.'' \textit{AAAI} 2021.
 \end{itemize}
@@ -203,7 +209,30 @@ Institute of Computing Technology, Chinese Academy of Sciences
 \end{itemize}
 
 % ========== PATENTS ==========
-\section*{Selected Patents}
-\noindent 20+ granted. Notable areas: model compression and knowledge distillation, cross-lingual representation learning, dense retrieval, multi-model joint training, hierarchical user-interest representation, knowledge-enhanced collaborative filtering. Full list available on request.
+\section*{Selected Patents (20+ granted; selection below)}
+\begin{itemize}[leftmargin=1.1em, itemsep=0pt, topsep=1pt, parsep=0pt]
+  \item Model Generation based Model Compression. 2019. (MS\#406805-CN-NP)
+  \item Model Selection Learning for Knowledge Distillation. 2020. (MS\#408426-CN-NP)
+  \item Multi-Model Joint Denoising Training. 2021. (MS\#409566-CN-NP)
+  \item Lexicon-Enhanced Self-Supervised Training for Multilingual Dense Retrieval. 2022. (MS\#412496-CN-NP)
+  \item Sentence Representation Generation for Cross-lingual Retrieval. 2022.
+  \item Representation Learning of Cross-Language Texts. 2021. (MS\#409565-CN-NP)
+  \item Cross-Lingual Task Training. 2019. (MS\#406497-CN-NP)
+  \item From Good to Best: Two-Stage Training for Cross-lingual Machine Reading Comprehension. 2021.
+  \item Contrastive Learning for Question Answering. 2020. (MS\#407988-CN-NP)
+  \item Providing QA Training Data and Training a QA Model based on Implicit Relevance Feedbacks. 2020. (MS\#407927-CN-NP)
+  \item Question Generation from Queries. 2021. (MS\#410241-CN-NP)
+  \item Assertion-based Question Answering with Question-Aware Open Information Extraction. 2019.
+  \item Representation Learning of Semi-structured Data. 2020. (MS\#408908-CN-NP)
+  \item Graph based Fact Clustering for Diversity and Freshness. 2021.
+  \item Controversial Poll Auto Generation by Generation Model and Crowdsourcing. 2021.
+  \item Personalized Multilingual Content Recommendation based on Robust Feature Network. 2023. (MS\#412659-CN-NP)
+  \item Sequential Recommendation based on Cross-Domain Behavior Data. 2023.
+  \item Sequential Recommendation Based on Dual Contrastive Interest Learning. 2022.
+  \item Temporal Co-Contrastive Learning-Based Node Representation Generation. 2022.
+  \item Content Recommendation Based on Graph Enhanced Collaborative Filtering. 2022.
+  \item Knowledge-enhanced Content-Aware Collaborative Filtering for Recommendation. 2021.
+  \item Hierarchical Representation Learning of User Interest. 2021. (MS\#410462-CN-NP)
+\end{itemize}
 
 \end{document}
