@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ming Gong — Resume (Anthropic Applied AI)</title>
+<style>
+  @page { size: Letter; margin: 0.36in 0.40in 0.42in 0.40in; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Calibri", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 10.0pt;
+    line-height: 1.24;
+    color: #111;
+  }
+  h1 {
+    font-size: 22pt;
+    margin: 0 0 4pt 0;
+    text-align: center;
+    letter-spacing: 0.3pt;
+    color: #1a4480;
+  }
+  .contact {
+    text-align: center;
+    font-size: 9.8pt;
+    color: #333;
+    margin-bottom: 8pt;
+  }
+  .contact a { color: #1a4480; text-decoration: none; }
+  .contact span + span::before { content: " · "; color: #888; margin: 0 4pt; }
+  h2 {
+    font-size: 11.3pt;
+    text-transform: uppercase;
+    letter-spacing: 0.6pt;
+    border-bottom: 1px solid #1a4480;
+    padding-bottom: 1.5pt;
+    margin: 8pt 0 3pt 0;
+    color: #1a4480;
+  }
+  p { margin: 0 0 3pt 0; }
+  ul { margin: 1pt 0 2pt 0; padding-left: 16pt; }
+  li { margin: 0 0 1.5pt 0; text-align: justify; }
+  .role-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 4pt;
+  }
+  .role-line .left { font-weight: 600; }
+  .role-line .right { font-weight: 600; font-size: 9.7pt; }
+  .sub-line {
+    display: flex;
+    justify-content: space-between;
+    font-style: italic;
+    font-size: 9.8pt;
+    color: #333;
+    margin-bottom: 2pt;
+  }
+  .summary { text-align: justify; }
+  .exp-intro { text-align: justify; margin: 1pt 0 2pt 0; }
+  strong { color: #000; }
+  .pubs { font-size: 9.6pt; line-height: 1.22; }
+  .pubs li { margin-bottom: 0.3pt; }
+  .pub-category { font-weight: 600; font-size: 10.0pt; color: #1a4480; margin: 4pt 0 1pt 0; }
+  .exp-group { font-weight: 700; font-style: italic; font-size: 10.0pt; margin: 4pt 0 1pt 0; }
+  .compact li { margin-bottom: 0.3pt; }
+</style>
+</head>
+<body>
+
+<h1>Ming Gong, Ph.D.</h1>
+<div class="contact">
+  <span>+1 206-833-0010</span>
+  <span>Bellevue, WA</span>
+  <span><a href="mailto:yiming10.13@163.com">yiming10.13@163.com</a></span>
+  <span><a href="https://scholar.google.com/citations?user=c7JEFwsAAAAJ">Google Scholar</a></span>
+</div>
+
+<h2>Summary</h2>
+<p class="summary">
+Applied AI engineering leader with 20+ years across the full frontier-model production stack — from pre-training-era cross-lingual encoders (Unicoder EMNLP 2019; CodeBERT 3,000+ citations) through BERT/DNN compression and distillation for production serving, to LLM post-training, SLM fine-tuning, generative answer systems, and agentic search experiences shipped to 100+ languages and 200M+ users.
+</p>
+<p class="summary">
+Currently leading <strong>Knowledge AI</strong> at Atlassian: search, retrieval, knowledge graph, generative answers, and agentic search across the Atlassian Suite. Previously at Microsoft for 11 years, took Bing Question-Answering and Copilot Search from zero to global; shipped <strong>Copilot Search one month before Google's AI Mode</strong>. Two-time MLADS Distinguished Contribution Award recipient (first-ever back-to-back). Best Paper Award at IJCAI '24 AI4Research. 50+ publications, 10,000+ citations, 20+ patents.
+</p>
+
+<h2>Technical Highlights</h2>
+
+<p class="pub-category">▸ Frontier Model Work</p>
+<ul>
+  <li><strong>Distillation &amp; compression for production serving</strong>: Authored novel model compression that powered the first BERT model deployed in Bing — within 1 month of BERT open-source, zero added GPU cost; +3.0% answer coverage, +5.0% precision. Later built <strong>Glow</strong>, a distillation framework producing task-specific SLMs that replaced GPT-4-class models in production — <strong>first-token latency 20-30s → ~5ms (~4000× reduction)</strong>, scaled to 5-10% of Bing global query coverage.</li>
+  <li><strong>Universal multilingual model architecture</strong>: Designed a cross-lingual model serving 100+ languages on ~13% of the GPU footprint a per-language approach would have required. Co-authored <strong>Unicoder</strong> (EMNLP/IJCNLP 2019), one of the earliest universal multilingual encoders, and <strong>CodeBERT</strong> (EMNLP Findings 2020, 3,000+ citations), the first pre-trained model for programming + natural languages.</li>
+  <li><strong>LLM post-training &amp; SLM fine-tuning at production scale</strong>: Established end-to-end post-training and fine-tuning framework for Copilot Search (multi-turn AI search vertical), including R1-distilled task-specific models; &lt;5s first-token latency in production at consumer scale.</li>
+  <li><strong>Retrieval architecture innovation</strong>: Replaced industry-standard sliding-window passage indexing with runtime <strong>query-dependent passage extraction</strong> via GNN document modeling + multi-teacher distillation to 40ms latency. Held <strong>#1 on Google Natural Questions benchmark for ~1 year</strong>; architecture adopted across Bing QnA, Knowledge, People Also Ask, and Azure Custom QnA.</li>
+</ul>
+
+<p class="pub-category">▸ Eval &amp; Quality Methodology</p>
+<ul>
+  <li><strong>Tier-wise hallucination control framework</strong> for LLM-generated search results — balanced capability and grounding requirements across content tiers. Held the technical position through 5-6 leadership reviews against split organizational consensus; framework subsequently adopted by Edge Copilot and Office Copilot.</li>
+  <li><strong>Systematic blinded human side-by-side (SBS) evaluation</strong>: 10+ DNN ranker releases replacing legacy GBDT (400+ hand-crafted features), each win-validated against Google via blinded human preference; cumulative wins drove Bing QnA from competitive-loss to competitive-parity on multiple verticals.</li>
+  <li><strong>Diagnosis-first hands-on intervention</strong>: For entity linking quality regression (40% → 90%+ precision), invested 2 months in hands-on data and model diagnosis before redirecting technical approach — illustrates eval-driven iteration over surface-level fixes.</li>
+</ul>
+
+<p class="pub-category">▸ Production Inference &amp; Serving</p>
+<ul>
+  <li><strong>NRT (near-real-time) inference pipeline</strong> for Bing QnA: co-owned design with 8 platform teams across time zones; pipeline became the platform team's flagship demo and blueprint for subsequent products.</li>
+  <li><strong>Generative Answers on Bing SERP</strong>: 20% query coverage globally, +2.0% SBS lift via streaming generative answers with click-through to Bing Chat.</li>
+  <li><strong>Copilot Search</strong>: multi-turn AI search vertical unifying GenQnA, GenSERP, and Magazine; shipped <strong>April 2025, one month before Google's AI Mode</strong>.</li>
+</ul>
+
+<p class="pub-category">▸ Multilingual &amp; Cross-Lingual Scaling</p>
+<ul>
+  <li>Scaled Bing QnA from English-only to <strong>100+ languages and 200+ markets</strong> via systematic cross-lingual methodology. Placed the universal-multilingual bet ~1 year before globalization became official org strategy.</li>
+  <li><strong>2× Microsoft MLADS Distinguished Contribution Award</strong> (CTO Office global award; first-ever back-to-back recipient in conference history; &lt;2 / 300+ acceptance rate).</li>
+  <li>Authored two large-scale survey tutorials: <em>Language Scaling: Applications, Challenges and Approaches</em> (KDD '21) and <em>Scaling out NLP Applications to 100+ Languages</em> (WWW '21).</li>
+</ul>
+
+<p class="pub-category">▸ Research Impact</p>
+<ul>
+  <li><strong>Best Paper Award, IJCAI '24 AI4Research</strong> — <em>Step-Back Profiling: Distilling User History for Personalized Scientific Writing</em>.</li>
+  <li><strong>CodeBERT</strong> (EMNLP Findings 2020): 3,000+ citations, foundational pre-trained model for code intelligence.</li>
+  <li>50+ publications across NeurIPS-tier venues (ACL, EMNLP, NAACL, KDD, AAAI, SIGIR, ICLR, WSDM, CIKM, COLING), 10,000+ citations on Google Scholar, 20+ patents granted.</li>
+</ul>
+
+<h2>Experience</h2>
+
+<div class="role-line"><span class="left">Atlassian</span><span class="right">Feb 2025 – Present</span></div>
+<div class="sub-line"><span>Head of Machine Learning Engineering, Knowledge AI</span><span>Bellevue, WA</span></div>
+<p class="exp-intro">
+Lead <strong>Knowledge AI</strong> at Atlassian — search, retrieval, knowledge graph, generative answers, and agentic search across Jira, Confluence, and Rovo. Hands-on technical leadership across ranking model architecture, RAG pipelines, agent framework design, generative UI, and LLM post-training methodology. Grew the IC org from 30 to 60+ (70% scientists, 30% engineers); recruited 2 Principal Managers and 3 Principal Tech Leads; established greenfield ML engineering sites in Canada and Singapore.
+</p>
+<ul>
+  <li><strong>Jira Search rebuild (MVP in 4 months, full launch in 12)</strong>: Rebuilt the ranking stack and search UX from the ground up; drove <strong>Search MAU 2.5M → 8.5M (3.4×)</strong>, helping AI Org exceed Search MAU L1 OKR. Premiered at Team '25. Cross-org V-Team scaled from ~30 to 115 contributors across 8 partner orgs; established a Coalition Council for cross-org technical alignment.</li>
+  <li><strong>Generative Answers in Search + AI Definitions</strong>: novel generative UI framework drove <strong>sustained AI MAU 100K → 1.2M</strong>; technical work spans retrieval grounding, citation correctness, streaming generation, and latency optimization.</li>
+  <li><strong>Knowledge fundamentals (collaboration graph, entity linking, entity recommendation)</strong>: now adopted by multiple product teams for personalized features. Led entity linking turnaround from <strong>40% to 90%+ precision</strong> — 2 months hands-on diagnosis before redirecting approach; protected team stability through parallel senior hiring.</li>
+  <li><strong>Jira Agents in Rovo Chat</strong>: shipped within 3 months; code-driven agent architecture <strong>beat Manus and GenSpark on the GAIA benchmark in early 2026</strong>; primary driver of Rovo adoption.</li>
+  <li><strong>Lumina — generative UI layer for enterprise GenAI Search</strong>: identified a cross-product platform gap no team was chartered to own; POC in &lt;1 month, MVP shipped early 2026. <strong>+20% engagement uplift, +30% SBS lift vs. competitor AI experiences</strong>; adopted as Atlassian's standard generative presentation framework, integrating across all GenAI products. Previewed at Team '25 EU AI Super Session; live demo at Team '26 Founder Keynote.</li>
+</ul>
+
+<div class="role-line"><span class="left">Microsoft — Search Technology Center Asia (Bing, Edge, Copilot)</span><span class="right">Aug 2013 – Dec 2024</span></div>
+<div class="sub-line"><span>Group Senior Principal Applied Sciences Manager (2019–2024) · Senior Dev Manager (2018–2019) · Senior Tech Lead (2016–2018) · SWE II (2013–2015)</span><span>Beijing, China</span></div>
+<p class="exp-intro">
+Built and led a team of 40+ engineers and applied scientists from scratch across Beijing and Suzhou (70% scientists, 30% engineers; 5 managers), spanning Bing Search, Copilot, Cross-Lingual QA, Knowledge Graph, Recommendation, and Edge browser AI.
+</p>
+
+<p class="exp-group">Frontier model &amp; inference work</p>
+<ul>
+  <li><strong>Bing Question-Answering, zero-to-global, traditional ML → DL → pre-trained models → LLM (2016–2024)</strong>: built Bing QnA ground-up and led its evolution through every major AI paradigm shift. Authored the BERT compression method that powered Bing's first BERT deployment within 1 month of open-source, zero added GPU cost — +3.0% coverage, +5.0% precision. Universal multilingual model served 100+ languages on ~13% of a per-language approach's GPU footprint. <strong>2× MLADS Distinguished Contribution Award (back-to-back, first ever)</strong>.</li>
+  <li><strong>Generative SERP — distillation &amp; hallucination control (2023–2024)</strong>: built <strong>Glow</strong>, a distillation framework producing task-specific SLMs that replaced GPT-4-class models in production — first-token latency 20-30s → ~5ms, scaled to 5-10% of Bing global query coverage. Proposed tier-wise hallucination control framework against split org consensus; held position through 5-6 leadership reviews; framework adopted by Edge Copilot and Office Copilot.</li>
+  <li><strong>Copilot Search (Bing AI vertical, 2024–2025)</strong>: multi-turn AI search experience unifying GenQnA, GenSERP, and Magazine; built scalable LLM generation pipelines and task-specific SLMs (incl. R1-distilled). <strong>Shipped April 2025 — one month before Google's AI Mode</strong>.</li>
+  <li><strong>Query-Dependent Passage Extraction (2019–2022)</strong>: replaced industry-standard sliding-window passage indexing with runtime query-dependent extraction via GNN document modeling + multi-teacher distillation to 40ms latency. <strong>Held #1 on Google Natural Questions benchmark for ~1 year</strong>; architecture adopted across Bing QnA, Knowledge, People Also Ask, and Azure Custom QnA.</li>
+</ul>
+
+<p class="exp-group">Production product work at consumer scale</p>
+<ul>
+  <li><strong>Knowledge Card for 150M Entities (2021–2023)</strong>: multi-modal entity aggregation via template + MRC DL extraction and LLM generation. <strong>60% Bing query traffic, 65M DAU, +3.0% SBS lift</strong>; certified as a Bing "WoW" feature (&lt;10 out of 100+ features).</li>
+  <li><strong>Generative Answers on Bing SERP (2023–2024)</strong>: 20% query coverage on Bing global markets, +2.0% SBS lift via streaming generative answers and click-through to Bing Chat.</li>
+  <li><strong>NLU Platform "Orca" (2020–2025)</strong>: unified query understanding pipeline (domain, intent, slots, topics) powering answer triggering. 95%+ of Bing answers (coverage ≥ 0.05%) onboarded; 60% of onboarded answers closed gap with Google on SBS.</li>
+  <li><strong>Microsoft Copilot on Edge (2023–2024)</strong>: long-document summarization and chat over PDFs and long-form web pages — <strong>1000+ page docs at 95%+ accuracy</strong>; demoed at Microsoft Copilot 2023 event; shipped to Edge and Windows Copilot.</li>
+  <li><strong>Underside (Edge right-rail Insight Pane, 2022–2024)</strong>: AI-powered right-rail panel featuring page summary, topics, QnA, related search, related pages. <strong>Edge engaged DAU +10%, Search DAU +1.2M</strong>.</li>
+  <li><strong>Segment entity search &amp; recommendation (2021–2024)</strong>: shipped recipe, job, and movie answers — beat Google on relevance and SBS on recipe and job; closed SBS gap with Google on movie recommendation.</li>
+</ul>
+
+<p class="exp-group">People &amp; community</p>
+<ul>
+  <li>Founded and led <strong>Microsoft AI School APRD (2017–2024)</strong> — 8-year regional AI education program; 10K+ participants, 2K+ certified graduates; the most influential AI training program in Microsoft Asia-Pacific R&amp;D.</li>
+</ul>
+
+<h2>Independent Technical Work</h2>
+<ul>
+  <li><strong>OpenClaw</strong> (2025–): multi-agent workflow harness built on Claude Code + Telegram bot, integrating multiple model providers; explores long-running agentic workflows over tmux + E2B sandboxes and remote browser platforms. Hands-on experimentation with Claude Code hooks, harnesses, CLAUDE.md / TASKS.md patterns.</li>
+  <li><strong>VoicePilotIOS</strong> (2025): iOS voice input app for hands-free LLM interaction.</li>
+</ul>
+
+<h2>Education</h2>
+<div class="role-line"><span class="left">Ph.D., Graphics and Visual Computing — Institute of Computing Technology, Chinese Academy of Sciences</span><span class="right">2008 – 2013</span></div>
+
+<h2>Selected Awards</h2>
+<ul class="compact">
+  <li><strong>Best Paper Award, IJCAI '24 AI4Research</strong> — <em>Step-Back Profiling: Distilling User History for Personalized Scientific Writing</em>.</li>
+  <li><strong>2021 Fall Microsoft MLADS Distinguished Contribution Award</strong> (2 / 250+; CTO Office global award).</li>
+  <li><strong>2021 Spring Microsoft MLADS Distinguished Contribution Award</strong> (2 / 300+) — broke conference history as the first ever back-to-back recipient.</li>
+  <li><strong>2023 Microsoft Global Hackathon — Edge Theatre</strong>: Best Overall Hack; Greater China Region: Most Popular Hack.</li>
+  <li><strong>2023 Microsoft Global Hackathon — WebXT China, DeKG</strong>: Best Innovativeness &amp; Originality Hack.</li>
+  <li>Microsoft AI Core Q3 FY18 Greatness Award.</li>
+</ul>
+
+<h2>Selected Publications <span style="font-weight:normal; font-size:10pt; text-transform:none; letter-spacing:0;">(50+ peer-reviewed papers, 10,000+ citations on Google Scholar — full list on <a href="https://scholar.google.com/citations?user=c7JEFwsAAAAJ">scholar profile</a>)</span></h2>
+
+<p class="pub-category">▸ Code Intelligence</p>
+<ul class="pubs">
+  <li>Zhangyin Feng, Daya Guo, Duyu Tang, Nan Duan, Xiaocheng Feng, <strong>Ming Gong</strong>, Linjun Shou, Bing Qin, Ting Liu, Daxin Jiang, Ming Zhou. "CodeBERT: A Pre-Trained Model for Programming and Natural Languages." <em>EMNLP Findings</em> 2020. (3,000+ citations)</li>
+  <li>Junjie Huang, Duyu Tang, Linjun Shou, <strong>Ming Gong</strong>, et al. "CoSQA: 20,000+ Web Queries for Code Search and Question Answering." <em>ACL</em> 2021.</li>
+</ul>
+
+<p class="pub-category">▸ LLM, Agentic AI &amp; Multimodal Pre-training</p>
+<ul class="pubs">
+  <li>Yaobo Liang, Chenfei Wu, Ting Song, et al., <strong>Ming Gong</strong>, Nan Duan. "TaskMatrix.AI: Completing Tasks by Connecting Foundation Models with Millions of APIs." <em>Intelligent Computing</em> 2023.</li>
+  <li>Gen Li, Nan Duan, Yuejian Fang, <strong>Ming Gong</strong>, Daxin Jiang. "Unicoder-VL: A Universal Encoder for Vision and Language by Cross-modal Pre-training." <em>AAAI</em> 2019.</li>
+  <li>Nuo Chen, Ning Wu, Shining Liang, <strong>Ming Gong</strong>, et al. "Is Bigger and Deeper Always Better? Probing LLaMA Across Scales and Layers." <em>arXiv</em> 2023.</li>
+  <li>Ning Wu, <strong>Ming Gong</strong>, Linjun Shou, et al. "Large Language Models are Diverse Role-Players for Summarization Evaluation." <em>NLPCC</em> 2023.</li>
+  <li><strong>Ming Gong</strong>, Linjun Shou, Wutao Lin, et al. "NeuronBlocks — Building Your NLP DNN Models Like Playing Lego." <em>EMNLP/IJCNLP</em> 2019.</li>
+</ul>
+
+<p class="pub-category">▸ Model Compression &amp; Distillation</p>
+<ul class="pubs">
+  <li>Ze Yang, Linjun Shou, <strong>Ming Gong</strong>, Wutao Lin, Daxin Jiang. "Model Compression with Two-stage Multi-teacher Knowledge Distillation for Web Question Answering System." <em>WSDM</em> 2020.</li>
+  <li>Fei Yuan, Linjun Shou, Jian Pei, Wutao Lin, <strong>Ming Gong</strong>, Daxin Jiang. "Reinforced Multi-Teacher Selection for Knowledge Distillation." <em>AAAI</em> 2021.</li>
+</ul>
+
+<p class="pub-category">▸ Cross-Lingual &amp; Multilingual Modeling</p>
+<ul class="pubs">
+  <li>H. Huang, Yaobo Liang, N. Duan, <strong>Ming Gong</strong>, et al. "Unicoder: A Universal Language Encoder by Pre-training with Multiple Cross-lingual Tasks." <em>EMNLP/IJCNLP</em> 2019.</li>
+  <li>Nuo Chen, Linjun Shou, <strong>Ming Gong</strong>, Jian Pei, Daxin Jiang. "Bridging the Gap between Language Models and Cross-Lingual Sequence Labeling." <em>NAACL</em> 2022.</li>
+  <li>Nuo Chen, Linjun Shou, <strong>Ming Gong</strong>, Jian Pei. "From Good to Best: Two-Stage Training for Cross-lingual Machine Reading Comprehension." <em>AAAI</em> 2022.</li>
+  <li>Shining Liang, <strong>Ming Gong</strong>, Jian Pei, Linjun Shou, Daxin Jiang. "Reinforced Iterative Knowledge Distillation for Cross-Lingual Named Entity Recognition." <em>KDD</em> 2021.</li>
+  <li>Nuo Chen, Linjun Shou, Tengtao Song, <strong>Ming Gong</strong>, et al. "Structural Contrastive Pretraining for Cross-Lingual Comprehension." <em>ACL</em> 2023.</li>
+  <li>Nuo Chen, Zinan Zheng, Ning Wu, <strong>Ming Gong</strong>, et al. "Breaking Language Barriers in Multilingual Mathematical Reasoning." <em>arXiv</em> 2023.</li>
+  <li>Linjun Shou, <strong>Ming Gong</strong>, Jian Pei, et al. "Language Scaling: Applications, Challenges and Approaches." <em>KDD Tutorial</em> 2021.</li>
+  <li>Linjun Shou, <strong>Ming Gong</strong>, Jian Pei, et al. "Scaling out NLP Applications to 100+ Languages." <em>WWW Tutorial</em> 2021.</li>
+</ul>
+
+<p class="pub-category">▸ Dense Retrieval &amp; RAG</p>
+<ul class="pubs">
+  <li>Shengyao Zhuang, Linjun Shou, Jian Pei, <strong>Ming Gong</strong>, et al. "Typos-aware Bottlenecked Pre-Training for Robust Dense Retrieval." <em>SIGIR</em> 2023.</li>
+  <li>Houxing Ren, Linjun Shou, Jian Pei, Ning Wu, <strong>Ming Gong</strong>, Daxin Jiang. "Lexicon-Enhanced Self-Supervised Training for Multilingual Dense Retrieval." <em>EMNLP</em> 2023.</li>
+  <li>Shunyu Zhang, Yaobo Liang, <strong>Ming Gong</strong>, Daxin Jiang, Nan Duan. "Modeling Sequential Sentence Relation to Improve Cross-lingual Dense Retrieval." <em>ICLR</em> 2023.</li>
+  <li>Shunyu Zhang, Yaobo Liang, <strong>Ming Gong</strong>, Daxin Jiang, Nan Duan. "Multi-View Document Representation Learning for Open-Domain Dense Retrieval." <em>ACL</em> 2022.</li>
+  <li>Linjun Shou, S. Bo, Fei-Xiang Cheng, <strong>Ming Gong</strong>, et al. "Mining Implicit Relevance Feedback from User Behavior for Web Question Answering." <em>KDD</em> 2020.</li>
+</ul>
+
+<p class="pub-category">▸ Knowledge &amp; Entity Understanding</p>
+<ul class="pubs">
+  <li>Zilin Xiao, <strong>Ming Gong</strong>, Jie Wu, et al. "Instructed Language Models with Retrievers Are Powerful Entity Linkers." <em>EMNLP</em> 2023.</li>
+  <li>Zilin Xiao, Linjun Shou, Xingyao Zhang, Jie Wu, <strong>Ming Gong</strong>, et al. "Coherent Entity Disambiguation via Modeling Topic and Categorical Dependency." <em>EMNLP Findings</em> 2023.</li>
+</ul>
+
+<p class="pub-category">▸ Personalization &amp; Scientific Writing</p>
+<ul class="pubs">
+  <li><em>(Best Paper, IJCAI '24 AI4Research)</em> "Step-Back Profiling: Distilling User History for Personalized Scientific Writing."</li>
+</ul>
+
+<h2>Selected Patents</h2>
+<p>
+20+ granted. Notable areas: model compression and knowledge distillation, cross-lingual representation learning, dense retrieval, multi-model joint training, hierarchical user-interest representation, knowledge-enhanced collaborative filtering. Full list available on request.
+</p>
+
+</body>
+</html>
